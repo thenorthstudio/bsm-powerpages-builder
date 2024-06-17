@@ -118,6 +118,7 @@ const deleteSubmodule = (index: number) =>
 <style lang="scss">
 .submodule-list
 {
+    .p-datatable-wrapper { overflow-x: hidden !important; }
     thead { display: none; }
     tr
     {
