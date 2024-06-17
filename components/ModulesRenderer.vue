@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import
 {
+    ModuleHeader,
     ModuleColumnasDeTexto,
     ModuleCardsConIconografia,
     ModuleGridDeImagenes,
@@ -9,6 +10,7 @@ from '#components';
 
 
 const moduleComponents: { [key in ModuleType]: any } = {
+    'header': ModuleHeader,
     'columnas-de-texto': ModuleColumnasDeTexto,
     'cards-con-iconografia': ModuleCardsConIconografia,
     'grid-de-imagenes': ModuleGridDeImagenes,

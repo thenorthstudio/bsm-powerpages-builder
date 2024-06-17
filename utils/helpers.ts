@@ -39,3 +39,8 @@ sit amet ornare nisl cursus. Sed leo tellus, commodo eu arcu nec,
 sagittis tincidunt velit.</p><p><br></p><p> In volutpat purus non
 elit pharetra, vel cursus nunc luctus. Quisque accumsan dolor dolor,
 pellentesque pretium tellus fringilla at.</p>`;
+
+
+export const MID_LOREM = `<p>Lorem ipsum dolor sit amet,
+<strong>consectetur</strong> adipiscing elit. Mauris condimentum
+nec elit vel egestas.<em>Integer sodales erat ac velit suscipit</em>.</p>`;

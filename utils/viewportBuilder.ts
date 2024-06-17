@@ -236,6 +236,7 @@ export class ViewportBuilder
 
         const modulePaths: { [key in ModuleType]: ModuleType } =
         {
+            'header': 'header',
             'columnas-de-texto': 'columnas-de-texto',
             'cards-con-iconografia': 'cards-con-iconografia',
             'grid-de-imagenes': 'grid-de-imagenes'

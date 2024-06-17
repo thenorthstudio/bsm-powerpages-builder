@@ -1,4 +1,5 @@
 type ModuleType = (
+    'header' |
     'columnas-de-texto' |
     'cards-con-iconografia' |
     'grid-de-imagenes'

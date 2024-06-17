@@ -1,3 +1,7 @@
+*:not([data-gjs-type="Header"], [data-gjs-type="Footer"]) {
+    >div#viewRoot { display: none !important; }
+}
+
 [data-gjs-type="Section"] { display: none !important; }
-#gjs-cv-tools .gjs-resizer { display: none !important; }
-div#viewRoot { display: none !important; }
+
+#gjs-tools .gjs-resizer { display: none !important; }
