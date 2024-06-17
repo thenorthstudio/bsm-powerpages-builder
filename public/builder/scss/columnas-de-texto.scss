@@ -1,0 +1,42 @@
+section.c-columnas-de-texto
+{
+    >.inner
+    {
+        >.t-title { margin-bottom: 3.2rem; }
+        >.col-wrap
+        {
+            display: grid;
+            &.has-1-cols { display: block; }
+            &.has-2-cols
+            {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 5.6rem;
+            }
+            &.has-3-cols
+            {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 4.6rem;
+            }
+            &.has-4-cols
+            {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 3.6rem;
+            }
+            @media (max-width: 1024px)
+            {
+                &:not(.has-1-cols)
+                {
+                    display: flex;
+                    flex-wrap: wrap;
+                    gap: 3.2rem 4.6rem;
+                    .col { flex: 1 1 calc(50% - 2.45rem); }
+                    @media (max-width: 760px)
+                    {
+                        gap: 4.8rem;
+                        .col { flex: 1 1 100%; }
+                    }
+                }
+            }
+        }
+    }
+}

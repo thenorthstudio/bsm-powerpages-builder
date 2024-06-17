@@ -1,0 +1,41 @@
+/* Converts input to T when type conversion is not possible (~vue template) */
+export const asA = <T>(obj: any) => obj as T;
+
+
+/* Moves elements around inside an array */
+export const reorderArray = <T>(array: T[], from: number, to: number) =>
+{
+    const newArray: T[] = [];
+    for (let i = 0; i < array.length; i++)
+    {
+        if (i == from) newArray.push(array[to]);
+        else if (i == to) newArray.push(array[from]);
+        else newArray.push(array[i]);
+    }
+    array.splice(0, array.length, ...newArray);
+}
+
+
+/* Checks if a string is empty */
+export const isEmpty = (str: string) => !(str && str.trim() != '');
+
+export const stringOrDefault = <T>(str: string, defaultValue: T) =>
+{
+    if (!isEmpty(str)) return str;
+    else return defaultValue;
+}
+
+/* Clean HTML from string */
+export const cleanHTML = (html: string) =>
+{
+    const regex = /<\/?\w+>/g;
+    return html.replace(regex, '');
+}
+
+export const LONG_LOREM = `<p>Lorem ipsum dolor sit amet,
+<strong>consectetur</strong> adipiscing elit. Mauris condimentum
+nec elit vel egestas.<em>Integer sodales erat ac velit suscipit</em>,
+sit amet ornare nisl cursus. Sed leo tellus, commodo eu arcu nec,
+sagittis tincidunt velit.</p><p><br></p><p> In volutpat purus non
+elit pharetra, vel cursus nunc luctus. Quisque accumsan dolor dolor,
+pellentesque pretium tellus fringilla at.</p>`;
