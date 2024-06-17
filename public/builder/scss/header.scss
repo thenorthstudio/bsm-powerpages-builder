@@ -17,13 +17,16 @@ header.c-header
             img, .is-builder-only {
                 background-color: #792d39;
             }
+            img { object-fit: cover; }
             .is-builder-only { color: black; }
         }
-        >.overlay {
+        >.overlay
+        {
             background: linear-gradient(84deg, 
                         rgba(0, 0, 0, 0.76) 14.76%, 
                         rgba(0, 0, 0, 0.00) 76.7%
             );
+            pointer-events: none;
         }
     }
     >.inner

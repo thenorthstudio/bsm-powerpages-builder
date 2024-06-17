@@ -7,7 +7,11 @@ type HeaderModulePropDic = {
 }
 export class HeaderModule extends Module<HeaderModulePropDic>
 {
-    constructor() { super('header') }
+    constructor()
+    {
+        super('header');
+        this.additionalInfo = 'Imagen: 1440x536px';
+    }
     createProps()
     {
         return {

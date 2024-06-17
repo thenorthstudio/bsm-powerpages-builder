@@ -6,6 +6,12 @@ const pageLoader = usePageLoader();
 const dialogs = useGlobalDialogs();
 const toast = useToast();
 
+const framePixelSize = computed(() =>
+{
+    const p100 = pageWidthPercent.value;
+    return Math.ceil((1440 - 375) * (p100 / 100) + 375);
+})
+
 
 watch(pageWidthPercent, () => 
 {
@@ -99,6 +105,10 @@ const loadPage = () =>
             <div class="pi pi-mobile"></div>
             <Slider class="w-14rem" v-model="pageWidthPercent" />
             <div class="pi pi-desktop"></div>
+
+            <div class="hint | text-sm text-400">
+                {{ framePixelSize }}px
+            </div>
         </div>
 
         <div>
@@ -124,6 +134,13 @@ const loadPage = () =>
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
+        .hint
+        {
+            position: absolute;
+            top: 17px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
     }
 }
 </style>

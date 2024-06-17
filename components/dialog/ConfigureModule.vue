@@ -32,6 +32,17 @@ const goBackFromSubmodule = () => {
                     />
                     <div>{{ currentSubmodule.getTitle() }}</div>
                 </template>
+
+                <div class="flex align-items-center | text-300"
+                    v-if="module && module.additionalInfo"
+                    >
+                    <div class="ml-2 mr-3">
+                        |
+                    </div>
+                    <div class="text-sm">
+                        {{ module.additionalInfo }}
+                    </div>
+                </div>
             </div>
         </template>
 

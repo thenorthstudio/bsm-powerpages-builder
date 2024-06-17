@@ -9,11 +9,10 @@ section.c-grid-de-imagenes
             display: flex;
             flex-wrap: wrap;
             align-items: center;
-            justify-content: center;
+            justify-content: flex-start;
             gap: 24px;
             >.image-block
             {
-                max-height: 200px;
                 display: flex;
                 align-items: center;
                 justify-content: center;
@@ -29,14 +28,14 @@ section.c-grid-de-imagenes
                     max-height: 100%;
                     img
                     {
-                        height: auto;
+                        height: auto !important;
+                        max-height: 200px !important;
                         object-fit: contain;
-                        .in-builder &
+                        .in-builder & { height: 200px !important;; }
+                        @media (max-width: 500px)
                         {
-                            height: 200px;
-                            @media (max-width: 500px) {
-                                height: 100px;
-                            }
+                            max-height: 100px !important;
+                            .in-builder & { height: 100px !important;; }
                         }
                     }
                 }

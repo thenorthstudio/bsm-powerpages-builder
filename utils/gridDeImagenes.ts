@@ -39,7 +39,11 @@ type GridDeImagenesPropDic = {
 }
 export class GridDeImagenesModule extends Module<GridDeImagenesPropDic>
 {
-    constructor() { super('grid-de-imagenes') }
+    constructor()
+    {
+        super('grid-de-imagenes');
+        this.additionalInfo = 'Imagen: 200px de alto (ancho variable)';
+    }
     createProps()
     {
         return {

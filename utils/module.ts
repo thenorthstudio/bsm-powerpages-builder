@@ -28,6 +28,7 @@ export abstract class Module<TPropDic extends ModulePropDic = ModulePropDic>
     dirty: boolean;
     hovering: boolean;
     deathMark: boolean;
+    additionalInfo?: string;
     
     constructor(type: ModuleType) 
     {

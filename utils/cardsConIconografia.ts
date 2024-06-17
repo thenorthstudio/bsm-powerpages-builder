@@ -38,7 +38,11 @@ type CardsConIconografiaPropDic = {
 }
 export class CardsConIconografiaModule extends Module<CardsConIconografiaPropDic>
 {
-    constructor() { super('cards-con-iconografia') }
+    constructor()
+    {
+        super('cards-con-iconografia');
+        this.additionalInfo = 'Imagen: 80x80px (svg para iconos)';
+    }
     createProps()
     {
         return {
