@@ -6,7 +6,7 @@
 
 :root
 {
-    --page-padding: 80px;
+    --page-padding: 84px;
     @media (max-width: 1024px) {
         --page-padding: 16px;
     }
@@ -34,14 +34,22 @@ html
         button { cursor: pointer; }
         [hidden] { display: none; }
 
-        main.main-content>section
+
+        main.main-content>.c-module
         {
-            margin: 12rem 0;
-            @media (max-width: 1024px) {
-                margin: 10rem 0;
-            }
-            @media (max-width: 1024px) {
-                margin: 8rem 0;
+            &:not(header)
+            {
+                margin-top: 4.8rem;
+                &.is-normal-margin
+                {
+                    margin-top: 12rem;
+                    @media (max-width: 1024px) {
+                        margin-top: 10rem;
+                    }
+                    @media (max-width: 1024px) {
+                        margin-top: 8rem;
+                    }
+                }
             }
             &.has-focus
             {
@@ -55,6 +63,7 @@ html
                     position: absolute;
                     top: 50%;
                     left: 50%;
+                    z-index: 10;
                     transform: translate(-50%, -50%);
                     pointer-events: none;
                 }

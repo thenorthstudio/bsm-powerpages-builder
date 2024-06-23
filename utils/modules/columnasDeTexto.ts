@@ -7,7 +7,7 @@ type ColumnasDeTextoSubPropDic = {
 export class ColumnasDeTextoSubModule extends SubModule<ColumnasDeTextoSubPropDic>
 {
     createProps() {
-        return { text: new ModulePropString('Texto', LONG_LOREM, 'rich') }
+        return { text: new ModulePropString('Texto', LONG_LOREM, 'rich-h3') }
     }
     getDescriptor()
     {
@@ -28,7 +28,7 @@ export class ColumnasDeTextoModule extends Module<ColumnasDeTextoModulePropDic>
     createProps()
     {
         return {
-            title: new ModulePropString('Título', 'Lorem Ipsum'),
+            title: new ModulePropString('Título', 'Columnas de texto'),
             columns: new ModulePropArray(
                 ColumnasDeTextoSubModule, 'columna', 'Columnas', 1, 4
             ),

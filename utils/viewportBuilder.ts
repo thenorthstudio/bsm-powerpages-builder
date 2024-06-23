@@ -25,7 +25,7 @@ export class ViewportBuilder
         await this.appendStyle('reset', '/builder/_reset.scss');
         await this.appendStyle('fontface', '/builder/_font-face.scss');
         await this.appendStyle('typography', '/builder/_typography.scss');
-        await this.appendStyle('global', '/builder/style.scss');
+        await this.appendStyle('theme', '/builder/theme.scss');
     }
 
 
@@ -223,9 +223,10 @@ export class ViewportBuilder
         let cssString = '';
         const globalPaths = [
             '_reset',
-            '_powerpages-fix',
+            '_font-face',
             '_typography',
-            'style'
+            '_powerpages-fix',
+            'theme'
         ];
         for (let i = 0; i < globalPaths.length; i++)
         {
@@ -238,6 +239,7 @@ export class ViewportBuilder
         {
             'header': 'header',
             'columnas-de-texto': 'columnas-de-texto',
+            'lista-con-iconografia': 'lista-con-iconografia',
             'cards-con-iconografia': 'cards-con-iconografia',
             'grid-de-imagenes': 'grid-de-imagenes'
         }

@@ -9,7 +9,7 @@ const prop = defineProps<{
 
 
 <template>
-    <header class="c-module | c-header">
+    <header class="c-header">
         <div class="background">
             <BuilderImage />
             <div class="overlay"></div>

@@ -21,12 +21,13 @@ const prop = defineProps<{
             />
         </div>
     
-        <div v-if="options.editor == 'rich'">
+        <div v-if="options.editor == 'rich' || options.editor == 'rich-h3'">
             <label :for="`${options.id}`" class="text-xs text-400 | pl-2 mb-2">
                 {{ options.title }}
             </label>
             <Editor :id="`${options.id}`" v-model="options.value"
                 @update:model-value="emit('set-dirty')"
+                :modules="{ history: true }"
                 >
                 <template v-slot:toolbar>
                     <span class="ql-formats">

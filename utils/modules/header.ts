@@ -15,7 +15,7 @@ export class HeaderModule extends Module<HeaderModulePropDic>
     createProps()
     {
         return {
-            title: new ModulePropString('Título', 'Lorem Ipsum'),
+            title: new ModulePropString('Título', 'Header'),
             text: new ModulePropString('Texto', MID_LOREM, 'rich'),
         }
     }

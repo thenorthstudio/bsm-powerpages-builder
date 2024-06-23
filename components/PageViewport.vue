@@ -41,6 +41,7 @@ onMounted(async () =>
     calculateIframeScale();
 
     await builder.value.init(iframe.value!, shadowRenderer.value!);
+    page.modules.value.push(moduleFactory['header']());
 })
 </script>
 

@@ -8,6 +8,7 @@ abstract class ModulePropBase<T>
     title: string;
     value: T;
     columnSpan: (1 | 2);
+    isHiiden?: boolean;
 
     constructor(title: string, defaultValue: T, columnSpan?: (1 | 2))
     {
@@ -20,7 +21,7 @@ abstract class ModulePropBase<T>
 
 
 /* All possible types */
-type ModulePropStringEditor = ('plain' | 'rich');
+type ModulePropStringEditor = ('plain' | 'rich' | 'rich-h3');
 export class ModulePropString extends ModulePropBase<string>
 {
     type = 'string' as ModulePropType;

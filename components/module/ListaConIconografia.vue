@@ -9,7 +9,7 @@ const prop = defineProps<{
 
 
 <template>
-    <section class="c-cards-con-iconografia">
+    <section class="c-lista-con-iconografia">
         <div class="inner | boxed">
             <h2 class="t-title" v-if="!isEmpty(instance.props.title.value)">
                 {{ instance.props.title.value }}
@@ -39,4 +39,4 @@ const prop = defineProps<{
 </template>
 
 
-<style lang="scss" src="/public/builder/scss/cards-con-iconografia.scss" />
+<style lang="scss" src="/public/builder/scss/lista-con-iconografia.scss" />

@@ -9,7 +9,7 @@ const prop = defineProps<{
 
 
 <template>
-    <section class="c-module | c-grid-de-imagenes">
+    <section class="c-grid-de-imagenes">
         <div class="inner | boxed">
             <h2 class="t-title" v-if="!isEmpty(instance.props.title.value)">
                 {{ instance.props.title.value }}

@@ -17,6 +17,7 @@ export abstract class ModuleBase<TPropDic extends ModulePropDic = ModulePropDic>
     abstract createProps(): TPropDic;
     abstract getTitle(): string;
     abstract getDescriptor(): string;
+    watchPropVisibility() {  }
 }
 
 
@@ -29,6 +30,7 @@ export abstract class Module<TPropDic extends ModulePropDic = ModulePropDic>
     hovering: boolean;
     deathMark: boolean;
     additionalInfo?: string;
+    topMaring: ModuleMarginType;
     
     constructor(type: ModuleType) 
     {
@@ -37,6 +39,7 @@ export abstract class Module<TPropDic extends ModulePropDic = ModulePropDic>
         this.dirty = true;
         this.hovering = false;
         this.deathMark = false;
+        this.topMaring = 'normal-margin';
     }
 
 

@@ -17,6 +17,7 @@ export const usePageLoader = () =>
             const newModule = moduleFactory[baseModule.type]();
 
             newModule.id = baseModule.id;
+            newModule.topMaring = baseModule.topMaring;
             for (const propName in newModule.props)
             {
                 const baseProp = baseModule.props[propName];

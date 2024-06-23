@@ -47,8 +47,8 @@ export class GridDeImagenesModule extends Module<GridDeImagenesPropDic>
     createProps()
     {
         return {
-            title: new ModulePropString('Título', 'Lorem ipsum'),
-            text: new ModulePropString('Texto', LONG_LOREM, 'rich'),
+            title: new ModulePropString('Título', 'Grid de imágenes'),
+            text: new ModulePropString('Texto', LONG_LOREM, 'rich-h3'),
             images: new ModulePropArray(
                 GridDeImagenesSubModule, 'imagen', 'Imágenes', 1
             ),
