@@ -91,14 +91,10 @@ html
 
     .swiper
     {
-        display: flex;
-        flex-wrap: wrap;
         overflow: visible;
         box-sizing: content-box;
         >.swiper-wrapper
         {
-            flex: 0 0 auto;
-            display: flex;
             >.swiper-slide>.inner
             {
                 height: 100%;
