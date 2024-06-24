@@ -298,6 +298,24 @@ export class ViewportBuilder
             node => node.parentNode!.removeChild(node)
         );
 
+        // Remove Swiper noise:
+        kitchenEl.querySelectorAll('.swiper, .swiper>*, .swiper>*>*').forEach(node =>
+        {
+            const classes = [...node.classList];
+            classes.forEach(c =>
+            {
+                const protectedClasses = ['swiper-wrapper', 'swiper-slide'];
+                if (c.startsWith('swiper-') && !protectedClasses.includes(c))
+                    node.classList.remove(c);
+            });
+            node.removeAttribute('aria-controls');
+            node.removeAttribute('aria-disabled');
+            node.removeAttribute('aria-live');
+            node.removeAttribute('aria-label');
+            node.removeAttribute('role');
+            node.removeAttribute('style');
+        });
+
         // Remove module ID attribute:
         kitchenEl.querySelectorAll('[data-id]').forEach(
             node => node.removeAttribute('data-id')
