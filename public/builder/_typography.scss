@@ -39,28 +39,78 @@ main.main-content
     u { display: inline; }
     
     h1, h2, h3, h4 { font-weight: 400; }
+    .rich-text
+    {
+        p, ul, ol
+        {
+            &+ { p, ul, ol { margin-top: 1.5em; } }
+            &+h3 { margin-top: 6.4rem; }
+        }
+        h3
+        {
+            &+ { p, ul, ol { margin-top: 2.4rem; } }
+            &+h3 { margin-top: 0; }
+        }
+        @media (max-width: 1024px)
+        {
+            p+p { margin-top: 1.6rem; }
+            p, ul, ol { &+h3 { margin-top: 3.2rem; } }
+            h3+ { p, ul, ol { margin-top: 1.8rem; } }
+        }
+    }
+    .rich-text-smaller
+    {
+        p, ul, ol {
+            &+ { p, ul, ol { margin-top: 1em; } }
+        }
+    }
 
     .t-title
     {
         font-size: 4.2rem;
-        line-height: 1.142;
+        line-height: 1.14;
+    }
+    .t-subtitle, .rich-text h3
+    {
+        font-size: 3.4rem;
+        line-height: 1.14;
     }
     &, .t-body
     {
         font-size: 2.2rem;
-        line-height: 1.4545;
+        line-height: 1.5;
     }
-    @media (max-width: 1100px)
+    .t-sm
+    {
+        font-size: 1.8rem;
+        line-height: 1.3;
+    }
+    .t-xs
+    {
+        font-size: 1.6rem;
+        line-height: 1.5;
+    }
+    .t-xxs
+    {
+        font-size: 1.4rem;
+        line-height: 1.7;
+    }
+    @media (max-width: 1024px)
     {
         .t-title
         {
             font-size: 2.8rem;
-            line-height: 1.128;
+            line-height: 1.13;
+        }
+        .t-subtitle, .rich-text h3
+        {
+            font-size: 2.2rem;
+            line-height: 1.13;
         }
         &, .t-body
         {
             font-size: 1.8rem;
-            line-height: 1.555;
+            line-height: 1.5;
         }
     }
 }

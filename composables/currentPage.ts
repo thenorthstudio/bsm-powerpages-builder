@@ -1,4 +1,4 @@
-import { type Module } from "@/utils/module";
+import { type Module } from "@/utils/moduleTypes";
 
 
 export const useCurrentPage = () =>
@@ -22,6 +22,7 @@ export const useCurrentPage = () =>
     }
     const reorder = useState('page-reordered', () => false);
     const isUpdating = useState('page-is-updating', () => false);
+    const dirtyJS = useState('page-dirty-js', () => false);
     
 
     return {
@@ -33,6 +34,7 @@ export const useCurrentPage = () =>
         hasModules,
         findModule,
         reorder,
-        isUpdating
+        isUpdating,
+        dirtyJS
     };
 };

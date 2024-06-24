@@ -25,6 +25,9 @@ const selectModule = (selction: ModuleType) =>
     const newModule = moduleFactory[selction]();
     page.modules.value.push(newModule);
     configureModule.value.open(newModule);
+
+    const libs = exLibRequirements[newModule.type];
+    if (libs.includes('swiper')) page.dirtyJS.value = true;
 }
 </script>
 
@@ -65,6 +68,7 @@ const selectModule = (selction: ModuleType) =>
 <style lang="scss">
 #new-module-dialog
 {
+    .p-dialog-content { overflow-x: hidden; }
     .inner
     {
         width: 80vw;

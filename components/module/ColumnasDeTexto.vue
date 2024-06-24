@@ -15,7 +15,8 @@ const prop = defineProps<{
                 {{ instance.props.title.value }}
             </h2>
             <div class="col-wrap" :class="`has-${instance.props.columns.value.length}-cols`">
-                <div class="col" v-for="(c, i) in instance.props.columns.value" :key="i"
+                <div class="col | rich-text"
+                    v-for="(c, i) in instance.props.columns.value" :key="i"
                     v-html="c.props.text.value"
                 ></div>
             </div>

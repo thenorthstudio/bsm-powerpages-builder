@@ -1,0 +1,13 @@
+footer.c-footer
+{
+    background-color: #383A43;
+    padding: 4rem var(--page-padding);
+    margin-top: 12rem;
+
+    @media (max-width: 1024px) {
+        margin-top: 10rem;
+    }
+    @media (max-width: 760px) {
+        margin-top: 8rem;
+    }
+}

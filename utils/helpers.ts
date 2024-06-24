@@ -17,12 +17,26 @@ export const reorderArray = <T>(array: T[], from: number, to: number) =>
 
 
 /* Checks if a string is empty */
-export const isEmpty = (str: string) => !(str && str.trim() != '');
+export const isEmpty = (str?: string) => !(str && str.trim() != '');
 
+/* Returns default value if string is empty */
 export const stringOrDefault = <T>(str: string, defaultValue: T) =>
 {
     if (!isEmpty(str)) return str;
     else return defaultValue;
+}
+
+/* Replaces {{ template }} with its file content or a string */
+export const renderTemplate = async (
+    content: string,
+    slot: string,
+    source?: string,
+)
+    : Promise<string> =>
+{
+    let sourceStr = source;
+    if (!sourceStr) sourceStr = await $fetch<string>(`/builder/template/${slot}.html`);
+    return content.replace(new RegExp(`{{ ?${slot} ?}}`, 'gi'), sourceStr);
 }
 
 /* Clean HTML from string */
@@ -36,7 +50,7 @@ export const LONG_LOREM = `<p>Lorem ipsum dolor sit amet,
 <strong>consectetur</strong> adipiscing elit. Mauris condimentum
 nec elit vel egestas.<em>Integer sodales erat ac velit suscipit</em>,
 sit amet ornare nisl cursus. Sed leo tellus, commodo eu arcu nec,
-sagittis tincidunt velit.</p><p><br></p><p> In volutpat purus non
+sagittis tincidunt velit.</p><p>In volutpat purus non
 elit pharetra, vel cursus nunc luctus. Quisque accumsan dolor dolor,
 pellentesque pretium tellus fringilla at.</p>`;
 

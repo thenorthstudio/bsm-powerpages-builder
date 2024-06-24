@@ -14,7 +14,7 @@ const prop = defineProps<{
             <h2 class="t-title" v-if="!isEmpty(instance.props.title.value)">
                 {{ instance.props.title.value }}
             </h2>
-            <div class="body"
+            <div class="body | rich-text"
                 v-if="!isEmpty(instance.props.text.value)"
                 v-html="instance.props.text.value"
             ></div>
@@ -29,7 +29,8 @@ const prop = defineProps<{
                             {{ c.props.title.value }}
                         </h3>
                     </div>
-                    <div class="body" v-if="!isEmpty(c.props.text.value)"
+                    <div class="body | rich-text-smaller"
+                        v-if="!isEmpty(c.props.text.value)"
                         v-html="c.props.text.value"
                     ></div>
                 </div>

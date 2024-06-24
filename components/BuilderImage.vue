@@ -8,7 +8,7 @@ defineProps<{
 <template>
     <div class="c-image">
         <img src="" :alt="alt" />
-        <div class="is-builder-only">
+        <div class="builder-only">
             img
         </div>
     </div>

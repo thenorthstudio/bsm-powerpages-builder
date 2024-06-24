@@ -14,11 +14,11 @@ header.c-header
         }
         >.c-image
         {
-            img, .is-builder-only {
+            img, .builder-only {
                 background-color: #792d39;
             }
             img { object-fit: cover; }
-            .is-builder-only { color: black; }
+            .builder-only { color: black; }
         }
         >.overlay
         {

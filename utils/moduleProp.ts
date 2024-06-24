@@ -1,4 +1,4 @@
-import type { SubModule } from "@/utils/module";
+import type { SubModule } from "@/utils/moduleTypes";
 
 
 abstract class ModulePropBase<T>
@@ -8,6 +8,7 @@ abstract class ModulePropBase<T>
     title: string;
     value: T;
     columnSpan: (1 | 2);
+    additionalInfo?: string;
     isHiiden?: boolean;
 
     constructor(title: string, defaultValue: T, columnSpan?: (1 | 2))
@@ -62,8 +63,57 @@ export class ModulePropNumber extends ModulePropBase<number> {
     type = 'number' as ModulePropType;
 }
 
+export type StringObj = { [key: string]: string };
+export class ModulePropList<TItem extends StringObj = StringObj>
+    extends ModulePropBase<TItem[]>
+{
+    type = 'list' as ModulePropType;
+    factory: () => TItem;
+    minAmount?: number;
+    maxAmount?: number;
+
+    constructor(
+        defaultItem: TItem,
+        title: string,
+        minAmount?: number,
+        maxAmount?: number
+    )
+    {
+        const items: TItem[] = [];
+        const length = minAmount || 1;
+        for (let i = 0; i < length; i++)
+        {
+            const item = { ...defaultItem };
+            items.push(item);
+        }
+        super(title, items);
+        this.factory = () => ({ ...defaultItem });
+        this.minAmount = minAmount;
+        this.maxAmount = maxAmount;
+    }
+
+    addNew()
+    {
+        if (!this.maxAmount || this.value.length < this.maxAmount)
+        {
+            const item = this.factory();
+            this.value.push(item);
+            return true;
+        }
+        else return false;
+    }
+    remove(index: number)
+    {
+        if (!this.minAmount || this.value.length > this.minAmount)
+        {
+            this.value.splice(index, 1);
+            return true;
+        }
+        else return false;
+    }
+}
 export class ModulePropArray<TSub extends SubModule = SubModule>
-    extends ModulePropBase<Array<TSub>>
+    extends ModulePropBase<TSub[]>
 {
     type = 'array' as ModulePropType;
     createSubtype: () => TSub;
@@ -85,7 +135,7 @@ export class ModulePropArray<TSub extends SubModule = SubModule>
             const item = new subtype(submoduleType);
             items.push(item);
         }
-        super(title, items, 1);
+        super(title, items);
         this.createSubtype = () => new subtype(submoduleType);
         this.minAmount = minAmount;
         this.maxAmount = maxAmount;
@@ -118,5 +168,6 @@ export type ModuleProp = (
     ModulePropString |
     ModulePropOptions |
     ModulePropNumber |
+    ModulePropList |
     ModulePropArray
 )

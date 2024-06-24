@@ -1,4 +1,4 @@
-import { Module, SubModule } from '@/utils/module';
+import { Module, SubModule } from "@/utils/moduleTypes";
 
 
 type ListaConIconografiaSubPropDic = {
@@ -8,7 +8,7 @@ export class ListaConIconografiaSubModule extends SubModule<ListaConIconografiaS
 {
     createProps() {
         return {
-            text: new ModulePropString('Texto', LONG_LOREM, 'rich'),
+            text: new ModulePropString('Texto', MID_LOREM, 'rich'),
         }
     }
     getDescriptor()
@@ -30,7 +30,7 @@ export class ListaConIconografiaModule extends Module<ListaConIconografiaPropDic
     constructor()
     {
         super('lista-con-iconografia');
-        this.additionalInfo = 'Imagen: 40x40px (.SVG para iconos)';
+        this.additionalInfo = 'Imagen de 40·40px';
     }
     createProps()
     {

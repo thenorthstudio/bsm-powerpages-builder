@@ -1,4 +1,4 @@
-import { Module, SubModule } from '@/utils/module';
+import { Module, SubModule } from "@/utils/moduleTypes";
 
 
 type GridDeImagenesSubPropDic = {
@@ -11,8 +11,8 @@ export class GridDeImagenesSubModule extends SubModule<GridDeImagenesSubPropDic>
     createProps()
     {
         return {
-            link: new ModulePropString('Link URL', 'https://www.bsm.upf.edu/'),
-            alt: new ModulePropString('Imagen alt-text', 'Lorem ipsum', 'plain', 1),
+            link: new ModulePropString('Link URL', ''),
+            alt: new ModulePropString('Imagen alt-text', '', 'plain', 1),
             width: new ModulePropOptions('Ancho', [
                 { label: 'Completo', value: '12' },
                 { label: 'Mitad', value: '6' },
@@ -42,7 +42,7 @@ export class GridDeImagenesModule extends Module<GridDeImagenesPropDic>
     constructor()
     {
         super('grid-de-imagenes');
-        this.additionalInfo = 'Imagen: 200px de alto (ancho variable)';
+        this.additionalInfo = 'Imagen de 200px de alto (ancho variable)';
     }
     createProps()
     {

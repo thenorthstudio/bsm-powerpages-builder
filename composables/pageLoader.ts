@@ -1,4 +1,4 @@
-import type { Module } from "@/utils/module";
+import type { Module } from "@/utils/moduleTypes";
 import type { ModulePropArray } from '#imports';
 
 
@@ -52,6 +52,7 @@ export const usePageLoader = () =>
             finalModules.push(newModule);
         }
         page.modules.value = finalModules;
+        page.dirtyJS.value = true;
     }
 
     const exportAsObject = () =>

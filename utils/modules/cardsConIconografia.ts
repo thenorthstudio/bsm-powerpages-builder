@@ -1,4 +1,4 @@
-import { Module, SubModule } from '@/utils/module';
+import { Module, SubModule } from "@/utils/moduleTypes";
 
 
 type CardsConIconografiaSubPropDic = {
@@ -17,7 +17,7 @@ export class CardsConIconografiaSubModule extends SubModule<CardsConIconografiaS
                 { label: 'Mitad', value: '6' },
                 { label: 'Tercio', value: '4' }
             ], 1, 1),
-            text: new ModulePropString('Texto', LONG_LOREM, 'rich'),
+            text: new ModulePropString('Texto', MID_LOREM, 'rich'),
         }
     }
     getDescriptor()
@@ -41,7 +41,7 @@ export class CardsConIconografiaModule extends Module<CardsConIconografiaPropDic
     constructor()
     {
         super('cards-con-iconografia');
-        this.additionalInfo = 'Imagen: 80x80px (.SVG para iconos)';
+        this.additionalInfo = 'Imagen de 80·80px';
     }
     createProps()
     {

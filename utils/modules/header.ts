@@ -1,4 +1,4 @@
-import { Module } from '@/utils/module';
+import { Module } from "@/utils/moduleTypes";
 
 
 type HeaderModulePropDic = {
@@ -10,7 +10,7 @@ export class HeaderModule extends Module<HeaderModulePropDic>
     constructor()
     {
         super('header');
-        this.additionalInfo = 'Imagen: 1440x536px';
+        this.additionalInfo = 'Imagen de 1440·536px';
     }
     createProps()
     {

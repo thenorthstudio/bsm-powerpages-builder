@@ -3,50 +3,33 @@ section.c-lista-con-iconografia
     >.inner
     {
         >.t-title { margin-bottom: 3.2rem; }
-        >.body { margin-bottom: 4.8rem; }
-        >.card-grid
+        >.body { margin-bottom: 3.6rem; }
+        >.item-grid
         {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 24px;
-            >.card-block
+            padding: 2.4rem;
+            @media (max-width: 760px) {
+                padding: 1.6rem;
+            }
+            >.item-block
             {
-                min-width: 330px;
-                background-color: #F7F7F9;
-                padding: 60px;
-                &.is-12-cols { flex: 1 1 100%; }
-                &.is-6-cols { flex: 1 1 calc(50% - 12px); }
-                &.is-4-cols { flex: 1 1 calc(33% - 12px) }
-                >.head
+                display: flex;
+                align-items: flex-start;
+                &+.item-block { margin-top: 3.2rem; }
+                >.L
                 {
-                    margin-bottom: 2rem;
-                    display: flex;
-                    align-items: center;
+                    height: 40px;
+                    flex: 0 0 40px;
+                    margin-right: 1.6rem;
                     >.c-image
                     {
-                        width: 80px;
-                        height: 80px;
-                        margin: 0 1.5rem 0 0;
+                        height: 100%;
                         img { object-fit: contain; }
                     }
-                    >.title
-                    {
-                        font-size: 2.6rem;
-                        line-height: 3rem;
-                        margin: 0;
+                    @media (max-width: 760px) {
+                        margin-right: .8rem;
                     }
                 }
-                >.body
-                {
-                    font-weight: 300;
-                    font-size: 2rem;
-                    line-height: 1.5;
-                }
-                @media (max-width: 900px)
-                {
-                    padding: 40px;
-                    >.body { font-size: 1.8rem; }
-                }
+                >.R { flex: 1 1 auto; }
             }
         }
     }

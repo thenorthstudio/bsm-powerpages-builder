@@ -33,39 +33,49 @@ html
         }
         button { cursor: pointer; }
         [hidden] { display: none; }
+        .prod-only { display: none !important; }
 
 
-        main.main-content>.c-module
+        main.main-content
         {
-            &:not(header)
+            &.in-builder
+            {}
+            >.c-module
             {
-                margin-top: 4.8rem;
-                &.is-normal-margin
+                &:not(header)
                 {
-                    margin-top: 12rem;
-                    @media (max-width: 1024px) {
-                        margin-top: 10rem;
-                    }
-                    @media (max-width: 1024px) {
-                        margin-top: 8rem;
+                    margin-top: 4.8rem;
+                    &.is-normal-margin
+                    {
+                        margin-top: 12rem;
+                        @media (max-width: 1024px) {
+                            margin-top: 10rem;
+                        }
+                        @media (max-width: 760px) {
+                            margin-top: 8rem;
+                        }
                     }
                 }
-            }
-            &.has-focus
-            {
-                position: relative;
-                &::before
+                &.has-focus
                 {
-                    content: '';
-                    width: calc(100% - 40px);
-                    height: calc(100% + 80px);
-                    border: solid 2px #d9be3d;
-                    position: absolute;
-                    top: 50%;
-                    left: 50%;
-                    z-index: 10;
-                    transform: translate(-50%, -50%);
-                    pointer-events: none;
+                    position: relative;
+                    &::before
+                    {
+                        content: '';
+                        width: calc(100% - 100px);
+                        height: calc(100% + 60px);
+                        border: solid 2px #d9be3d;
+                        position: absolute;
+                        top: 50%;
+                        left: 50%;
+                        z-index: 80;
+                        transform: translate(-50%, -50%);
+                        pointer-events: none;
+                        @media (max-width: 1024px) {
+                            width: calc(100% - 10px);
+                            height: calc(100% + 20px);
+                        }
+                    }
                 }
             }
         }
@@ -86,17 +96,16 @@ html
 .c-image
 {
     overflow: hidden;
-    #viewBot { display: none !important; }
     .image, img
     {
-        width: 100%;
-        height: 100%;
+        width: 100% !important;
+        height: 100% !important;
     }
     img { background-color: #C8102E; }
     .in-builder &
     {
         position: relative;
-        .is-builder-only
+        .builder-only
         {
             width: 100%;
             height: 100%;
@@ -112,5 +121,18 @@ html
             justify-content: center;
             pointer-events: none;
         }
+    }
+}
+
+.c-swiper-arrows
+{
+    display: flex;
+    margin-bottom: 2rem;
+    >button
+    {
+        width: 30rem;
+        height: 10rem;
+        background-color: #C8102E;
+        margin-right: 2rem;
     }
 }

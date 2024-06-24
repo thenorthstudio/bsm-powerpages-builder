@@ -1,7 +1,5 @@
-export type ModulePropDic = { [key: string]: ModuleProp };
-
-
 /* Base class for both modules and sub-modules */
+export type ModulePropDic = { [key: string]: ModuleProp };
 export abstract class ModuleBase<TPropDic extends ModulePropDic = ModulePropDic>
 {
     id: number;

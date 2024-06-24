@@ -1,4 +1,4 @@
-import type { Module, SubModule } from "@/utils/module";
+import type { Module, SubModule } from "@/utils/moduleTypes";
 
 
 export const useGlobalDialogs = () =>

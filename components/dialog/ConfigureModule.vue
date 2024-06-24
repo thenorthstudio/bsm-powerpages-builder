@@ -1,9 +1,8 @@
 <script lang="ts" setup>
-const { configureModule: dialog } = useGlobalDialogs();
-
-
+const page = useCurrentPage();
 const module = computed(() => dialog.value.module);
 const currentSubmodule = computed(() => dialog.value.sub.module);
+const { configureModule: dialog } = useGlobalDialogs();
 
 const marginOptions: Array<{
     label: string,
@@ -23,6 +22,12 @@ watch([module, currentSubmodule], () =>
 );
 
 
+const checkTriggerJS = (lib: ExternalLib) =>
+{
+    if (!module.value) return;
+    const libs = exLibRequirements[module.value.type];
+    if (libs.includes(lib)) page.dirtyJS.value = true;
+}
 const goBackFromSubmodule = () => {
     dialog.value.closeSubmodule();
 }
@@ -32,8 +37,8 @@ const goBackFromSubmodule = () => {
 <template>
     <Dialog id="configure-module-dialog"  position="topleft"
         v-model:visible="dialog.isVisible" :keep-in-view-port="false"
-        pt:header="border-bottom-1 border-200 | cursor-move" pt:content="pt-4 pb-0"
-        @after-hide="goBackFromSubmodule"
+        pt:header="border-bottom-1 border-200 | cursor-move"
+        pt:content="p-0" @after-hide="goBackFromSubmodule"
         >
         <template #header>
             <div class="flex align-items-center gap-2">
@@ -56,42 +61,45 @@ const goBackFromSubmodule = () => {
                     <div class="ml-2 mr-3">
                         |
                     </div>
-                    <div class="text-sm">
-                        {{ module.additionalInfo }}
-                    </div>
+                    <div class="pi pi-info-circle cursor-auto"
+                        v-tooltip.right="module.additionalInfo"
+                    ></div>
                 </div>
             </div>
         </template>
 
-        <div class="inner field-grid" v-if="module && !currentSubmodule">
-            <div v-if="module.type != 'header'"
-                class="w-full | pb-3 mb-4 | border-100 border-bottom-1"
+        <div class="inner" v-if="module && !currentSubmodule">
+            <div class=" p-3 mb-2 | border-100 border-bottom-1"
+                v-if="module.type != 'header'"
                 >
                 <div class="flex align-items-center">
                     <label for="margin-option" class="text-xs text-500 | mr-3">
-                        Margen <br>
-                        superior
+                        Margen superior
                     </label>
                     <Dropdown id="margin-option" v-model="module.topMaring" checkmark
                         :options="marginOptions" option-label="label" option-value="value"
                         pt:input="text-xs" pt:list="text-xs"
                     />
                     <div class="text-xs text-300 | ml-3 | flex align-items-start">
-                        <div class="pi pi-info-circle"></div>
-                        <div class="ml-2">
-                            Permite enganchar este módulo al anterior
-                        </div>
+                        <div class="pi pi-info-circle"
+                            v-tooltip.right="`Permite enganchar este módulo al anterior`"
+                        ></div>
                     </div>
                 </div>
             </div>
-            <DialogPropRenderer v-for="(p, i) in module.props" :key="i"
-                :options="p" @set-dirty="module!.dirty = true"
-            />
+            <div class="field-grid | p-3">
+                <DialogPropRenderer :options="p"
+                    v-for="(p, i) in module.props" :key="i"
+                    @set-dirty="module!.dirty = true"
+                    @check-js="checkTriggerJS"
+                />
+            </div>
         </div>
 
-        <div class="inner field-grid" v-if="currentSubmodule">
-            <DialogPropRenderer v-for="(p, i) in currentSubmodule.props" :key="i"
-                :options="p" @set-dirty="module!.dirty = true"
+        <div class="inner field-grid | p-3 pt-5" v-if="currentSubmodule">
+            <DialogPropRenderer :options="p" :key="i"
+                v-for="(p, i) in currentSubmodule.props"
+                @set-dirty="module!.dirty = true"
             />
         </div>
 
@@ -105,13 +113,14 @@ const goBackFromSubmodule = () => {
     .p-dialog-content
     {
         position: relative;
-        overflow: hidden;
+        overflow-x: hidden;
     }
 
     .inner
     {
         width: 80vw;
-        max-width: 525px;
+        max-width: 450px;
+        // max-height: 80vh;
     }
     .field-grid
     {

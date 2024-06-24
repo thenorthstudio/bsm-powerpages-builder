@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { Module } from '@/utils/module';
+import { Module } from "@/utils/moduleTypes";
 import type OverlayPanel from 'primevue/overlaypanel';
 import type { DataTableRowReorderEvent } from 'primevue/datatable';
 
@@ -13,6 +13,7 @@ const onRowReorder = (e: DataTableRowReorderEvent) =>
 {
     reorderArray(page.modules.value, e.dragIndex, e.dropIndex);
     page.reorder.value = true;
+    triggerJS();
 }
 const registerDeleteConfirmation = (index: number, i: any) =>
 {
@@ -21,6 +22,9 @@ const registerDeleteConfirmation = (index: number, i: any) =>
         deleteConfirmation.value[index] = i;
     }
     else deleteConfirmation.value.push(i);
+}
+const triggerJS = () => {
+    page.dirtyJS.value = true;
 }
 
 const askNewModule = () =>
@@ -41,12 +45,16 @@ const deleteModule = (index: number) =>
     dialogs.configureModule.value.close();
     deleteConfirmation.value[index].hide();
     page.modules.value[index].deathMark = true;
+    triggerJS();
 }
 </script>
 
 
 <template>
-    <Panel id="modules-list" class="min-h-full" pt:header="p-3 pb-0">
+    <Panel id="modules-list" class="min-h-full"
+        pt:header="sticky top-0 z-2 | p-3 | surface-0 border-100 border-bottom-1"
+        pt:content="pt-0"
+        >
 
         <template #header>
             <div class="flex align-items-center gap-2">
@@ -63,7 +71,6 @@ const deleteModule = (index: number) =>
         </template>
 
         <div class="inner text-sm">
-            <Divider />
             
             <div class="text-center" v-if="!page.hasModules()">
                 <div class="mt-5 mb-4">No hay módulos todavía.</div>
@@ -77,7 +84,7 @@ const deleteModule = (index: number) =>
                 >
                 <Column class="reorder-row | pt-2" row-reorder />
 
-                <Column class="type-row px-0" header="Tipo">
+                <Column class="type-row px-0">
                     <template #body="{ data }">
                         <div class="text-sm">
                             {{ asA<Module>(data).getDescriptor() }}
@@ -85,7 +92,7 @@ const deleteModule = (index: number) =>
                     </template>
                 </Column>
 
-                <Column class="actions-row" header="Acciones">
+                <Column class="actions-row">
                     <template #body="{ index }">
                         <ButtonGroup>
                             <Button class="px-1 py-2" icon="pi pi-cog"

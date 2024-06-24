@@ -4,7 +4,7 @@ const page = useCurrentPage();
 
 <template>
     <div id="app" class="h-screen | flex align-items-start"
-        :class="{ loading: page.isUpdating.value }"
+        :class="{ 'is-loading': page.isUpdating.value }"
         >
         <div id="sidebar-wrap" class="flex flex-column">
             <Sidebar/>
@@ -31,7 +31,7 @@ const page = useCurrentPage();
 #app
 {
     overflow: hidden;
-    &.loading::after
+    &.is-loading::after
     {
         content: '';
         width: 100%;

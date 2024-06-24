@@ -32,8 +32,10 @@ const exportPageHTML = async (action: ActionT) =>
 }
 const exportMenuHTML = async (action: ActionT) =>
 {
-    // const html = await builder.value.exportMenuHTML();
-    // copyToClipboard(html);
+    action.loading = true;
+    const html = await builder.value.exportMenuHTML();
+    copyToClipboard(html);
+    action.loading = false;
 }
 const exportFooterHTML = async (action: ActionT) =>
 {
@@ -69,14 +71,14 @@ const actions = ref<Array<ActionT>>([
         loading: false,
         disabled: true
     },
-/*     {
+    {
         icon: 'pi-clipboard',
         tooltip: 'Copiar',
         title: 'Menú de navegación',
         callback: exportMenuHTML,
         loading: false,
     },
-    {
+/*     {
         icon: 'pi-clipboard',
         tooltip: 'Copiar',
         title: 'Footer',

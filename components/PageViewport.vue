@@ -25,6 +25,12 @@ watch(page.reorder, async () =>
         page.reorder.value = false;
     }
 });
+watch(page.dirtyJS, () =>
+{
+    if (!page.dirtyJS.value) return;
+    builder.value.triggerJS();
+    page.dirtyJS.value = false;
+});
 
 onMounted(async () =>
 {
@@ -41,7 +47,6 @@ onMounted(async () =>
     calculateIframeScale();
 
     await builder.value.init(iframe.value!, shadowRenderer.value!);
-    page.modules.value.push(moduleFactory['header']());
 })
 </script>
 

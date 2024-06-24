@@ -1,0 +1,110 @@
+section.c-cards-de-programa
+{
+    overflow: hidden;
+    >.inner
+    {
+        >.t-title { margin-bottom: 3.2rem; }
+        >.body { margin-bottom: 4.8rem; }
+        >.swiper
+        {
+            display: flex;
+            overflow: visible;
+            box-sizing: content-box;
+            >.program-grid
+            {
+                flex: 0 0 auto;
+                display: flex;
+                >.program-block
+                {
+                    width: 405px;
+                    flex: 0 0 405px;
+                    >.inner
+                    {
+                        height: 100%;
+                        background-color: #f7f7f9;
+                        padding: 40px;
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: space-between;
+                        box-sizing: border-box;
+                        >.top
+                        {
+                            flex: 0 0 auto;
+                            >.c-image
+                            {
+                                width: 100%;
+                                height: 225px;
+                                margin-bottom: 2rem;
+                            }
+                            >h3
+                            {
+                                font-weight: 700;
+                                margin: 2rem 0;
+                            }
+                            >.detail-grid
+                            {
+                                margin-top: 4.8rem;
+                                display: grid;
+                                grid-template-columns: repeat(2, 1fr);
+                                gap: 5rem 1rem;
+                                >.detail-block
+                                {
+                                    display: flex;
+                                    align-items: center;
+                                    >.L
+                                    {
+                                        height: 25px;
+                                        flex: 0 0 25px;
+                                        margin-right: 25px;
+                                        >.c-image
+                                        {
+                                            height: 100%;
+                                            >.builder-only { font-size: 50%; }
+                                        }
+                                    }
+                                    >.R
+                                    {
+                                        flex: 1 1 auto;
+                                        line-height: 1.1;
+                                        >.title
+                                        {
+                                            color: #5b5b5b;
+                                            font-weight: 300;
+                                        }
+                                        >.text { font-weight: 500; }
+                                    }
+                                }
+                            }
+                        }
+                        >.bottom
+                        {
+                            flex: 0 0 auto;
+                            >a.cta
+                            {
+                                color: #c8102e;
+                                font-weight: 600;
+                                line-height: 1;
+                                text-align: center;
+                                text-decoration: none;
+                                text-transform: uppercase;
+                                border: 1px solid #c8102e;
+                                background-color: #fff;
+                                padding: 1.5rem 2rem;
+                                margin-top: 5rem;
+                                display: block;
+                                transition: color .3s ease,
+                                            background-color .3s ease
+                                ;
+                                &:hover
+                                {
+                                    color: white;
+                                    background-color: #c8102e;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

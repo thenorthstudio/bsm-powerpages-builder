@@ -6,9 +6,13 @@
 
 #gjs-tools .gjs-resizer { display: none !important; }
 
-.c-image>[data-gjs-type="image"]
+.c-image
 {
-    width: 100% !important;
-    height: 100% !important;
-    display: block !important;
+    #viewBot { display: none !important; }
+    >[data-gjs-type="image"]
+    {
+        width: 100% !important;
+        height: 100% !important;
+        display: block !important;
+    }
 }

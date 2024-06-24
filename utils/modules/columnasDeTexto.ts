@@ -1,4 +1,4 @@
-import { Module, SubModule } from '@/utils/module';
+import { Module, SubModule } from "@/utils/moduleTypes";
 
 
 type ColumnasDeTextoSubPropDic = {

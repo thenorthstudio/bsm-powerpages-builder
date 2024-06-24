@@ -27,16 +27,28 @@ const prop = defineProps<{
             </label>
             <Editor :id="`${options.id}`" v-model="options.value"
                 @update:model-value="emit('set-dirty')"
-                :modules="{ history: true }"
                 >
-                <template v-slot:toolbar>
+                <template #toolbar>
+                    <span class="ql-formats" v-if="options.editor == 'rich-h3'">
+                        <select class="ql-header" value="0">
+                            <option value="3">Subtítulo</option>
+                            <option selected value="0">Parágrafo</option>
+                        </select>
+                    </span>
                     <span class="ql-formats">
                         <button class="ql-bold"></button>
                         <button class="ql-italic"></button>
                         <button class="ql-underline"></button>
                         <button class="ql-link"></button>
-                        <button class="ql-list" data-pc-section="list" value="ordered"></button>
-                        <button class="ql-list" data-pc-section="list" value="bullet"></button>
+                        <button class="ql-list" value="ordered"></button>
+                        <button class="ql-list" value="bullet"></button>
+                    </span>
+                    <!-- <span class="ql-formats">
+                        <button class="ql-script" value="sub"></button>
+                        <button class="ql-script" value="super"></button>
+                    </span> -->
+                    <span class="ql-formats">
+                        <button class="ql-clean"></button>
                     </span>
                 </template>
             </Editor>
@@ -46,15 +58,26 @@ const prop = defineProps<{
 
 
 <style lang="scss">
-.prop-string-field.is-rich
+.prop-string-field.is-rich, .prop-string-field.is-rich-h3
 {
     margin-top: -1rem;
     .p-editor-container .p-editor-content .ql-editor
     {
+        max-height: 250px;
         color: black;
         font-family: var(--font-family);
         font-size: 0.9rem;
-        background-color: white;
+        background: white;
+        p, ul, ol
+        {
+            &+ { p, ul, ol { margin-top: 1.2em; } }
+            &+h3 { margin-top: 1.75rem; }
+        }
+        h3
+        {
+            &+ { p, ul, ol { margin-top: 0.5rem; } }
+            &+h3 { margin-top: 0; }
+        }
     }
 }
 </style>

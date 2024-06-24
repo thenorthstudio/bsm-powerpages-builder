@@ -3,6 +3,7 @@ import
 {
     ModuleHeader,
     ModuleColumnasDeTexto,
+    ModuleCardsDePrograma,
     ModuleListaConIconografia,
     ModuleCardsConIconografia,
     ModuleGridDeImagenes,
@@ -13,6 +14,7 @@ from '#components';
 const moduleComponents: { [key in ModuleType]: any } = {
     'header': ModuleHeader,
     'columnas-de-texto': ModuleColumnasDeTexto,
+    'cards-de-programa': ModuleCardsDePrograma,
     'lista-con-iconografia': ModuleListaConIconografia,
     'cards-con-iconografia': ModuleCardsConIconografia,
     'grid-de-imagenes': ModuleGridDeImagenes,
@@ -22,7 +24,7 @@ const page = useCurrentPage();
 
 
 <template>
-    <main class="main-content | in-builder | t-body">
+    <main class="main-content | in-builder">
         <component class="c-module"
             :class="[{ 'has-focus': m.hovering }, `is-${m.topMaring}`]"
             :is="moduleComponents[m.type]" :instance="m" :data-id="m.id"

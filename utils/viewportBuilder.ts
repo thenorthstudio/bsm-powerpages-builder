@@ -1,3 +1,4 @@
+import type { Module } from "@/utils/moduleTypes";
 import { html_beautify } from 'js-beautify';
 import { compileString } from 'sass';
 
@@ -8,24 +9,35 @@ export class ViewportBuilder
     mirrorWindow?: Window;
     mirrorDoc?: Document;
     mainEl?: HTMLElement;
+    bodyEl?: HTMLElement;
     
     async init(iframe: HTMLIFrameElement, shadowDoc: HTMLElement)
     {
+        this.shadowDoc = shadowDoc;
         this.mirrorWindow = iframe.contentWindow!;
         this.mirrorDoc = iframe.contentDocument!;
         this.mirrorDoc.open();
-        const template = await $fetch<string>('/builder/template.html');
-        this.mirrorDoc.write(template);
+        let html = await $fetch<string>('/builder/index.html');
+        html = await renderTemplate(html, 'menu');
+        html = await renderTemplate(html, 'footer');
+        html = await renderTemplate(html, 'logo');
+        this.mirrorDoc.write(html);
         this.mirrorDoc.close();
-        await skipFrame();
         
-        this.shadowDoc = shadowDoc;
+        await skipFrame();
+        this.bodyEl = this.mirrorDoc.querySelector<HTMLElement>('body')!;
         this.mainEl = this.mirrorDoc.querySelector<HTMLElement>('main')!;
+        await skipFrame();
 
-        await this.appendStyle('reset', '/builder/_reset.scss');
-        await this.appendStyle('fontface', '/builder/_font-face.scss');
-        await this.appendStyle('typography', '/builder/_typography.scss');
-        await this.appendStyle('theme', '/builder/theme.scss');
+        await this.appendStyle('reset-global', '/builder/_reset.scss');
+        await this.appendStyle('swiper-lib', '/builder/_swiper.scss');
+        await this.appendStyle('fontface-global', '/builder/_font-face.scss');
+        await this.appendStyle('typography-global', '/builder/_typography.scss');
+        await this.appendStyle('theme-global', '/builder/theme.scss');
+        await this.appendStyle('menu-module', '/builder/scss/menu.scss');
+        await this.appendStyle('footer-module', '/builder/scss/footer.scss');
+
+        await this.appendScript('theme-global', '/builder/js/theme.js');
     }
 
 
@@ -48,33 +60,8 @@ export class ViewportBuilder
                 else console.error('Tried to remove a mirror-ghost module!', m);
                 page.modules.value.splice(i, 1);
 
-                // remove CSS/JS if necessary:
-                let isModuleCssExtinct = true;
-                let isModuleJsExtinct = true;
-                for (let j = 0; j < page.modules.value.length; j++)
-                {
-                    const m2 = page.modules.value[j];
-                    if (m2.id == m.id) continue;
-                    if (m2.type == m.type)
-                    {
-                        isModuleCssExtinct = false;
-                        isModuleJsExtinct = false;
-                        break;
-                    }
-                }
-                if (isModuleCssExtinct)
-                {
-                    const id = `#${m.type}-module-css`;
-                    const styleEl = this.mainEl!.querySelector(id);
-                    if (styleEl) this.mainEl!.removeChild(styleEl);
-                    else console.error('Tried to remove a mirror-ghost style!', m);
-                }
-                if (isModuleJsExtinct)
-                {
-                    const id = `#${m.type}-module-js`;
-                    const scriptEl = this.mainEl!.querySelector(id);
-                    if (scriptEl) this.mainEl!.removeChild(scriptEl);
-                }
+                await this.cleanCssJs(m, page.modules.value);
+                await this.cleanExLib(m, page.modules.value);
             }
             else if (m.dirty)
             {
@@ -88,35 +75,20 @@ export class ViewportBuilder
                         const clone = newEl.cloneNode(true);
                         this.mainEl!.append(clone);
 
-                        // add CSS if necessary:
-                        const cssId = `#${m.type}-module-css`;
-                        const styleEl = this.mainEl!.querySelector(cssId);
-                        if (!styleEl)
-                        {
-                            const path = `/builder/scss/${m.type}.scss`;
-                            await this.appendStyle(`${m.type}`, path);
-                        }
-                        // add JS if necessary:
-                        const jsId = `#${m.type}-module-js`;
-                        const scriptEl = this.mainEl!.querySelector(jsId);
-                        if (!scriptEl)
-                        {
-                            const path = `/builder/js/${m.type}.js`;
-                            await this.appendScript(`${m.type}`, path);
-                        }
+                        await this.checkAddExLib(m);
+                        await this.checkAddCssJs(m);
                     }
                     // re-render:
                     else this.mainEl!.replaceChild(newEl.cloneNode(true), oldEl);
                 }
                 else console.error('Tried to add a shadow-ghost module!', m);
+
+                // If re-rending a swiper-related module, trigger JS reload:
+                if (exLibRequirements[m.type].includes('swiper'))
+                    this.triggerJS();
             }
         }
         // this.scrollToFocused();
-
-        // dispatch load event for JS:
-        setTimeout(() => {
-            this.mirrorDoc!.dispatchEvent(new Event('load'));
-        }, 10);
         
         await skipTime(10);
         page.isUpdating.value = false;
@@ -130,6 +102,151 @@ export class ViewportBuilder
         );
         page.modules.value.forEach(m => m.dirty = true);
     }
+    triggerJS()
+    {
+        // dispatch load event for JS:
+        setTimeout(() => {
+            this.mirrorWindow!.dispatchEvent(new Event('load'));
+        }, 100);
+    }
+
+    async checkAddCssJs(module: Module)
+    {
+        // add CSS if necessary:
+        const cssId = `#${module.type}-module-css`;
+        const styleEl = this.bodyEl!.querySelector(cssId);
+        if (!styleEl)
+        {
+            const path = `/builder/scss/${module.type}.scss`;
+            await this.appendStyle(`${module.type}-module`, path);
+        }
+        // add JS if necessary:
+        const jsId = `#${module.type}-module-js`;
+        const scriptEl = this.bodyEl!.querySelector(jsId);
+        if (!scriptEl)
+        {
+            const path = `/builder/js/${module.type}.js`;
+            await this.appendScript(`${module.type}-module`, path);
+        }
+    }
+    async cleanCssJs(module: Module, moduleList: Module[])
+    {
+        // remove CSS/JS if necessary:
+        let isModuleCssExtinct = true;
+        let isModuleJsExtinct = true;
+        for (let j = 0; j < moduleList.length; j++)
+        {
+            const m2 = moduleList[j];
+            if (m2.id == module.id) continue;
+            if (m2.type == module.type)
+            {
+                isModuleCssExtinct = false;
+                isModuleJsExtinct = false;
+                break;
+            }
+        }
+        if (isModuleCssExtinct)
+        {
+            const id = `#${module.type}-module-css`;
+            const styleEl = this.bodyEl!.querySelector(id);
+            if (styleEl) this.bodyEl!.removeChild(styleEl);
+            else console.error('Tried to remove a mirror-ghost style!', module);
+        }
+        if (isModuleJsExtinct)
+        {
+            const id = `#${module.type}-module-js`;
+            const scriptEl = this.bodyEl!.querySelector(id);
+            if (scriptEl) this.bodyEl!.removeChild(scriptEl);
+        }
+    }
+
+    async checkAddExLib(module: Module)
+    {
+        const libPaths: { [key in ExternalLib]: string } = {
+            'none': '',
+            'swiper': 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js'
+        }
+        const libs = exLibRequirements[module.type];
+        for (let i = 0; i < libs.length; i++)
+        {
+            const lib = libs[i];
+            // add JS if necessary:
+            const jsId = `#${lib}-lib-js`;
+            const scriptEl = this.bodyEl!.querySelector(jsId);
+            if (!scriptEl)
+            {
+                const path = libPaths[lib];
+                const node = this.mirrorDoc!.createElement('script') as HTMLScriptElement;
+                node.id = `${lib}-lib-js`;
+                node.src = path;
+                
+                this.bodyEl!.append(node);
+                await skipFrame();
+            }
+        }
+    }
+    async cleanExLib(module: Module, moduleList: Module[])
+    {
+        // check if any external libraries are needed:
+        return;
+
+        let isModuleCssExtinct = true;
+        let isModuleJsExtinct = true;
+        for (let j = 0; j < moduleList.length; j++)
+        {
+            const m2 = moduleList[j];
+            if (m2.id == module.id) continue;
+            if (m2.type == module.type)
+            {
+                isModuleCssExtinct = false;
+                isModuleJsExtinct = false;
+                break;
+            }
+        }
+        if (isModuleCssExtinct)
+        {
+            const id = `#${module.type}-module-css`;
+            const styleEl = this.bodyEl!.querySelector(id);
+            // if (styleEl) this.bodyEl!.removeChild(styleEl);
+            // else console.error('Tried to remove a mirror-ghost style!', module);
+        }
+        if (isModuleJsExtinct)
+        {
+            const id = `#${module.type}-module-js`;
+            const scriptEl = this.bodyEl!.querySelector(id);
+            // if (scriptEl) this.bodyEl!.removeChild(scriptEl);
+        }
+    }
+
+    async appendStyle(id: string, path: string)
+    {
+        const scss = await $fetch<string>(path);
+        const css = compileString(scss, { style: 'compressed' }).css;
+        const node = this.mirrorDoc!.createElement('style');
+        node.id = id + '-css';
+        node.innerHTML = css;
+
+        this.bodyEl!.append(node);
+        await skipFrame();
+    }
+    async appendScript(id: string, path: string)
+    {
+        const js = await $fetch<Blob>(path).then(
+            r => r.text()
+        ).catch(_ => console.log(`Not found: ${path}`));
+        if (js)
+        {            
+            const node = this.mirrorDoc!.createElement('script') as HTMLScriptElement;
+            // if (defer) node.defer = true;
+            node.id = id + '-js';
+            node.innerHTML = js;
+            
+            this.bodyEl!.append(node);
+            await skipFrame();
+        }
+    }
+
+    
     scrollToFocused()
     {
         const focusEl = this.mainEl!.querySelector('.has-focus');
@@ -156,56 +273,35 @@ export class ViewportBuilder
         return el || false;
     }
 
-    async appendStyle(id: string, path: string)
-    {
-        const scss = await $fetch<string>(path);
-        const css = compileString(scss, { style: 'compressed' }).css;
-        const node = this.mirrorDoc!.createElement('style');
-        node.id = id + '-module-css';
-        node.innerHTML = css;
-
-        this.mainEl!.append(node);
-        await skipFrame();
-    }
-    async appendScript(id: string, path: string)
-    {
-        const js = await $fetch<Blob>(path).then(
-            r => r.text()
-        ).catch(_ => console.log(`Not found: ${path}`));
-        if (js)
-        {            
-            const node = this.mirrorDoc!.createElement('script');
-            node.id = id + '-module-js';
-            node.innerHTML = js;
-            
-            this.mainEl!.append(node);
-            await skipFrame();
-        }
-    }
 
     async exportPageHTML()
     {
         // Take into account <liquid> macros
 
         // Create fake-DIV that will hold exported HTML:
-        const body = this.mirrorDoc!.querySelector('body')! as HTMLBodyElement;
+        const mirrorBody = this.mirrorDoc!.querySelector('body')! as HTMLBodyElement;
         const kitchenEl = document.createElement('div') as HTMLElement;
-        for (const el of body.children)
+        for (const el of mirrorBody.children)
         {
             const newEl = el.cloneNode(true);
             kitchenEl.appendChild(newEl);
         }
         await skipTime(10);
-        const main = kitchenEl.querySelector('main')! as HTMLElement;
 
-        // Remove builder marker & builder-only elements:
-        main.classList.remove('in-builder');
-        main.querySelectorAll('.is-builder-only').forEach(
+        // Remove in-builder marker:
+        const kitchenMain = kitchenEl.querySelector('main')! as HTMLElement;
+        kitchenMain.classList.remove('in-builder', '|');
+
+        // Remove builder-only elements, styles & menu and footer:
+        const toRemove = 'nav, .builder-only, style, footer';
+        kitchenEl.querySelectorAll(toRemove).forEach(
             node => node.parentNode!.removeChild(node)
         );
-        
-        // Remove builder style tags:
-        main.querySelectorAll('style').forEach(node => main.removeChild(node));
+
+        // Remove module ID attribute:
+        kitchenEl.querySelectorAll('[data-id]').forEach(
+            node => node.removeAttribute('data-id')
+        );
 
         await skipTime(10);
         return html_beautify(kitchenEl.innerHTML, { indent_size: 4 });
@@ -213,20 +309,31 @@ export class ViewportBuilder
     async exportMenuHTML()
     {
         // There are different menus!
+        // or are they..?
+        let html = await $fetch<string>('/builder/template/menu.html');
+        html = await renderTemplate(html, 'logo');
+
+        // Remove <prod-only> tags, keeping content:
+        const regex = /<div ?class="prod-only ?">(.*?)<\/div>/gis;
+        html = html.replace(regex, '$1');
+
+        return html_beautify(html, { indent_size: 4 });
     }
     async exportFooterHTML()
     {
-
     }
     async exportThemeCSS()
     {
         let cssString = '';
         const globalPaths = [
             '_reset',
+            '_swiper',
             '_font-face',
             '_typography',
             '_powerpages-fix',
-            'theme'
+            'theme',
+            'scss/menu',
+            'scss/footer'
         ];
         for (let i = 0; i < globalPaths.length; i++)
         {
@@ -239,6 +346,7 @@ export class ViewportBuilder
         {
             'header': 'header',
             'columnas-de-texto': 'columnas-de-texto',
+            'cards-de-programa': 'cards-de-programa',
             'lista-con-iconografia': 'lista-con-iconografia',
             'cards-con-iconografia': 'cards-con-iconografia',
             'grid-de-imagenes': 'grid-de-imagenes'
