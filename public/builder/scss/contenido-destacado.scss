@@ -26,13 +26,6 @@ section.c-contenido-destacado
             gap: 24px;
         }
     }
-    &.has-swiper .swiper-slide
-    {
-        margin-right: 32px;
-        @media (max-width: 960px) {
-            margin-right: 24px;
-        }
-    }
     &.is-text-content
     {
         &.has-2-items .swiper-wrapper
@@ -190,6 +183,16 @@ section.c-contenido-destacado
                 }
                 >.quote { padding-top: 1.6rem; }
             }
+        }
+    }
+
+    
+    /* PowerPages fix */
+    [data-gjs-type="wrapper"] &.has-swiper .swiper-slide
+    {
+        margin-right: 32px;
+        @media (max-width: 960px) {
+            margin-right: 24px;
         }
     }
 }
