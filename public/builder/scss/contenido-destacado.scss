@@ -19,11 +19,24 @@ section.c-contenido-destacado
 
 
     /* Variations: */
+    &:not(.has-swiper) .swiper-wrapper
+    {
+        gap: 32px;
+        @media (max-width: 960px) {
+            gap: 24px;
+        }
+    }
+    &.has-swiper .swiper-slide
+    {
+        margin-right: 32px;
+        @media (max-width: 960px) {
+            margin-right: 24px;
+        }
+    }
     &.is-text-content
     {
         &.has-2-items .swiper-wrapper
         {
-            gap: 32px;
             .swiper-slide { flex: 0 1 50%; }
             @media (max-width: 800px)
             {
@@ -73,7 +86,6 @@ section.c-contenido-destacado
             .swiper-wrapper
             {
                 flex-wrap: wrap;
-                gap: 32px;
                 .swiper-slide
                 {
                     width: auto;
@@ -136,7 +148,6 @@ section.c-contenido-destacado
             .swiper-wrapper
             {
                 flex-wrap: wrap;
-                gap: 32px;
                 .swiper-slide
                 {
                     width: 40%;
