@@ -86,7 +86,10 @@ const deleteModule = (index: number) =>
 
                 <Column class="type-row px-0">
                     <template #body="{ data }">
-                        <div class="text-sm">
+                        <div class="text-sm" v-tooltip.bottom="{
+                                value: asA<Module>(data).getDescriptor(),
+                                showDelay: 1000,
+                            }">
                             {{ asA<Module>(data).getDescriptor() }}
                         </div>
                     </template>

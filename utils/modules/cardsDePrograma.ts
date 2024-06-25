@@ -30,7 +30,7 @@ export class CardsDeProgramaSubModule extends SubModule<CardsDeProgramaSubPropDi
         props.details.additionalInfo = 'Icono de 25·25px';
         return props;
     }
-    override watchPropVisibility() {
+    override onAnyChange() {
         this.props.linkText.isHiiden = isEmpty(this.props.linkUrl.value);
     }
     getDescriptor()
@@ -62,7 +62,7 @@ export class CardsDeProgramaModule extends Module<CardsDeProgramaPropDic>
             title: new ModulePropString('Título', 'Cards de programa'),
             text: new ModulePropString('Texto', LONG_LOREM, 'rich-h3'),
             programs: new ModulePropArray(
-                CardsDeProgramaSubModule, 'programa', 'Programas', 1
+                CardsDeProgramaSubModule, 'programa', 'Programas'
             ),
         }
     }

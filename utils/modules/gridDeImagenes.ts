@@ -50,7 +50,7 @@ export class GridDeImagenesModule extends Module<GridDeImagenesPropDic>
             title: new ModulePropString('Título', 'Grid de imágenes'),
             text: new ModulePropString('Texto', LONG_LOREM, 'rich-h3'),
             images: new ModulePropArray(
-                GridDeImagenesSubModule, 'imagen', 'Imágenes', 1
+                GridDeImagenesSubModule, 'imagen', 'Imágenes'
             ),
         }
     }

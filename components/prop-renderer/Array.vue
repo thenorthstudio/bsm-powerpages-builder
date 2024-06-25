@@ -72,7 +72,11 @@ const deleteSubmodule = (index: number) =>
 <template>
     <div class="prop-submodule-array">
         <div class="flex align-items-center justify-content-between">
-            <div class="text-xs text-400 | ml-2">
+            <div class="text-xs text-400 | flex | ml-2">
+                <div class="pi pi-info-circle | mr-2"
+                    v-tooltip.left="options.additionalInfo"
+                    v-if="options.additionalInfo"
+                ></div>
                 {{ options.title }}
             </div>
             <Button icon="pi pi-plus" severity="secondary"

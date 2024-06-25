@@ -49,7 +49,7 @@ export class CardsConIconografiaModule extends Module<CardsConIconografiaPropDic
             title: new ModulePropString('Título', 'Cards con iconografía'),
             text: new ModulePropString('Texto', LONG_LOREM, 'rich-h3'),
             cards: new ModulePropArray(
-                CardsConIconografiaSubModule, 'card', 'Cards', 1
+                CardsConIconografiaSubModule, 'card', 'Cards'
             ),
         }
     }

@@ -171,13 +171,13 @@ export class ViewportBuilder
         {
             const lib = libs[i];
             // add JS if necessary:
-            const jsId = `#${lib}-lib-js`;
-            const scriptEl = this.bodyEl!.querySelector(jsId);
+            const jsId = `${lib}-lib-js`;
+            const scriptEl = this.bodyEl!.querySelector( `#${jsId}`);
             if (!scriptEl)
             {
                 const path = libPaths[lib];
                 const node = this.mirrorDoc!.createElement('script') as HTMLScriptElement;
-                node.id = `${lib}-lib-js`;
+                node.id = jsId;
                 node.src = path;
                 
                 this.bodyEl!.append(node);
@@ -187,34 +187,30 @@ export class ViewportBuilder
     }
     async cleanExLib(module: Module, moduleList: Module[])
     {
-        // check if any external libraries are needed:
-        return;
-
-        let isModuleCssExtinct = true;
-        let isModuleJsExtinct = true;
-        for (let j = 0; j < moduleList.length; j++)
+        // check if any other module is using the libraries::
+        const libs = exLibRequirements[module.type];
+        for (let i = 0; i < libs.length; i++)
         {
-            const m2 = moduleList[j];
-            if (m2.id == module.id) continue;
-            if (m2.type == module.type)
+            const lib = libs[i];
+            let isLibExtinct = true;
+            for (let j = 0; j < moduleList.length; j++)
             {
-                isModuleCssExtinct = false;
-                isModuleJsExtinct = false;
-                break;
+                const m2 = moduleList[j];
+                if (m2.id == module.id) continue;
+                const libs2 = exLibRequirements[m2.type];
+                if (libs2.includes(lib))
+                {
+                    isLibExtinct = false;
+                    break;
+                }
             }
-        }
-        if (isModuleCssExtinct)
-        {
-            const id = `#${module.type}-module-css`;
-            const styleEl = this.bodyEl!.querySelector(id);
-            // if (styleEl) this.bodyEl!.removeChild(styleEl);
-            // else console.error('Tried to remove a mirror-ghost style!', module);
-        }
-        if (isModuleJsExtinct)
-        {
-            const id = `#${module.type}-module-js`;
-            const scriptEl = this.bodyEl!.querySelector(id);
-            // if (scriptEl) this.bodyEl!.removeChild(scriptEl);
+            if (isLibExtinct)
+            {
+                const id = `#${lib}-lib-js`;
+                const scriptEl = this.bodyEl!.querySelector(id);
+                if (scriptEl) this.bodyEl!.removeChild(scriptEl);
+                else console.error(`Tried to remove ghost-lib ${lib}`, module);
+            }
         }
     }
 
@@ -365,6 +361,7 @@ export class ViewportBuilder
             'header': 'header',
             'columnas-de-texto': 'columnas-de-texto',
             'cards-de-programa': 'cards-de-programa',
+            'contenido-destacado': 'contenido-destacado',
             'lista-con-iconografia': 'lista-con-iconografia',
             'cards-con-iconografia': 'cards-con-iconografia',
             'grid-de-imagenes': 'grid-de-imagenes'

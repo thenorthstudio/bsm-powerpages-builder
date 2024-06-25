@@ -15,8 +15,8 @@ const marginOptions: Array<{
 
 watch([module, currentSubmodule], () =>
 {
-    if (module.value) module.value.watchPropVisibility();
-    if (currentSubmodule.value) currentSubmodule.value.watchPropVisibility();
+    if (module.value) module.value.onAnyChange();
+    if (currentSubmodule.value) currentSubmodule.value.onAnyChange();
 },
     { deep: true }
 );

@@ -51,6 +51,8 @@ html
 /* Compontents */
 .main-content
 {
+    color: #181818;
+    ;
     >.c-module
     {
         &:not(header)
@@ -95,10 +97,14 @@ html
         box-sizing: content-box;
         >.swiper-wrapper
         {
-            >.swiper-slide>.inner
+            >.swiper-slide
             {
-                height: 100%;
-                box-sizing: border-box;
+                height: auto;
+                >.inner
+                {
+                    height: 100%;
+                    box-sizing: border-box;
+                }
             }
         }
     }

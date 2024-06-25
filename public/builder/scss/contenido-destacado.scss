@@ -1,0 +1,184 @@
+section.c-contenido-destacado
+{
+    overflow: hidden;
+    .t-title { margin-bottom: 3.2rem; }
+    .body { margin-bottom: 4.8rem; }
+    .swiper>.swiper-wrapper>.swiper-slide>.inner
+    {
+        border-left: solid 2px #C8102E;
+        background-color: #F7F7F9;
+        padding: 32px 60px;
+        &+.body { margin-top: 1.6rem; }
+        @media (max-width: 1024px) {
+            padding: 32px 40px;
+        }
+        @media (max-width: 760px) {
+            padding: 24px 16px;
+        }
+    }
+
+
+    /* Variations: */
+    &.is-text-content
+    {
+        &.has-2-items .swiper-wrapper
+        {
+            gap: 32px;
+            .swiper-slide { flex: 0 1 50%; }
+            @media (max-width: 800px)
+            {
+                display: block;
+                .swiper-slide
+                {
+                    width: 100%;
+                    max-width: 100%;
+                    &+.swiper-slide { margin-top: 24px; }
+                }
+            }
+        }
+        .swiper-slide
+        {
+            width: 100%;
+            flex: 0 0 100%;
+            >.inner
+            {
+                >.title
+                {
+                    font-weight: 300;
+                    &+.text { margin-top: 1.6rem; }
+                    @media (max-width: 1024px) {
+                        font-size: 2.8rem;
+                    }
+                    @media (max-width: 760px) {
+                        font-size: 2.4rem;
+                    }
+                }
+                >.text
+                {
+                    @media (max-width: 1024px) {
+                        font-size: 2rem;
+                    }
+                    @media (max-width: 760px) {
+                        font-size: 1.8rem;
+                    }
+                }
+            }
+        }
+    }
+    &.is-number-data
+    {
+        color: #6F7173;
+        &.has-1-item, &.has-2-items
+        {
+            .swiper-wrapper
+            {
+                flex-wrap: wrap;
+                gap: 32px;
+                .swiper-slide
+                {
+                    width: auto;
+                    flex: 1 0 auto;
+                }
+            }
+        }
+        .swiper-slide
+        {
+            $width: calc(33% - 19px);
+            flex: 0 0 $width;
+            min-width: 27.5rem;
+            width: auto;
+            >.inner
+            {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                >.number
+                {
+                    font-weight: 200;
+                    font-size: 9.6rem;
+                    line-height: 7rem;
+                    display: flex;
+                    align-items: flex-end;
+                    >.unit
+                    {
+                        font-weight: 300;
+                        font-size: 4.2rem;
+                        line-height: 4.8rem;
+                    }
+                    &+.text { margin-top: .8rem; }
+                }
+                >.text { text-transform: uppercase; }
+            }
+            @media (max-width: 960px)
+            {
+                $width: calc(33% - 19px);
+                flex: 0 0 $width;
+                >.inner>.number { font-size: 8rem; }
+            }
+        }
+    }
+    &.is-testimonial
+    {
+        &.has-1-item .swiper-slide>.inner>.quote
+        {
+            max-width: 50%;
+            align-self: flex-end;
+            @media (max-width: 1024px) {
+                max-width: 65%;
+            }
+            @media (max-width: 760px) {
+                max-width: 100%;
+            }
+        }
+        &.has-1-item, &.has-2-items
+        {
+            .swiper-wrapper
+            {
+                flex-wrap: wrap;
+                gap: 32px;
+                .swiper-slide
+                {
+                    width: 40%;
+                    flex: 1 1 40%;
+                }
+            }
+        }
+        .swiper-slide
+        {
+            flex: 0 0 45%;
+            min-width: 28.2rem;
+            width: auto;
+            >.inner
+            {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                >.author
+                {
+                    display: flex;
+                    align-items: flex-start;
+                    >.c-image
+                    {
+                        width: 6.4rem;
+                        height: 6.4rem;
+                        flex: 0 0 6.4rem;
+                        margin-right: 1.6rem;
+                    }
+                    >.info
+                    {
+                        align-self: flex-end;
+                        color: #6F7173;
+                        line-height: 1;
+                        >.name
+                        {
+                            font-weight: 600;
+                            font-size: 2rem;
+                        }
+                    }
+                }
+                >.quote { padding-top: 1.6rem; }
+            }
+        }
+    }
+}

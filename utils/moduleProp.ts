@@ -22,7 +22,7 @@ abstract class ModulePropBase<T>
 
 
 /* All possible types */
-type ModulePropStringEditor = ('plain' | 'rich' | 'rich-h3');
+type ModulePropStringEditor = ('plain' | 'plain-lines' | 'rich' | 'rich-h3');
 export class ModulePropString extends ModulePropBase<string>
 {
     type = 'string' as ModulePropType;
@@ -41,14 +41,15 @@ export class ModulePropString extends ModulePropBase<string>
 }
 
 export type ModulePropOption = { label: string, value: string }
-export class ModulePropOptions extends ModulePropBase<number>
+export class ModulePropOptions<TOption extends ModulePropOption = ModulePropOption>
+    extends ModulePropBase<number>
 {
     type = 'options' as ModulePropType;
-    options: ModulePropOption[];
+    options: TOption[];
 
     constructor(
         title: string,
-        options: ModulePropOption[],
+        options: TOption[],
         defaultOptionIndex?: number,
         columnSpan?: (1 | 2)
     )

@@ -15,7 +15,7 @@ export abstract class ModuleBase<TPropDic extends ModulePropDic = ModulePropDic>
     abstract createProps(): TPropDic;
     abstract getTitle(): string;
     abstract getDescriptor(): string;
-    watchPropVisibility() {  }
+    onAnyChange() {  }
 }
 
 

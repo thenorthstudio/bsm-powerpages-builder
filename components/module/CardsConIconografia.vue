@@ -29,7 +29,7 @@ const prop = defineProps<{
                             {{ c.props.title.value }}
                         </h3>
                     </div>
-                    <div class="body | rich-text-smaller"
+                    <div class="body | rich-text-simple"
                         v-if="!isEmpty(c.props.text.value)"
                         v-html="c.props.text.value"
                     ></div>

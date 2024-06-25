@@ -38,7 +38,7 @@ export class ListaConIconografiaModule extends Module<ListaConIconografiaPropDic
             title: new ModulePropString('Título', 'Lista con iconografía'),
             text: new ModulePropString('Texto', LONG_LOREM, 'rich-h3'),
             items: new ModulePropArray(
-                ListaConIconografiaSubModule, 'elemento', 'Elementos', 1
+                ListaConIconografiaSubModule, 'elemento', 'Elementos'
             ),
         }
     }

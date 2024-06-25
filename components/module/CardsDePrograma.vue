@@ -51,7 +51,7 @@ const classList = computed(() =>
                                     <h3 v-if="!isEmpty(p.props.title.value)">
                                         {{ p.props.title.value }}
                                     </h3>
-                                    <div class="body | t-sm rich-text-smaller"
+                                    <div class="body | t-sm | rich-text-simple"
                                         v-if="!isEmpty(p.props.description.value)"
                                         v-html="p.props.description.value"
                                     ></div>

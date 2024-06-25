@@ -20,6 +20,15 @@ const prop = defineProps<{
                 @input="emit('set-dirty')" label
             />
         </div>
+
+        <div v-if="options.editor == 'plain-lines'">
+            <label :for="`${options.id}`" class="text-xs text-400 | pl-2 mb-2">
+                {{ options.title }}
+            </label>
+            <Textarea :id="`${options.id}`" v-model="options.value"
+                rows="1" auto-resize @input="emit('set-dirty')"
+            />
+        </div>
     
         <div v-if="options.editor == 'rich' || options.editor == 'rich-h3'">
             <label :for="`${options.id}`" class="text-xs text-400 | pl-2 mb-2">
@@ -58,25 +67,35 @@ const prop = defineProps<{
 
 
 <style lang="scss">
-.prop-string-field.is-rich, .prop-string-field.is-rich-h3
+.prop-string-field
 {
-    margin-top: -1rem;
-    .p-editor-container .p-editor-content .ql-editor
+    textarea
     {
-        max-height: 250px;
-        color: black;
-        font-family: var(--font-family);
-        font-size: 0.9rem;
-        background: white;
-        p, ul, ol
+        width: 100%;
+        resize: none;
+        * { background: none !important; }
+    }
+    &.is-rich, &.is-rich-h3
+    {
+        margin-top: -1rem;
+        .p-editor-container .p-editor-content .ql-editor
         {
-            &+ { p, ul, ol { margin-top: 1.2em; } }
-            &+h3 { margin-top: 1.75rem; }
-        }
-        h3
-        {
-            &+ { p, ul, ol { margin-top: 0.5rem; } }
-            &+h3 { margin-top: 0; }
+            max-height: 250px;
+            color: black;
+            font-family: var(--font-family);
+            font-size: 0.9rem;
+            background: var(--surface-700);
+            * { background: none !important; }
+            p, ul, ol
+            {
+                &+ { p, ul, ol { margin-top: 1.2em; } }
+                &+h3 { margin-top: 1.75rem; }
+            }
+            h3
+            {
+                &+ { p, ul, ol { margin-top: 0.5rem; } }
+                &+h3 { margin-top: 0; }
+            }
         }
     }
 }

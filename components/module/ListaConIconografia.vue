@@ -25,7 +25,7 @@ const prop = defineProps<{
                     <div class="L">
                         <BuilderImage />
                     </div>
-                    <div class="R | rich-text-smaller"
+                    <div class="R | rich-text-simple"
                         v-html="c.props.text.value"
                     ></div>
                 </div>
