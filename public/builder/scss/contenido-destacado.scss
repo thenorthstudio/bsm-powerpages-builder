@@ -125,15 +125,23 @@ section.c-contenido-destacado
     }
     &.is-testimonial
     {
-        &.has-1-item .swiper-slide>.inner>.quote
+        &.has-1-item .swiper-slide>.inner
         {
-            max-width: 50%;
-            align-self: flex-end;
-            @media (max-width: 1024px) {
-                max-width: 65%;
+            >.author { max-width: 40%; }
+            >.quote
+            {
+                max-width: 50%;
+                align-self: flex-end;
             }
-            @media (max-width: 760px) {
-                max-width: 100%;
+            @media (max-width: 1200px)
+            {
+                >.author { max-width: 55%; }
+                >.quote { max-width: 65%; }
+            }
+            @media (max-width: 800px)
+            {
+                >.author { max-width: 400px; }
+                >.quote { max-width: 100%; }
             }
         }
         &.has-1-item, &.has-2-items

@@ -19,11 +19,9 @@ watch(page.modules, () =>
 );
 watch(page.reorder, async () =>
 {
-    if (page.reorder.value)
-    {
-        builder.value.reRender();
-        page.reorder.value = false;
-    }
+    if (!page.reorder.value) return;
+    builder.value.reRender();
+    page.reorder.value = false;
 });
 watch(page.dirtyJS, () =>
 {
@@ -37,7 +35,7 @@ onMounted(async () =>
     const calculateIframeScale = () =>
     {
         const wrapW = document.querySelector('#page-wrap')!.clientWidth;
-        if (wrapW < 1457)
+        if (wrapW <= 1457)
         {
             page.dimensions.value.iframeWidth = `${1457.0 / wrapW * 100}%`;
             page.dimensions.value.iframeScale = wrapW / 1457.0;

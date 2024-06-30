@@ -88,7 +88,6 @@ export class ViewportBuilder
                     this.triggerJS();
             }
         }
-        // this.scrollToFocused();
         
         await skipTime(10);
         page.isUpdating.value = false;
@@ -229,7 +228,7 @@ export class ViewportBuilder
     {
         const js = await $fetch<Blob>(path).then(
             r => r.text()
-        ).catch(_ => console.log(`Not found: ${path}`));
+        ).catch(_ => { /* console.log(`No JS exists: ${path}`) */ });
         if (js)
         {            
             const node = this.mirrorDoc!.createElement('script') as HTMLScriptElement;
@@ -243,13 +242,15 @@ export class ViewportBuilder
     }
 
     
-    scrollToFocused()
+    scrollToModule(module: Module)
     {
-        const focusEl = this.mainEl!.querySelector('.has-focus');
+        const selector = `.c-module[data-id="${module.id}"]`;
+        const focusEl = this.mainEl!.querySelector(selector);
         if (focusEl)
         {
+            this.mirrorWindow!.scrollTo(0, 0);
             const y = focusEl.getBoundingClientRect().top;
-            this.mirrorWindow!.scrollTo(0, y - 90);
+            this.mirrorWindow!.scrollTo(0, y - 120);
         }
     }
     pinScroll()

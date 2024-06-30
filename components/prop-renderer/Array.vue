@@ -2,7 +2,9 @@
 import { SubModule } from "@/utils/moduleTypes";
 import type { ModulePropArray } from '#imports';
 import type OverlayPanel from 'primevue/overlaypanel';
-import type { DataTableRowReorderEvent } from 'primevue/datatable';
+import type ContextMenu from "primevue/contextmenu";
+import type { MenuItem } from "primevue/menuitem";
+import type { DataTableRowContextMenuEvent, DataTableRowReorderEvent } from 'primevue/datatable';
 
 
 const emit = defineEmits<{
@@ -12,7 +14,16 @@ const emit = defineEmits<{
 const prop = defineProps<{
     options: ModulePropArray
 }>();
+
+const selectedSubmodule = ref<SubModule>();
+const ctxMenu = ref<ContextMenu>();
+const ctxMenuItems: MenuItem[] = [{
+    icon: 'pi pi-clone',
+    label: 'Duplicar',
+    command: () => duplicateSubmodule(selectedSubmodule.value!)
+}]
 const deleteConfirmation = ref<OverlayPanel[]>([]);
+
 const { configureModule: { value: { openSubmodule } } } = useGlobalDialogs();
 const toast = useToast();
 
@@ -45,6 +56,33 @@ const addNewSubmodule = () =>
     emit('check-js', 'swiper');
     emit('set-dirty');
 }
+const duplicateSubmodule = (submodule: SubModule) =>
+{
+    const index = prop.options.value.findIndex(sub => sub.id == submodule.id);
+    const beforeLength = prop.options.value.length;
+    const done = prop.options.addNew();
+    if (!done) toast.add({
+        severity: 'error',
+        summary: 'Límite alcanzado',
+        detail: `No se pueden añadir más de ${prop.options.maxAmount} elementos`,
+        life: 3500
+    })
+    else
+    {
+        const newSubmodule = prop.options.value[beforeLength];
+        // Loop all of new submodule's props:
+        for (const subPropName in newSubmodule.props)
+        {
+            const subProp = submodule.props[subPropName];
+            const newSubProp = newSubmodule.props[subPropName];
+            newSubProp.value = subProp.value;
+        }
+        reorderArray(prop.options.value, beforeLength, index + 1);
+        emit('check-js', 'swiper');
+        emit('set-dirty');
+    }
+
+}
 const configureSubmodule = (index: number) =>
 {
     const submodule = prop.options.value[index];
@@ -66,6 +104,17 @@ const deleteSubmodule = (index: number) =>
     emit('check-js', 'swiper');
     emit('set-dirty');
 }
+
+
+const onRowContextMenu = (event: DataTableRowContextMenuEvent) => {
+    ctxMenu.value!.show(event.originalEvent);
+}
+onMounted(() =>
+{
+    document.querySelector('#app')?.addEventListener('mouseenter',
+        () => ctxMenu.value?.hide()
+    )
+})
 </script>
 
 
@@ -84,7 +133,12 @@ const deleteSubmodule = (index: number) =>
             />
         </div>
     
+        <ContextMenu ref="ctxMenu" :model="ctxMenuItems"
+            @hide="selectedSubmodule = undefined"
+        />
         <DataTable :value="options.value" size="small"
+            v-model:contextMenuSelection="selectedSubmodule"
+            @row-contextmenu="onRowContextMenu"
             @row-reorder="onRowReorder"
             >
             <Column class="reorder-row | pt-2" row-reorder />

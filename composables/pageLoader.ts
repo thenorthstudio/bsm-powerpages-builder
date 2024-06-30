@@ -1,5 +1,4 @@
-import type { Module } from "@/utils/moduleTypes";
-import type { ModulePropArray } from '#imports';
+import { Module } from "@/utils/moduleTypes";
 
 
 export const usePageLoader = () =>
@@ -13,46 +12,10 @@ export const usePageLoader = () =>
 
         for (let i = 0; i < loadedModules.length; i++)
         {
-            const baseModule = loadedModules[i];
-            const newModule = moduleFactory[baseModule.type]();
-
-            newModule.id = baseModule.id;
-            newModule.topMaring = baseModule.topMaring;
-            for (const propName in newModule.props)
-            {
-                const baseProp = baseModule.props[propName];
-                const prop = newModule.props[propName];
-
-                prop.id = baseProp.id;
-                if (prop.type == 'array')
-                {
-                    const basePropArray = baseProp as ModulePropArray;
-                    const propArray = prop as ModulePropArray;
-
-                    propArray.value = [];
-                    for (let i = 0; i < basePropArray.value.length; i++)
-                    {
-                        propArray.addNew();
-                        const baseSubmodule = basePropArray.value[i];
-                        const submodule = propArray.value[i];
-                        
-                        submodule.id = baseSubmodule.id;
-                        for (const subPropName in submodule.props)
-                        {
-                            const baseSubProp = baseSubmodule.props[subPropName];
-                            const subProp = submodule.props[subPropName];
-
-                            subProp.id = baseSubProp.id;
-                            subProp.value = baseSubProp.value;
-                        }
-                    }
-                }
-                else prop.value = baseProp.value;
-            }
+            const newModule = cloneModule(loadedModules[i], false);
             finalModules.push(newModule);
         }
         page.modules.value = finalModules;
-        page.dirtyJS.value = true;
     }
 
     const exportAsObject = () =>

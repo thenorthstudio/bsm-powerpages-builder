@@ -1,11 +1,26 @@
 <script lang="ts" setup>
 import { Module } from "@/utils/moduleTypes";
+import type ContextMenu from "primevue/contextmenu";
+import type { MenuItem } from "primevue/menuitem";
 import type OverlayPanel from 'primevue/overlaypanel';
-import type { DataTableRowReorderEvent } from 'primevue/datatable';
+import type { DataTableRowContextMenuEvent, DataTableRowReorderEvent } from 'primevue/datatable';
 
 
 const page = useCurrentPage();
+const builde = useViewportBuilder();
 const dialogs = useGlobalDialogs();
+
+const selectedModule = ref<Module>();
+const ctxMenu = ref<ContextMenu>();
+const ctxMenuItems: MenuItem[] = [{
+    icon: 'pi pi-expand',
+    label: 'Centrar',
+    command: () => builde.value.scrollToModule(selectedModule.value!),
+}, {
+    icon: 'pi pi-clone',
+    label: 'Duplicar',
+    command: () => duplicateModule(selectedModule.value!)
+}]
 const deleteConfirmation = ref<OverlayPanel[]>([]);
 
 
@@ -32,6 +47,14 @@ const askNewModule = () =>
     dialogs.configureModule.value.close();
     dialogs.newModule.value = true;
 }
+const duplicateModule = (module: Module) =>
+{
+    const newModule = cloneModule(module, true);
+    const index = page.modules.value.findIndex(m => m.id == module.id);
+    page.modules.value.splice(index, 0, newModule);
+    configureModule(index + 1);
+    page.reorder.value = true;
+}
 const configureModule = (index: number) =>
 {
     const module = page.modules.value[index];
@@ -47,6 +70,17 @@ const deleteModule = (index: number) =>
     page.modules.value[index].deathMark = true;
     triggerJS();
 }
+
+
+const onRowContextMenu = (event: DataTableRowContextMenuEvent) => {
+    ctxMenu.value!.show(event.originalEvent);
+};
+onMounted(() =>
+{
+    document.querySelector('iframe')?.addEventListener('mouseenter',
+        () => ctxMenu.value!.hide()
+    )
+})
 </script>
 
 
@@ -79,7 +113,12 @@ const deleteModule = (index: number) =>
                 />
             </div>
 
+            <ContextMenu ref="ctxMenu" :model="ctxMenuItems"
+                @hide="selectedModule = undefined"
+            />
             <DataTable :value="page.modules.value" size="small"
+                v-model:contextMenuSelection="selectedModule"
+                @row-contextmenu="onRowContextMenu"
                 @row-reorder="onRowReorder"
                 >
                 <Column class="reorder-row | pt-2" row-reorder />
@@ -87,7 +126,7 @@ const deleteModule = (index: number) =>
                 <Column class="type-row px-0">
                     <template #body="{ data }">
                         <div class="text-sm" v-tooltip.bottom="{
-                                value: asA<Module>(data).getDescriptor(),
+                                value: asA<Module>(data).getDescriptor().slice(0, 100),
                                 showDelay: 1000,
                             }">
                             {{ asA<Module>(data).getDescriptor() }}

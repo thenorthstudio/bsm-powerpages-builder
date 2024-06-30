@@ -14,7 +14,6 @@ export class GridDeImagenesSubModule extends SubModule<GridDeImagenesSubPropDic>
             link: new ModulePropString('Link URL', ''),
             alt: new ModulePropString('Imagen alt-text', '', 'plain', 1),
             width: new ModulePropOptions('Ancho', [
-                { label: 'Completo', value: '12' },
                 { label: 'Mitad', value: '6' },
                 { label: 'Tercio', value: '4' },
                 { label: 'Cuarto', value: '3' },

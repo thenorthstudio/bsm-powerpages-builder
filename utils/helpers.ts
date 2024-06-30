@@ -1,18 +1,62 @@
-/* Converts input to T when type conversion is not possible (~vue template) */
+import type { Module } from "@/utils/moduleTypes";
+import type { ModulePropArray } from "@/utils/moduleProp";
+
+
+/* Creates a perfect copy or clone of a Module */
+export const cloneModule = <TModule extends Module>(
+    module: TModule,
+    generateNewId: boolean
+): TModule =>
+{
+    const newModule = moduleFactory[module.type]() as TModule;
+    if (!generateNewId) newModule.id = module.id;
+    newModule.topMaring = module.topMaring;
+
+    // Loop all of new module's props:
+    for (const propName in newModule.props)
+    {
+        const moduleProp = module.props[propName];
+        const prop = newModule.props[propName];
+        if (!generateNewId) prop.id = moduleProp.id;
+        
+        if (prop.type == 'array')
+        {
+            const propArray = moduleProp as ModulePropArray;
+            const newPropArray = prop as ModulePropArray;
+            newPropArray.value = [];
+
+            // Looop all elements insie the Submodule-array prop:
+            for (let i = 0; i < propArray.value.length; i++)
+            {
+                newPropArray.addNew();
+                const submodule = propArray.value[i];
+                const newSubmodule = newPropArray.value[i];
+                if (!generateNewId) newSubmodule.id = submodule.id;
+                
+                // Loop all of new submodule's props:
+                for (const subPropName in newSubmodule.props)
+                {
+                    const subProp = submodule.props[subPropName];
+                    const newSubProp = newSubmodule.props[subPropName];
+                    if (!generateNewId) newSubProp.id = subProp.id;
+                    newSubProp.value = subProp.value;
+                }
+            }
+        }
+        else prop.value = moduleProp.value;
+    }
+    return newModule;
+}
+
+/* Converts input to T when type conversion is not possible (eg. vue template) */
 export const asA = <T>(obj: any) => obj as T;
 
 
 /* Moves elements around inside an array */
 export const reorderArray = <T>(array: T[], from: number, to: number) =>
 {
-    const newArray: T[] = [];
-    for (let i = 0; i < array.length; i++)
-    {
-        if (i == from) newArray.push(array[to]);
-        else if (i == to) newArray.push(array[from]);
-        else newArray.push(array[i]);
-    }
-    array.splice(0, array.length, ...newArray);
+    const movedItem = array.splice(from, 1);
+    array.splice(to, 0, movedItem[0]);
 }
 
 

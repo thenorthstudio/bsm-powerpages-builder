@@ -40,7 +40,6 @@ export abstract class Module<TPropDic extends ModulePropDic = ModulePropDic>
         this.topMaring = 'normal-margin';
     }
 
-
     /* Base methods */
     getTitle()
     {

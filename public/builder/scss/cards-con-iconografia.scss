@@ -26,6 +26,8 @@ section.c-cards-con-iconografia
                     {
                         width: 80px;
                         height: 80px;
+                        flex: 0 0 80px;
+                        align-self: flex-start;
                         margin: 0 1.5rem 0 0;
                         img { object-fit: contain; }
                     }
@@ -34,6 +36,11 @@ section.c-cards-con-iconografia
                         font-size: 2.6rem;
                         line-height: 3rem;
                         margin: 0;
+                    }
+                    @media (max-width: 500px)
+                    {
+                        display: block;
+                        > .c-image { margin: 0 0 1.5rem; }
                     }
                 }
                 >.body
