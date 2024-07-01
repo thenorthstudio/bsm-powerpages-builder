@@ -9,6 +9,7 @@ export const moduleFactory: { [key in ModuleType]: () => Module } =
     'contenido-destacado': () => new ContenidoDestacadoModule(),
     'lista-con-iconografia': () => new ListaConIconografiaModule(),
     'cards-con-iconografia': () => new CardsConIconografiaModule(),
+    'acordeon': () => new AcordeonModule(),
     'grid-de-imagenes': () => new GridDeImagenesModule()
 }
 
@@ -21,6 +22,7 @@ export const submoduleFactory: { [key in ModuleType]: () => SubModule } =
     'contenido-destacado': () => new ContenidoDestacadoSubModule('contenido'),
     'lista-con-iconografia': () => new ListaConIconografiaSubModule('elemento'),
     'cards-con-iconografia': () => new CardsConIconografiaSubModule('card'),
+    'acordeon': () => new AcordeonSubModule('desplegable'),
     'grid-de-imagenes': () => new GridDeImagenesSubModule('imagen')
 }
 
@@ -34,5 +36,6 @@ export const exLibRequirements: { [key in ModuleType]: ExternalLib[] } =
     'contenido-destacado': ['swiper'],
     'lista-con-iconografia': [],
     'cards-con-iconografia': [],
+    'acordeon': ['swiper'],
     'grid-de-imagenes': []
 }

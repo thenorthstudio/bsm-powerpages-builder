@@ -7,6 +7,7 @@ import
     ModuleContenidoDestacado,
     ModuleListaConIconografia,
     ModuleCardsConIconografia,
+    ModuleAcordeon,
     ModuleGridDeImagenes,
 }
 from '#components';
@@ -19,6 +20,7 @@ const moduleComponents: { [key in ModuleType]: any } = {
     'contenido-destacado': ModuleContenidoDestacado,
     'lista-con-iconografia': ModuleListaConIconografia,
     'cards-con-iconografia': ModuleCardsConIconografia,
+    'acordeon': ModuleAcordeon,
     'grid-de-imagenes': ModuleGridDeImagenes,
 }
 const page = useCurrentPage();

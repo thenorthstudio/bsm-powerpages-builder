@@ -75,8 +75,7 @@ export const renderTemplate = async (
     content: string,
     slot: string,
     source?: string,
-)
-    : Promise<string> =>
+): Promise<string> =>
 {
     let sourceStr = source;
     if (!sourceStr) sourceStr = await $fetch<string>(`/builder/template/${slot}.html`);

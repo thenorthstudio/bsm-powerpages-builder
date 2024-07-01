@@ -10,6 +10,7 @@ type ModuleType = (
     'contenido-destacado' |
     'lista-con-iconografia' |
     'cards-con-iconografia' |
+    'acordeon' |
     'grid-de-imagenes'
 )
 

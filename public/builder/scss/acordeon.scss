@@ -1,0 +1,173 @@
+section.c-acordeon
+{
+    overflow: hidden;
+    >.inner
+    {
+        >.t-title { margin-bottom: 3.2rem; }
+        >.body { margin-bottom: 4.8rem; }
+    }
+
+    button { display: block; }
+    .tab-wrap
+    {
+        margin-bottom: 16px;
+        position: relative;
+        >.swiper-wrapper>.tab
+        {
+            width: auto;
+            max-width: 90%;
+            flex: 0 0 auto;
+            cursor: pointer;
+            &.is-current>button
+            {
+                color: #C8102E;
+                border-color: #C8102E;
+                opacity: 1;
+            }
+            >button
+            {
+                width: auto;
+                max-width: 100%;
+                font-weight: 400;
+                border-bottom: solid 2px transparent;
+                opacity: 0.7;
+                padding: 1.6rem;
+                transition: color .3s ease,
+                            opacity .3s ease,
+                            border-color .3s ease;
+                pointer-events: none;
+                &:hover { opacity: 1; }
+            }
+        }
+        >.mask-wrap
+        {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            >.mask
+            {
+                height: 100%;
+                width: var(--page-padding);
+                background: linear-gradient(90deg, #FFF 20%, rgba(255, 255, 255, 0.00) 100%);
+                position: absolute;
+                top: 0;
+                &.L
+                {
+                    left: 0;
+                    transform: translateX(-100%);
+                }
+                &.R
+                {
+                    right: 0;
+                    transform: translateX(100%) rotate(180deg);
+                }
+            }
+        }
+    }
+    .viewport-wrap
+    {
+        position: relative;
+        transition: max-height .3s ease .3s;
+        overflow: hidden;
+        >.viewport
+        {
+            transition: opacity .3s ease .3s;
+            &:not(.is-current)
+            {
+                opacity: 0;
+                visibility: hidden;
+                position: absolute;
+                top: 0;
+                left: 0;
+                z-index: -1;
+                transition-delay: 0s;
+                pointer-events: none;
+            }
+            >.foldable
+            {
+                background-color: #F7F7F9;
+                &+.foldable { margin-top: 4px; }
+                &.is-open
+                {
+                    >button.head
+                    {
+                        >.handle>.inner>.line.V { transform: translate(-50%, -50%); }
+                        @media (max-width: 1024px) {
+                            padding: 1.4rem 2.4rem;
+                        }
+                        @media (max-width: 768px) {
+                            padding: 1.4rem 1.6rem;
+                        }
+                    }
+                }
+                >button.head
+                {
+                    width: 100%;
+                    max-width: 100%;
+                    padding: 1.6rem 2.4rem;
+                    display: flex;
+                    align-items: center;
+                    transition: padding .3s ease;
+                    >h3 { flex: 1 1 auto; }
+                    >.handle
+                    {
+                        width: 16px;
+                        height: 16px;
+                        padding: 2px;
+                        margin-left: 1.6rem;
+                        >.inner
+                        {
+                            width: 100%;
+                            height: 100%;
+                            position: relative;
+                            >.line
+                            {
+                                width: 100%;
+                                height: 1.5px;
+                                background-color: #C8102E;
+                                position: absolute;
+                                top: 50%;
+                                left: 50%;
+                                transform: translate(-50%, -50%);
+                                transition: transform .2s ease;
+                                &.V { transform: translate(-50%, -50%) rotate(90deg); }
+                            }
+                        }
+                    }
+                    &:hover>.handle>.inner>.line { background-color: #181818; }
+                    @media (max-width: 1024px) {
+                        padding: 0.9rem 2.4rem;
+                    }
+                    @media (max-width: 768px) {
+                        padding: 1.4rem 1.6rem;
+                    }
+                }
+                >.body
+                {
+                    color: #6F7173;
+                    transition: max-height 0.7s ease;
+                    overflow: hidden;
+                    >.inner
+                    {
+                        line-height: 1.7;
+                        padding: 0 2.4rem 1.6rem;
+                        a
+                        {
+                            &:hover { text-decoration: underline; }
+                            text-decoration: none;
+                        }
+                        @media (max-width: 768px)
+                        {
+                            font-size: 1.6rem;
+                            line-height: 1.5;
+                            padding: 0 1.6rem 1.6rem;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

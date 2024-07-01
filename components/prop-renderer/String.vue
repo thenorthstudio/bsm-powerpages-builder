@@ -13,7 +13,11 @@ const prop = defineProps<{
 <template>
     <div class="prop-string-field" :class="`is-${options.editor}`">
         <div v-if="options.editor == 'plain'">
-            <label :for="`${options.id}`" class="text-xs text-400 | pl-2 mb-2">
+            <label :for="`${options.id}`" class="text-xs text-400 | pl-2 mb-2 | flex">
+                <div class="pi pi-info-circle | mr-2"
+                    v-tooltip.left="options.additionalInfo"
+                    v-if="options.additionalInfo"
+                ></div>
                 {{ options.title }}
             </label>
             <InputText :id="`${options.id}`" v-model="options.value"

@@ -314,9 +314,9 @@ export class ViewportBuilder
         });
 
         // Remove module ID attribute:
-        kitchenEl.querySelectorAll('[data-id]').forEach(
+/*         kitchenEl.querySelectorAll('[data-id]').forEach(
             node => node.removeAttribute('data-id')
-        );
+        ); */
 
         await skipTime(10);
         return html_beautify(kitchenEl.innerHTML, { indent_size: 4 });
@@ -365,6 +365,7 @@ export class ViewportBuilder
             'contenido-destacado': 'contenido-destacado',
             'lista-con-iconografia': 'lista-con-iconografia',
             'cards-con-iconografia': 'cards-con-iconografia',
+            'acordeon': 'acordeon',
             'grid-de-imagenes': 'grid-de-imagenes'
         }
         for (const path in modulePaths)

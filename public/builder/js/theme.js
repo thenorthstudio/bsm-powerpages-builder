@@ -6,3 +6,11 @@ const swapSwiperClass = (el, state) =>
         found.classList[state? 'add' : 'remove'](swiperClass);
     })
 };
+
+
+const useState = (moduleEl, defaultObj) =>
+{
+    const id = 'bsm-module-' + moduleEl.dataset.id;
+    window[id] = window[id] || defaultObj || {};
+    return window[id];
+}
