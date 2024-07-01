@@ -27,7 +27,7 @@ const selectModule = (selction: ModuleType) =>
     configureModule.value.open(newModule);
 
     const libs = exLibRequirements[newModule.type];
-    if (libs.includes('swiper')) page.dirtyJS.value = true;
+    if (libs.length) page.dirtyJS.value = true;
 }
 </script>
 

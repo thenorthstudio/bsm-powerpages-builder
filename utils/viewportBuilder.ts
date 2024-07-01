@@ -83,8 +83,7 @@ export class ViewportBuilder
                 }
                 else console.error('Tried to add a shadow-ghost module!', m);
 
-                // If re-rending a swiper-related module, trigger JS reload:
-                if (exLibRequirements[m.type].includes('swiper'))
+                if (exLibRequirements[m.type].length)
                     this.triggerJS();
             }
         }
@@ -162,8 +161,8 @@ export class ViewportBuilder
     async checkAddExLib(module: Module)
     {
         const libPaths: { [key in ExternalLib]: string } = {
-            'none': '',
-            'swiper': 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js'
+            'swiper': 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js',
+            'youtube': 'https://www.youtube.com/iframe_api',
         }
         const libs = exLibRequirements[module.type];
         for (let i = 0; i < libs.length; i++)
@@ -366,7 +365,8 @@ export class ViewportBuilder
             'lista-con-iconografia': 'lista-con-iconografia',
             'cards-con-iconografia': 'cards-con-iconografia',
             'acordeon': 'acordeon',
-            'grid-de-imagenes': 'grid-de-imagenes'
+            'grid-de-imagenes': 'grid-de-imagenes',
+            'video': 'video'
         }
         for (const path in modulePaths)
         {            

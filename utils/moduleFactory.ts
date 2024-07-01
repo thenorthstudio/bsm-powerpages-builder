@@ -10,7 +10,8 @@ export const moduleFactory: { [key in ModuleType]: () => Module } =
     'lista-con-iconografia': () => new ListaConIconografiaModule(),
     'cards-con-iconografia': () => new CardsConIconografiaModule(),
     'acordeon': () => new AcordeonModule(),
-    'grid-de-imagenes': () => new GridDeImagenesModule()
+    'grid-de-imagenes': () => new GridDeImagenesModule(),
+    'video': () => new VideoModule()
 }
 
 
@@ -23,11 +24,12 @@ export const submoduleFactory: { [key in ModuleType]: () => SubModule } =
     'lista-con-iconografia': () => new ListaConIconografiaSubModule('elemento'),
     'cards-con-iconografia': () => new CardsConIconografiaSubModule('card'),
     'acordeon': () => new AcordeonSubModule('desplegable'),
-    'grid-de-imagenes': () => new GridDeImagenesSubModule('imagen')
+    'grid-de-imagenes': () => new GridDeImagenesSubModule('imagen'),
+    'video': () => ({} as SubModule),
 }
 
 
-export type ExternalLib = ('none' | 'swiper');
+export type ExternalLib = ('swiper' | 'youtube');
 export const exLibRequirements: { [key in ModuleType]: ExternalLib[] } =
 {
     'header': [],
@@ -37,5 +39,6 @@ export const exLibRequirements: { [key in ModuleType]: ExternalLib[] } =
     'lista-con-iconografia': [],
     'cards-con-iconografia': [],
     'acordeon': ['swiper'],
-    'grid-de-imagenes': []
+    'grid-de-imagenes': [],
+    'video': ['youtube']
 }

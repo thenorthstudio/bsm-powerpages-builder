@@ -11,7 +11,8 @@ type ModuleType = (
     'lista-con-iconografia' |
     'cards-con-iconografia' |
     'acordeon' |
-    'grid-de-imagenes'
+    'grid-de-imagenes' |
+    'video'
 )
 
 type ModulePropType = (

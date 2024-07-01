@@ -9,6 +9,7 @@ import
     ModuleCardsConIconografia,
     ModuleAcordeon,
     ModuleGridDeImagenes,
+    ModuleVideo
 }
 from '#components';
 
@@ -22,6 +23,7 @@ const moduleComponents: { [key in ModuleType]: any } = {
     'cards-con-iconografia': ModuleCardsConIconografia,
     'acordeon': ModuleAcordeon,
     'grid-de-imagenes': ModuleGridDeImagenes,
+    'video': ModuleVideo,
 }
 const page = useCurrentPage();
 </script>

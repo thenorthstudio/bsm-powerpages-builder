@@ -3,7 +3,10 @@ import Editor from 'primevue/editor';
 import type { ModulePropString } from '#imports';
 
 
-const emit = defineEmits(['set-dirty']);
+const emit = defineEmits<{
+    'set-dirty': [],
+    'check-js': [lib: ExternalLib]
+}>();
 const prop = defineProps<{
     options: ModulePropString
 }>();
