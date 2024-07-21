@@ -3,7 +3,7 @@ import type { HeaderModule } from '#imports';
 
 
 const prop = defineProps<{
-    instance: HeaderModule
+    m: HeaderModule
 }>();
 </script>
 
@@ -15,12 +15,12 @@ const prop = defineProps<{
             <div class="overlay"></div>
         </div>
         <div class="inner">
-            <h1 class="t-title" v-if="!isEmpty(instance.props.title.value)">
-                {{ instance.props.title.value }}
+            <h1 class="t-title" v-if="!isEmpty(m.props.title.value)">
+                {{ m.props.title.value }}
             </h1>
             <div class="body | rich-text-simple"
-                v-if="!isEmpty(instance.props.text.value)"
-                v-html="instance.props.text.value"
+                v-if="!isEmpty(m.props.text.value)"
+                v-html="m.props.text.value"
             ></div>
         </div>
     </header>

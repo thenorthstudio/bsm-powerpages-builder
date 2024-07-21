@@ -366,7 +366,8 @@ export class ViewportBuilder
             'cards-con-iconografia': 'cards-con-iconografia',
             'acordeon': 'acordeon',
             'grid-de-imagenes': 'grid-de-imagenes',
-            'video': 'video'
+            'video': 'video',
+            'thank-you': 'thank-you',
         }
         for (const path in modulePaths)
         {            

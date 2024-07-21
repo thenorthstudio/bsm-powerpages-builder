@@ -3,10 +3,10 @@ import type { AcordeonModule, AcordeonSubModule } from '#imports';
 
 
 const prop = defineProps<{
-    instance: AcordeonModule
+    m: AcordeonModule
 }>();
-const hasTitle = computed(() => !isEmpty(prop.instance.props.title.value));
-const hasText = computed(() => !isEmpty(prop.instance.props.text.value));
+const hasTitle = computed(() => !isEmpty(prop.m.props.title.value));
+const hasText = computed(() => !isEmpty(prop.m.props.text.value));
 
 type ViewGroup = {
     name: string,
@@ -15,12 +15,12 @@ type ViewGroup = {
 const viewGroups = computed(() =>
 {
     const groups: ViewGroup[] = [];
-    prop.instance.props.foldables.value.forEach(f =>
+    prop.m.props.foldables.value.forEach(f =>
     {
         let groupName = f.props.group.value;
         if (isEmpty(groupName))
         {
-            const found2 = prop.instance.props.foldables.value.find(
+            const found2 = prop.m.props.foldables.value.find(
                 f2 => !isEmpty(f2.props.group.value)
             );
             groupName = found2? found2.props.group.value : 'group';
@@ -46,10 +46,10 @@ const hasTabs = computed(() => viewGroups.value.length > 1);
     <section class="c-acordeon" :class="{ 'has-tabs': hasTabs }">
         <div class="inner | boxed">
             <h2 class="t-title" v-if="hasTitle">
-                {{ instance.props.title.value }}
+                {{ m.props.title.value }}
             </h2>
             <div class="body | rich-text" v-if="hasText"
-                v-html="instance.props.text.value"
+                v-html="m.props.text.value"
             ></div>
             
             <div class="tab-wrap | swiper | t-xxs" v-if="hasTabs">

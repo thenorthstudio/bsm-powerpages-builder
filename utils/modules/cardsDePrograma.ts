@@ -25,7 +25,7 @@ export class CardsDeProgramaSubModule extends SubModule<CardsDeProgramaSubPropDi
             description: new ModulePropString('Descripción', MID_LOREM, 'rich'),
             linkUrl: new ModulePropString('CTA Link', 'https://...', 'plain', 1),
             linkText: new ModulePropString('CTA Texto', 'Me interesa', 'plain', 1),
-            details: new ModulePropList(defaultItem, 'Detalle'),
+            details: new ModulePropList(defaultItem, 'Lista de detalles'),
         };
         props.details.additionalInfo = 'Icono de 25·25px';
         return props;

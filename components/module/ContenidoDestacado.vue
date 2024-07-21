@@ -3,19 +3,19 @@ import type { ContenidoDestacadoModule } from '#imports';
 
 
 const prop = defineProps<{
-    instance: ContenidoDestacadoModule
+    m: ContenidoDestacadoModule
 }>();
 const type = computed(
-    () => prop.instance.props.contentType.getValue().value
+    () => prop.m.props.contentType.getValue().value
 );
-const hasTitle = computed(() => !isEmpty(prop.instance.props.title.value));
-const hasText = computed(() => !isEmpty(prop.instance.props.text.value));
+const hasTitle = computed(() => !isEmpty(prop.m.props.title.value));
+const hasText = computed(() => !isEmpty(prop.m.props.text.value));
 const classList = computed(() =>
 {
     type Classes = ('has-1-item' | 'has-2-items' | 'has-swiper');
     const list: Classes[] = [];
 
-    const amount = prop.instance.props.contents.value.length;
+    const amount = prop.m.props.contents.value.length;
     if (type.value == 'text-content')
     {
         if (amount == 1) list.push('has-1-item');
@@ -39,10 +39,10 @@ const classList = computed(() =>
         <div class="inner | boxed">
             <div class="L">
                 <h2 class="t-title" v-if="hasTitle">
-                    {{ instance.props.title.value }}
+                    {{ m.props.title.value }}
                 </h2>
                 <div class="body | rich-text" v-if="hasText"
-                    v-html="instance.props.text.value"
+                    v-html="m.props.text.value"
                 ></div>
             </div>
             <div class="R">
@@ -50,7 +50,7 @@ const classList = computed(() =>
                     <SwiperArrows v-if="classList.includes('has-swiper')" />
                     <div class="swiper-wrapper">
                         <div class="swiper-slide" :key="i"
-                            v-for="(p, i) in instance.props.contents.value"
+                            v-for="(p, i) in m.props.contents.value"
                             >
                             <div class="inner">
 

@@ -3,7 +3,7 @@ import type { CardsConIconografiaModule } from '#imports';
 
 
 const prop = defineProps<{
-    instance: CardsConIconografiaModule
+    m: CardsConIconografiaModule
 }>();
 </script>
 
@@ -11,17 +11,17 @@ const prop = defineProps<{
 <template>
     <section class="c-cards-con-iconografia">
         <div class="inner | boxed">
-            <h2 class="t-title" v-if="!isEmpty(instance.props.title.value)">
-                {{ instance.props.title.value }}
+            <h2 class="t-title" v-if="!isEmpty(m.props.title.value)">
+                {{ m.props.title.value }}
             </h2>
             <div class="body | rich-text"
-                v-if="!isEmpty(instance.props.text.value)"
-                v-html="instance.props.text.value"
+                v-if="!isEmpty(m.props.text.value)"
+                v-html="m.props.text.value"
             ></div>
             <div class="card-grid">
                 <div class="card-block"
                     :class="`is-${c.props.width.getValue().value}-cols`"
-                    v-for="(c, i) in instance.props.cards.value" :key="i"
+                    v-for="(c, i) in m.props.cards.value" :key="i"
                     >
                     <div class="head">
                         <BuilderImage />

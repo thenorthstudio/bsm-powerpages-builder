@@ -3,7 +3,7 @@ import type { ListaConIconografiaModule } from '#imports';
 
 
 const prop = defineProps<{
-    instance: ListaConIconografiaModule
+    m: ListaConIconografiaModule
 }>();
 </script>
 
@@ -11,16 +11,16 @@ const prop = defineProps<{
 <template>
     <section class="c-lista-con-iconografia">
         <div class="inner | boxed">
-            <h2 class="t-title" v-if="!isEmpty(instance.props.title.value)">
-                {{ instance.props.title.value }}
+            <h2 class="t-title" v-if="!isEmpty(m.props.title.value)">
+                {{ m.props.title.value }}
             </h2>
             <div class="body | rich-text"
-                v-if="!isEmpty(instance.props.text.value)"
-                v-html="instance.props.text.value"
+                v-if="!isEmpty(m.props.text.value)"
+                v-html="m.props.text.value"
             ></div>
             <div class="item-grid">
                 <div class="item-block" :key="i"
-                    v-for="(c, i) in instance.props.items.value" 
+                    v-for="(c, i) in m.props.items.value" 
                     >
                     <div class="L">
                         <BuilderImage />

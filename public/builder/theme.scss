@@ -8,6 +8,9 @@
 {
     --page-padding: 84px;
     @media (max-width: 1024px) {
+        --page-padding: 58px;
+    }
+    @media (max-width: 760px) {
         --page-padding: 16px;
     }
 }
@@ -54,7 +57,7 @@ html
     color: #181818;
     >.c-module
     {
-        &:not(header)
+        &:not(header, .c-thank-you)
         {
             margin-top: 4.8rem;
             &.is-normal-margin

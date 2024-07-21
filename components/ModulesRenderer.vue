@@ -9,7 +9,8 @@ import
     ModuleCardsConIconografia,
     ModuleAcordeon,
     ModuleGridDeImagenes,
-    ModuleVideo
+    ModuleVideo,
+    ModuleThankYou,
 }
 from '#components';
 
@@ -24,6 +25,7 @@ const moduleComponents: { [key in ModuleType]: any } = {
     'acordeon': ModuleAcordeon,
     'grid-de-imagenes': ModuleGridDeImagenes,
     'video': ModuleVideo,
+    'thank-you': ModuleThankYou,
 }
 const page = useCurrentPage();
 </script>
@@ -33,7 +35,7 @@ const page = useCurrentPage();
     <main class="main-content | in-builder">
         <component class="c-module"
             :class="[{ 'has-focus': m.hovering }, `is-${m.topMaring}`]"
-            :is="moduleComponents[m.type]" :instance="m" :data-id="m.id"
+            :is="moduleComponents[m.type]" :m="m" :data-id="m.id"
             v-for="m in page.modules.value" :key="m.id"
         />
     </main>

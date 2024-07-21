@@ -3,15 +3,15 @@ import type { VideoModule } from '#imports';
 
 
 const prop = defineProps<{
-    instance: VideoModule
+    m: VideoModule
 }>();
-const hasTitle = computed(() => !isEmpty(prop.instance.props.title.value));
-const hasText = computed(() => !isEmpty(prop.instance.props.text.value));
+const hasTitle = computed(() => !isEmpty(prop.m.props.title.value));
+const hasText = computed(() => !isEmpty(prop.m.props.text.value));
 
 const videoId = computed(() =>
 {
     const regex = /.*youtube\.com\/watch\?v=(\w*)(\&.*)?/gi;
-    return prop.instance.props.url.value.replace(regex, '$1');
+    return prop.m.props.url.value.replace(regex, '$1');
 })
 </script>
 
@@ -20,10 +20,10 @@ const videoId = computed(() =>
     <section class="c-video">
         <div class="inner | boxed">
             <h2 class="t-title" v-if="hasTitle">
-                {{ instance.props.title.value }}
+                {{ m.props.title.value }}
             </h2>
             <div class="body | rich-text" v-if="hasText"
-                v-html="instance.props.text.value"
+                v-html="m.props.text.value"
             ></div>
 
             <button class="video-opener" :data-vid="videoId">
@@ -38,8 +38,8 @@ const videoId = computed(() =>
                     </svg>
                 </div>
             </button>
-            <div class="foot-text | t-sm" v-if="!isEmpty(instance.props.foot.value)">
-                {{ instance.props.foot.value }}
+            <div class="foot-text | t-sm" v-if="!isEmpty(m.props.foot.value)">
+                {{ m.props.foot.value }}
             </div>
         </div>
 
