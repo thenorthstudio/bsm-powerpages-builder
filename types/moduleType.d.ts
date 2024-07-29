@@ -6,10 +6,11 @@ type ModuleMarginType = (
 type ModuleType = (
     'header' |
     'columnas-de-texto' |
-    'cards-de-programa' |
     'contenido-destacado' |
-    'lista-con-iconografia' |
+    'cards-de-programa' |
+    'cards-genericas' |
     'cards-con-iconografia' |
+    'lista-con-iconografia' |
     'acordeon' |
     'grid-de-imagenes' |
     'video' |

@@ -73,7 +73,7 @@ section.c-contenido-destacado
     }
     &.is-number-data
     {
-        color: #6F7173;
+        .swiper { color: #6F7173; }
         &.has-1-item, &.has-2-items
         {
             .swiper-wrapper

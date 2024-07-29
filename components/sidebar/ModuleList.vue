@@ -127,7 +127,7 @@ onMounted(() =>
                     <template #body="{ data }">
                         <div class="text-sm" v-tooltip.bottom="{
                                 value: asA<Module>(data).getDescriptor().slice(0, 100),
-                                showDelay: 1000,
+                                showDelay: 100,
                             }">
                             {{ asA<Module>(data).getDescriptor() }}
                         </div>

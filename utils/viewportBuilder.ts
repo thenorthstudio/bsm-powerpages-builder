@@ -360,10 +360,11 @@ export class ViewportBuilder
         {
             'header': 'header',
             'columnas-de-texto': 'columnas-de-texto',
-            'cards-de-programa': 'cards-de-programa',
             'contenido-destacado': 'contenido-destacado',
-            'lista-con-iconografia': 'lista-con-iconografia',
+            'cards-de-programa': 'cards-de-programa',
+            'cards-genericas': 'cards-genericas',
             'cards-con-iconografia': 'cards-con-iconografia',
+            'lista-con-iconografia': 'lista-con-iconografia',
             'acordeon': 'acordeon',
             'grid-de-imagenes': 'grid-de-imagenes',
             'video': 'video',

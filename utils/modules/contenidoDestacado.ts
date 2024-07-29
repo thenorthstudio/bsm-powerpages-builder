@@ -79,7 +79,8 @@ export class ContenidoDestacadoModule extends Module<ContenidoDestacadoPropDic>
     }
     override onAnyChange()
     {
-        const groups: { [key in TOption['value']]: string[] } = {
+        type TKey = keyof ContenidoDestacadoSubPropDic;
+        const groups: { [key in TOption['value']]: TKey[] } = {
             'text-content': ['textTitle', 'textText'],
             'number-data': ['numberValue', 'numberUnit', 'numberText'],
             'testimonial': [
@@ -93,7 +94,8 @@ export class ContenidoDestacadoModule extends Module<ContenidoDestacadoPropDic>
         {
             for (const pName in c.props)
             {
-                const p = c.props[pName];
+                const k = pName as TKey;
+                const p = c.props[k];
                 p.isHiiden = !groups[cType].includes(pName);
             }
         });

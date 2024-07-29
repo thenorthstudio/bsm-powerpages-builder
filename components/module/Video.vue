@@ -8,11 +8,7 @@ const prop = defineProps<{
 const hasTitle = computed(() => !isEmpty(prop.m.props.title.value));
 const hasText = computed(() => !isEmpty(prop.m.props.text.value));
 
-const videoId = computed(() =>
-{
-    const regex = /.*youtube\.com\/watch\?v=(\w*)(\&.*)?/gi;
-    return prop.m.props.url.value.replace(regex, '$1');
-})
+const videoId = computed(() => getYoutubeId(prop.m.props.url.value));
 </script>
 
 

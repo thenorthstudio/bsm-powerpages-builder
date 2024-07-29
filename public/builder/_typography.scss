@@ -75,6 +75,11 @@ main.main-content
         font-size: 3.4rem;
         line-height: 1.14;
     }
+    .t-lg
+    {
+        font-size: 2.6rem;
+        line-height: 1.23;
+    }
     &, .t-body
     {
         font-size: 2.2rem;
@@ -100,6 +105,11 @@ main.main-content
         font-size: 1.4rem;
         line-height: 1.71;
     }
+    .t-xxxs
+    {
+        font-size: 1.2rem;
+        line-height: 1.5;
+    }
     @media (max-width: 1024px)
     {
         .t-title
@@ -111,6 +121,11 @@ main.main-content
         {
             font-size: 2.2rem;
             line-height: 1.13;
+        }
+        .t-lg
+        {
+            font-size: 2.2rem;
+            line-height: 1.27;
         }
         &, .t-body
         {
@@ -126,6 +141,11 @@ main.main-content
         {
             font-size: 1.4rem;
             line-height: 1.4;
+        }
+        .t-xxs
+        {
+            font-size: 1.2rem;
+            line-height: 1.571;
         }
     }
 }

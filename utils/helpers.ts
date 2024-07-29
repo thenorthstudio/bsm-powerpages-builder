@@ -59,6 +59,13 @@ export const reorderArray = <T>(array: T[], from: number, to: number) =>
     array.splice(to, 0, movedItem[0]);
 }
 
+/* Get Youtube ID */
+export const getYoutubeId = (url: string) =>
+{
+    const regex = /.*youtube\.com\/watch\?v=(\w*)(\&.*)?/gi;
+    return url.replace(regex, '$1');
+}
+
 
 /* Checks if a string is empty */
 export const isEmpty = (str?: string) => !(str && str.trim() != '');
