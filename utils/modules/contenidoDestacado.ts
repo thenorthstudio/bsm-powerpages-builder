@@ -65,7 +65,7 @@ export class ContenidoDestacadoModule extends Module<ContenidoDestacadoPropDic>
     createProps()
     {
         return {
-            title: new ModulePropString('Título', 'Cards de programa'),
+            title: new ModulePropString('Título', 'Contenido destacado'),
             text: new ModulePropString('Texto', LONG_LOREM, 'rich-h3'),
             contentType: new ModulePropOptions<TOption>('Tipo de contenido', [
                 { label: 'Titular y texto', value: 'text-content' },

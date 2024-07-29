@@ -45,11 +45,8 @@ section.c-video
                 &:hover { background-color: rgba(#383838, 0.6); }
                 >svg
                 {
-                    width: 100%;
-                    height: 100%;
                     position: relative;
                     left: 7%;
-                    pointer-events: none;
                 }
                 @media (max-width: 1024px)
                 {

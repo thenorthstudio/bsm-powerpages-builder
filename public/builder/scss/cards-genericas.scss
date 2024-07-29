@@ -71,7 +71,6 @@ section.c-cards-genericas
                         {
                             width: 16px;
                             height: 16px;
-                            svg { width: 100%; height: 100%; }
                         }
                     }
                 }
@@ -154,7 +153,6 @@ section.c-cards-genericas
                                 height: 100%;
                                 position: relative;
                                 left: 7%;
-                                pointer-events: none;
                             }
                             @media (max-width: 768px)
                             {

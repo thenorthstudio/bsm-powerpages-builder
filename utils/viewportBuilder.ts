@@ -312,13 +312,12 @@ export class ViewportBuilder
             node.removeAttribute('style');
         });
 
-        // Remove module ID attribute:
-/*         kitchenEl.querySelectorAll('[data-id]').forEach(
-            node => node.removeAttribute('data-id')
-        ); */
+        // Remove <prod-only> tags, keeping content:
+        const regex = /<div ?class="prod-only ?">(.*?)<\/div>/gis;
+        const html = kitchenEl.innerHTML.replace(regex, '$1');
 
         await skipTime(10);
-        return html_beautify(kitchenEl.innerHTML, { indent_size: 4 });
+        return html_beautify(html, { indent_size: 2 });
     }
     async exportMenuHTML()
     {
