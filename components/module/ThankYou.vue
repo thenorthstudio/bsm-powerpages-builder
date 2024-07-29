@@ -12,7 +12,7 @@ const prop = defineProps<{
     <section class="c-thank-you">
         <div class="top">
             <div class="svg">
-                <svg width="129" height="94" viewBox="0 0 129 94" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg class="svg" width="129" height="94" viewBox="0 0 129 94" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M0.75 1.25H103.25V73.75H0.75V1.25Z" stroke="#1CC286" stroke-width="1.5"/>
                     <path d="M1 1.5L52.2727 43.5L103 1.5" stroke="#1CC286" stroke-width="1.5"/>
                     <rect x="76.75" y="41.25" width="51.5" height="51.5" fill="white" stroke="#1CC286" stroke-width="1.5"/>
@@ -47,7 +47,7 @@ const prop = defineProps<{
                         <div class="cta | t-xxs" v-if="!isEmpty(b.props.cta.value)">
                             {{ b.props.cta.value }}
                             <div class="arrow">
-                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <svg class="svg" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M10.5996 3L14.9996 7.5L10.5996 12" stroke="#C8102E"/>
                                     <line x1="1" y1="7.5" x2="14.5111" y2="7.5" stroke="#C8102E"/>
                                 </svg>

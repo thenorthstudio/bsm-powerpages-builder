@@ -121,7 +121,7 @@ const sectionClass = computed(() =>
                                             >
                                             <BuilderImage />
                                             <div class="play-icon">
-                                                <svg width="42" height="50" viewBox="0 0 42 50"
+                                                <svg class="svg" width="42" height="50" viewBox="0 0 42 50"
                                                     fill="none" xmlns="http://www.w3.org/2000/svg"
                                                     >
                                                     <path d="M1 2.48334L40 25L1 47.5167L1 2.48334Z"
@@ -159,7 +159,7 @@ const sectionClass = computed(() =>
                                     <component :is="c.bottomText.tag" class="inner" :href="c.link">
                                         {{ c.bottomText.value }}
                                         <div v-if="c.bottomText.tag == 'a'" class="arrow">
-                                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <svg class="svg" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <path d="M10.6 3L15 7.5L10.6 12" stroke="#C8102E"/>
                                                 <line x1="1" y1="7.5" x2="14.5111" y2="7.5" stroke="#C8102E"/>
                                             </svg>

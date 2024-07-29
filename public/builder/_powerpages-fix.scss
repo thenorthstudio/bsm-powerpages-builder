@@ -1,5 +1,13 @@
-*:not([data-gjs-type="Header"], [data-gjs-type="Footer"]) {
+*:not(
+    [data-gjs-type="Header"],
+    [data-gjs-type="EntityForm"],
+    [data-gjs-type="ENTITY_FORM_FIELD"],
+    [data-gjs-type="Footer"]
+    ) {
     >div#viewRoot { display: none !important; }
+}
+*[data-gjs-type="EntityForm"]>div#viewRoot>*:last-child {
+    display: none !important;
 }
 
 [data-gjs-type="Section"] { display: none !important; }

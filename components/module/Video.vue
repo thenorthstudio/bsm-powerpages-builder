@@ -25,7 +25,7 @@ const videoId = computed(() => getYoutubeId(prop.m.props.url.value));
             <button class="video-opener" :data-vid="videoId">
                 <BuilderImage />
                 <div class="play-icon">
-                    <svg width="42" height="50" viewBox="0 0 42 50"
+                    <svg class="svg" width="42" height="50" viewBox="0 0 42 50"
                         fill="none" xmlns="http://www.w3.org/2000/svg"
                         >
                         <path d="M1 2.48334L40 25L1 47.5167L1 2.48334Z"
