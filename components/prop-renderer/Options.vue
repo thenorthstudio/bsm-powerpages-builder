@@ -24,7 +24,11 @@ watch(selectedValue, () =>
 
 <template>
     <div class="prop-string-options">
-        <label :for="`${options.id}`" class="text-xs text-400 | pl-2 mb-2">
+        <label :for="`${options.id}`" class="text-xs text-400 | pl-2 mb-2 | flex">
+            <div class="pi pi-info-circle | mr-2"
+                v-tooltip.left="options.additionalInfo"
+                v-if="options.additionalInfo"
+            ></div>
             {{ options.title }}
         </label>
         <Dropdown :id="`${options.id}`" v-model="selectedValue" checkmark
