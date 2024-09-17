@@ -89,7 +89,7 @@ export class ContenidoDestacadoModule extends Module<ContenidoDestacadoPropDic>
                 'testimonialText'
             ]
         };
-        const cType = this.props.contentType.getValue().value;
+        const cType = this.props.contentType.getOption().value;
         this.props.contents.value.forEach(c =>
         {
             for (const pName in c.props)
@@ -110,7 +110,7 @@ export class ContenidoDestacadoModule extends Module<ContenidoDestacadoPropDic>
     {
         const title = this.props.title.value;
         const text = cleanHTML(this.props.text.value);
-        const type = this.props.contentType.getValue().value;
+        const type = this.props.contentType.getOption().value;
 
         if (!isEmpty(title)) return title;
         else if (!isEmpty(text)) return text;

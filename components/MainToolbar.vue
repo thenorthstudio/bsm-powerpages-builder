@@ -29,7 +29,7 @@ const savePage = () =>
   dialogs.configureModule.value.close();
 
   // Create downloadable blob:
-  const jsonString = JSON.stringify(pageLoader.exportAsObject(), null, 4);
+  const jsonString = JSON.stringify(pageLoader.exportAsObject(), null, 2);
   const blob = new Blob([jsonString], { type: "application/json" });
 
   // Create a link element & click it:

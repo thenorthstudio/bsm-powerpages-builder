@@ -5,6 +5,7 @@ type ModuleMarginType = (
 
 type ModuleType = (
   'header' |
+  'detalle-de-programa' |
   'columnas-de-texto' |
   'contenido-destacado' |
   'cards-de-programa' |

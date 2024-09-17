@@ -6,7 +6,7 @@ const prop = defineProps<{
   m: HeaderModule
 }>();
 
-const hasForm = computed(() => prop.m.props.hasForm.getValue().value == 'true');
+const hasForm = computed(() => prop.m.props.hasForm.getOption().value == 'true');
 </script>
 
 

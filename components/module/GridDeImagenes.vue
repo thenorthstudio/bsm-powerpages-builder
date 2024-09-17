@@ -20,7 +20,7 @@ const prop = defineProps<{
             ></div>
             <div class="image-grid">
                 <component class="image-block"
-                    :class="`is-${c.props.width.getValue().value}-cols`"
+                    :class="`is-${c.props.width.getOption().value}-cols`"
                     v-for="(c, i) in m.props.images.value" :key="i"
                     :is="!isEmpty(c.props.link.value)? 'a' : 'div'"
                     :href="stringOrDefault(c.props.link.value, null)"

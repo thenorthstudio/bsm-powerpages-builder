@@ -91,10 +91,10 @@ export class CardsGenericasModule extends Module<CardsGenericasPropDic>
                 'bottomText', 'url',
             ],
         };
-        const cType = this.props.contentType.getValue().value;
+        const cType = this.props.contentType.getOption().value;
         this.props.cards.value.forEach(c =>
         {
-            const isVideo = c.props.mediaType.getValue().value == 'video';
+            const isVideo = c.props.mediaType.getOption().value == 'video';
             for (const pName in c.props)
             {
                 const k = pName as TKey;
@@ -121,7 +121,7 @@ export class CardsGenericasModule extends Module<CardsGenericasPropDic>
     {
         const title = this.props.title.value;
         const text = cleanHTML(this.props.text.value);
-        const type = this.props.contentType.getValue().value;
+        const type = this.props.contentType.getOption().value;
 
         if (!isEmpty(title)) return title;
         else if (!isEmpty(text)) return text;

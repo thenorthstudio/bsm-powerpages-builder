@@ -38,7 +38,7 @@ export class HeaderModule extends Module<HeaderModulePropDic>
   }
   override onAnyChange()
   {
-    const hasForm = this.props.hasForm.getValue().value == 'true';
+    const hasForm = this.props.hasForm.getOption().value == 'true';
     this.props.formClaim.isHiiden = !hasForm;
   }
   getDescriptor()

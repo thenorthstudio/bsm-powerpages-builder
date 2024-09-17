@@ -361,6 +361,7 @@ export class ViewportBuilder
     const modulePaths: { [key in ModuleType]: ModuleType } =
     {
       'header': 'header',
+      'detalle-de-programa': 'detalle-de-programa',
       'columnas-de-texto': 'columnas-de-texto',
       'contenido-destacado': 'contenido-destacado',
       'cards-de-programa': 'cards-de-programa',

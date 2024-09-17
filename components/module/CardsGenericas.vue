@@ -7,7 +7,7 @@ const prop = defineProps<{
 }>();
 const hasTitle = computed(() => !isEmpty(prop.m.props.title.value));
 const hasText = computed(() => !isEmpty(prop.m.props.text.value));
-const contentType = computed(() => prop.m.props.contentType.getValue().value);
+const contentType = computed(() => prop.m.props.contentType.getOption().value);
 const transCards = computed(() =>
 {
   type Card = {
@@ -44,14 +44,14 @@ const transCards = computed(() =>
   }
   return prop.m.props.cards.value.map((c) =>
   {
-    const hasVideo = c.props.mediaType.getValue().value == 'video';
+    const hasVideo = c.props.mediaType.getOption().value == 'video';
     const videoUrl = hasVideo ? getYoutubeId(c.props.videoUrl.value) : undefined;
     const hasLink = !isEmpty(c.props.url.value);
     return <Card>{
       tag: hasLink ? 'a' : 'div',
       link: c.props.url.value,
       media: {
-        type: c.props.mediaType.getValue().value,
+        type: c.props.mediaType.getOption().value,
         videoUrl: videoUrl,
       },
       title: {

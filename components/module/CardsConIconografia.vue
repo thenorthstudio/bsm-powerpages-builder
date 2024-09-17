@@ -20,7 +20,7 @@ const prop = defineProps<{
             ></div>
             <div class="card-grid">
                 <div class="card-block"
-                    :class="`is-${c.props.width.getValue().value}-cols`"
+                    :class="`is-${c.props.width.getOption().value}-cols`"
                     v-for="(c, i) in m.props.cards.value" :key="i"
                     >
                     <div class="head">

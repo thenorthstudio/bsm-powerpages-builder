@@ -4,6 +4,7 @@ import { Module, SubModule } from "@/utils/moduleTypes";
 export const moduleFactory: { [key in ModuleType]: () => Module } =
 {
   'header': () => new HeaderModule(),
+  'detalle-de-programa': () => new DetalleDeProgramaModule(),
   'columnas-de-texto': () => new ColumnasDeTextoModule(),
   'contenido-destacado': () => new ContenidoDestacadoModule(),
   'cards-de-programa': () => new CardsDeProgramaModule(),
@@ -20,6 +21,7 @@ export const moduleFactory: { [key in ModuleType]: () => Module } =
 export const submoduleFactory: { [key in ModuleType]: () => SubModule } =
 {
   'header': () => ({} as SubModule),
+  'detalle-de-programa': () => new DetalleDeProgramaSubModule('detalle'),
   'columnas-de-texto': () => new ColumnasDeTextoSubModule('columna'),
   'contenido-destacado': () => new ContenidoDestacadoSubModule('contenido'),
   'cards-de-programa': () => new CardsDeProgramaSubModule('programa'),
@@ -37,6 +39,7 @@ export type ExternalLib = ('swiper' | 'youtube');
 export const exLibRequirements: { [key in ModuleType]: ExternalLib[] } =
 {
   'header': [],
+  'detalle-de-programa': ['swiper'],
   'columnas-de-texto': [],
   'contenido-destacado': ['swiper'],
   'cards-de-programa': ['swiper'],

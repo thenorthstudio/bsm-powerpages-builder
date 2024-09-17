@@ -6,7 +6,7 @@ const prop = defineProps<{
     m: ContenidoDestacadoModule
 }>();
 const type = computed(
-    () => prop.m.props.contentType.getValue().value
+    () => prop.m.props.contentType.getOption().value
 );
 const hasTitle = computed(() => !isEmpty(prop.m.props.title.value));
 const hasText = computed(() => !isEmpty(prop.m.props.text.value));
