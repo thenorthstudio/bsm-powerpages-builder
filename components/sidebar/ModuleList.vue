@@ -103,7 +103,7 @@ onMounted(() =>
 <template>
   <Panel id="modules-list" class="min-h-full"
   pt:header="sticky top-0 z-2 | p-3 | surface-0 border-100 border-bottom-1"
-  pt:content="pt-0"
+  pt:content="p-0 pr-2"
   >
 
     <template #header>
@@ -147,7 +147,7 @@ onMounted(() =>
               value: asA<Module>(data).getDescriptor().slice(0, 100),
               showDelay: 100,
             }">
-              {{ asA<Module>(data).getDescriptor() }}
+              {{ asA<Module>(data).getTitle() }}
             </div>
           </template>
         </Column>
@@ -199,7 +199,7 @@ onMounted(() =>
       width: 100%;
       .text-sm
       {
-        width: 136px;
+        width: 170px;
         text-overflow: ellipsis;
         white-space: nowrap;
         overflow: hidden;
