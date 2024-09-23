@@ -9,6 +9,7 @@ import type { DataTableRowContextMenuEvent, DataTableRowReorderEvent } from 'pri
 const page = useCurrentPage();
 const builde = useViewportBuilder();
 const dialogs = useGlobalDialogs();
+const toast = useToast();
 
 const selectedModule = ref<Module>();
 const ctxMenu = ref<ContextMenu>();
@@ -26,6 +27,15 @@ const deleteConfirmation = ref<OverlayPanel[]>([]);
 
 const onRowReorder = (e: DataTableRowReorderEvent) =>
 {
+  /* Menu & Footer cannot be moved */
+  if (isMenuOrFooter(e.dragIndex) || isMenuOrFooter(e.dropIndex))
+  {
+    toast.add({ severity: 'warn', summary: 'Movimiento no permitido',
+      detail: 'El menú y el footer no se pueden mover.',
+      life: 3000,
+    });
+    return;
+  }
   reorderArray(page.modules.value, e.dragIndex, e.dropIndex);
   page.reorder.value = true;
   triggerJS();
@@ -71,14 +81,20 @@ const deleteModule = (index: number) =>
   triggerJS();
 }
 
+const isMenuOrFooter = (index: number) => {
+  return /* index == 0 ||  */index == page.modules.value.length - 1;
+}
 
-const onRowContextMenu = (event: DataTableRowContextMenuEvent) => {
+
+const onRowContextMenu = (event: DataTableRowContextMenuEvent) =>
+{
+  if (isMenuOrFooter(event.index)) return;
   ctxMenu.value!.show(event.originalEvent);
 };
 onMounted(() =>
 {
   document.querySelector('iframe')?.addEventListener('mouseenter',
-    () => ctxMenu.value!.hide()
+    () => ctxMenu.value?.hide()
   )
 })
 </script>
@@ -144,7 +160,9 @@ onMounted(() =>
               v-tooltip.bottom="'Opciones'" outlined
               @click="configureModule(index)"
               />
-              <Button class="px-1 py-2" icon="pi pi-trash"
+              <!-- Menu & Footer cannot be deleted -->
+              <Button v-if="!isMenuOrFooter(index)"
+              class="px-1 py-2" icon="pi pi-trash"
               size="small" severity="danger" text outlined
               @click="askDeleteModule($event, index)"
               />

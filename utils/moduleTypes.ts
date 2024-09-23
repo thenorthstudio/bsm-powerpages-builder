@@ -8,7 +8,7 @@ export abstract class ModuleBase<TPropDic extends ModulePropDic = ModulePropDic>
   
   constructor()
   {
-    this.id = Date.now();
+    this.id = Math.floor(Math.random() * 10000);
     this.props = this.createProps();
   }
   

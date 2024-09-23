@@ -1,13 +1,119 @@
 footer.c-footer
 {
-    background-color: #383A43;
-    padding: 4rem var(--page-padding);
-    margin-top: 12rem;
-
-    @media (max-width: 1024px) {
-        margin-top: 10rem;
+  color: #E3E4E5;
+  background-color: #383A43;
+  padding: 4rem 0;
+  margin-top: 12rem !important;
+  @media (max-width: 1024px) {
+    margin-top: 10rem !important;
+  }
+  @media (max-width: 760px) {
+    margin-top: 8rem !important;
+  }
+  @media (max-width: 660px) {
+    padding: 3.2rem 0;
+  }
+  >.inner
+  {
+    >.top
+    {
+      display: flex;
+      justify-content: space-between;
+      @media (max-width: 660px) {
+        flex-direction: column-reverse;
+      }
+      >.L
+      {
+        >.logo
+        {
+          height: auto;
+          width: 14.8rem;
+          margin-bottom: 4rem;
+          fill: white;
+          @media (max-width: 660px) {
+            margin-bottom: 2.4rem;
+          }
+        }
+        >.partners
+        {
+          width: 19.8rem;
+          display: block;
+          @media (max-width: 660px) {
+            width: 19rem;
+          }
+        }
+      }
+      >.R
+      {
+        @media (max-width: 660px) {
+          display: flex;
+          flex-direction: column-reverse;
+        }
+        >.social-wrap
+        {
+          margin-bottom: 2.4rem;
+          display: flex;
+          gap: 2rem;
+          @media (max-width: 660px) {
+            border: solid 1px #6F7173;
+            border-left: 0;
+            border-right: 0;
+            padding: 2.4rem 0;
+            margin: 2.4rem 0;
+          }
+          >a
+          {
+            width: 2.4rem;
+            height: 2.4rem;
+            display: block;
+          }
+        }
+        >.info
+        {
+          max-width: 17.5rem;
+          text-align: right;
+          margin-left: auto;
+          @media (max-width: 660px) {
+            max-width: 15rem;
+            text-align: left;
+            margin: 0;
+          }
+        }
+      }
     }
-    @media (max-width: 760px) {
-        margin-top: 8rem;
+    >.bottom
+    {
+      margin-top: 4rem;
+      display: flex;
+      gap: 3.2rem;
+      @media (max-width: 660px) {
+        border-top: solid 1px #6F7173;
+        padding-top: 2.4rem;
+        margin-top: 2.4rem;
+        flex-wrap: wrap;
+        gap: 2.4rem;
+        >.legal
+        {
+          order: 1;
+          flex: 1 1 100%;
+        }
+      }
+      >a
+      {
+        flex: 0 0 auto;
+        color: inherit
+      }
+      >.flex-space
+      {
+        flex: 1 1 0;
+        @media (max-width: 660px) {
+          display: none;
+        }
+      }
+      >.lang
+      {
+        flex: 0 0 auto;
+      }
     }
+  }
 }

@@ -19,7 +19,6 @@ export class ViewportBuilder
     this.mirrorDoc.open();
     let html = await $fetch<string>('/builder/index.html');
     html = await renderTemplate(html, 'menu');
-    html = await renderTemplate(html, 'footer');
     html = await renderTemplate(html, 'logo');
     this.mirrorDoc.write(html);
     this.mirrorDoc.close();
@@ -36,7 +35,6 @@ export class ViewportBuilder
     await this.appendStyle('theme-global', '/builder/theme.scss');
     await this.appendStyle('menu-module', '/builder/scss/menu.scss');
     await this.appendStyle('form-module', '/builder/scss/form.scss');
-    await this.appendStyle('footer-module', '/builder/scss/footer.scss');
 
     await this.appendScript('theme-global', '/builder/js/theme.js');
   }
@@ -290,10 +288,22 @@ export class ViewportBuilder
     const kitchenMain = kitchenEl.querySelector('main')! as HTMLElement;
     kitchenMain.classList.remove('in-builder', '|');
 
-    // Remove builder-only elements, styles & menu and footer:
-    const toRemove = 'nav, .builder-only, style, footer';
+    // Remove builder-only elements, styles & menu:
+    const toRemove = 'nav, .builder-only, style';
     kitchenEl.querySelectorAll(toRemove).forEach(
       node => node.parentNode!.removeChild(node)
+    );
+
+    // Move <nav> and <footer> outside of <main>:
+    // const navEl = kitchenEl.querySelector('nav')!;
+    const footerEl = kitchenEl.querySelector('footer')!;
+    // kitchenEl.prepend(navEl);
+    // kitchenEl.append(kitchenMain);
+    kitchenEl.append(footerEl);
+
+    // Append all JS at the end:
+    kitchenEl.querySelectorAll('script').forEach(
+      script => kitchenEl.append(script)
     );
 
     // Remove Swiper noise:
@@ -334,9 +344,6 @@ export class ViewportBuilder
 
     return html_beautify(html, { indent_size: 4 });
   }
-  async exportFooterHTML()
-  {
-  }
   async exportThemeCSS()
   {
     let cssString = '';
@@ -349,7 +356,6 @@ export class ViewportBuilder
       'theme',
       'scss/menu',
       'scss/form',
-      'scss/footer',
     ];
     for (let i = 0; i < globalPaths.length; i++)
     {
@@ -372,6 +378,7 @@ export class ViewportBuilder
       'grid-de-imagenes': 'grid-de-imagenes',
       'video': 'video',
       'thank-you': 'thank-you',
+      'footer': 'footer',
     }
     for (const path in modulePaths)
     {

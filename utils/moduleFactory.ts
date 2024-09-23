@@ -14,7 +14,8 @@ export const moduleFactory: { [key in ModuleType]: () => Module } =
   'acordeon': () => new AcordeonModule(),
   'grid-de-imagenes': () => new GridDeImagenesModule(),
   'video': () => new VideoModule(),
-  'thank-you': () => new ThankYouModule()
+  'thank-you': () => new ThankYouModule(),
+  'footer': () => new FooterModule()
 }
 
 
@@ -31,7 +32,8 @@ export const submoduleFactory: { [key in ModuleType]: () => SubModule } =
   'acordeon': () => new AcordeonSubModule('desplegable'),
   'grid-de-imagenes': () => new GridDeImagenesSubModule('imagen'),
   'video': () => ({} as SubModule),
-  'thank-you': () => new ThankYouSubModule('enlace')
+  'thank-you': () => new ThankYouSubModule('enlace'),
+  'footer': () => ({} as SubModule)
 }
 
 
@@ -49,5 +51,6 @@ export const exLibRequirements: { [key in ModuleType]: ExternalLib[] } =
   'acordeon': ['swiper'],
   'grid-de-imagenes': [],
   'video': ['youtube'],
-  'thank-you': []
+  'thank-you': [],
+  'footer': []
 }

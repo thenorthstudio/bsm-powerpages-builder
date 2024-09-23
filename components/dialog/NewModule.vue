@@ -8,25 +8,39 @@ const { newModule: isVisible, configureModule } = useGlobalDialogs();
 
 const moduleItems = () =>
 {
+  const skipItems: ModuleType[] = ['footer'];
   const items: {
     typeName: string,
     title: string,
   }[] = [];
-  for (const m in moduleFactory) items.push({
-    typeName: m,
-    title: moduleFactory[m as ModuleType]().getTitle()
-  });
+  for (const m in moduleFactory)
+  {
+    if (skipItems.includes(m as ModuleType)) continue;
+    items.push({
+      typeName: m,
+      title: moduleFactory[m as ModuleType]().getTitle()
+    });
+  }
   return items;
 }
 const selectModule = (selction: ModuleType) =>
 {
   isVisible.value = false;
   const newModule = moduleFactory[selction]();
-  page.modules.value.push(newModule);
+  // If page is empty, add a menu & footer:
+  if (page.modules.value.length == 0)
+  {
+    // page.modules.value.push(moduleFactory['menu']());
+    page.modules.value.push(moduleFactory['footer']());
+  }
+  page.modules.value.splice(page.modules.value.length - 1, 0, newModule);
   configureModule.value.open(newModule);
   
   const libs = exLibRequirements[newModule.type];
   if (libs.length) page.dirtyJS.value = true;
+
+  // Trigger re-render since footer must be the last element:
+  page.reorder.value = true;
 }
 </script>
 

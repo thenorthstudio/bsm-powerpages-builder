@@ -13,6 +13,7 @@ import
   ModuleGridDeImagenes,
   ModuleVideo,
   ModuleThankYou,
+  ModuleFooter,
 }
 from '#components';
 
@@ -30,6 +31,7 @@ const moduleComponents: { [key in ModuleType]: any } = {
   'grid-de-imagenes': ModuleGridDeImagenes,
   'video': ModuleVideo,
   'thank-you': ModuleThankYou,
+  'footer': ModuleFooter,
 }
 const page = useCurrentPage();
 </script>
@@ -38,8 +40,8 @@ const page = useCurrentPage();
 <template>
   <main class="main-content | in-builder">
     <component class="c-module" :id="m.anchor"
-    :class="[{ 'has-focus': m.hovering }, `is-${m.topMaring}`]"
     :is="moduleComponents[m.type]" :m="m" :data-id="m.id"
+    :class="[{ 'has-focus': m.hovering }, `is-${m.topMaring}`]"
     v-for="m in page.modules.value" :key="m.id"
     />
   </main>

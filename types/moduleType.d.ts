@@ -15,7 +15,8 @@ type ModuleType = (
   'acordeon' |
   'grid-de-imagenes' |
   'video' |
-  'thank-you'
+  'thank-you' |
+  'footer'
 )
 
 type ModulePropType = (
