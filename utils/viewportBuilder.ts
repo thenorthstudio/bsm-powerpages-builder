@@ -17,9 +17,7 @@ export class ViewportBuilder
     this.mirrorWindow = iframe.contentWindow!;
     this.mirrorDoc = iframe.contentDocument!;
     this.mirrorDoc.open();
-    let html = await $fetch<string>('/builder/index.html');
-    html = await renderTemplate(html, 'menu');
-    html = await renderTemplate(html, 'logo');
+    const html = await $fetch<string>('/builder/index.html');
     this.mirrorDoc.write(html);
     this.mirrorDoc.close();
       
@@ -33,7 +31,6 @@ export class ViewportBuilder
     await this.appendStyle('fontface-global', '/builder/_font-face.scss');
     await this.appendStyle('typography-global', '/builder/_typography.scss');
     await this.appendStyle('theme-global', '/builder/theme.scss');
-    await this.appendStyle('menu-module', '/builder/scss/menu.scss');
     await this.appendStyle('form-module', '/builder/scss/form.scss');
 
     await this.appendScript('theme-global', '/builder/js/theme.js');
@@ -45,7 +42,8 @@ export class ViewportBuilder
     const page = useCurrentPage();
     page.isUpdating.value = true;
     page.scrollY.value = this.mirrorWindow!.scrollY;
-      
+    let triggerJS = false;
+
     await skipTime(10);
     const temp = [...page.modules.value];
     for (let i = 0; i < temp.length; i++)
@@ -82,12 +80,13 @@ export class ViewportBuilder
         }
         else console.error('Tried to add a shadow-ghost module!', m);
 
-        if (exLibRequirements[m.type].length)
-          this.triggerJS();
+        if (exLibRequirements[m.type].length || m.type == 'menu') triggerJS = true;
+        m.dirty = false;
       }
     }
-      
     await skipTime(10);
+    if (triggerJS) this.triggerJS();
+
     page.isUpdating.value = false;
     this.pinScroll();
   }
@@ -272,8 +271,6 @@ export class ViewportBuilder
 
   async exportPageHTML()
   {
-    // Take into account <liquid> macros
-
     // Create fake-DIV that will hold exported HTML:
     const mirrorBody = this.mirrorDoc!.querySelector('body')! as HTMLBodyElement;
     const kitchenEl = document.createElement('div') as HTMLElement;
@@ -288,18 +285,15 @@ export class ViewportBuilder
     const kitchenMain = kitchenEl.querySelector('main')! as HTMLElement;
     kitchenMain.classList.remove('in-builder', '|');
 
-    // Remove builder-only elements, styles & menu:
-    const toRemove = 'nav, .builder-only, style';
+    // Remove builder-only elements & styles:
+    const toRemove = '.builder-only, style';
     kitchenEl.querySelectorAll(toRemove).forEach(
       node => node.parentNode!.removeChild(node)
     );
 
     // Move <nav> and <footer> outside of <main>:
-    // const navEl = kitchenEl.querySelector('nav')!;
-    const footerEl = kitchenEl.querySelector('footer')!;
-    // kitchenEl.prepend(navEl);
-    // kitchenEl.append(kitchenMain);
-    kitchenEl.append(footerEl);
+    kitchenEl.prepend(kitchenEl.querySelector('nav')!);
+    kitchenEl.append(kitchenEl.querySelector('footer')!);
 
     // Append all JS at the end:
     kitchenEl.querySelectorAll('script').forEach(
@@ -331,19 +325,6 @@ export class ViewportBuilder
     await skipTime(10);
     return html_beautify(html, { indent_size: 2 });
   }
-  async exportMenuHTML()
-  {
-    // There are different menus!
-    // or are they..?
-    let html = await $fetch<string>('/builder/template/menu.html');
-    html = await renderTemplate(html, 'logo');
-
-    // Remove <prod-only> tags, keeping content:
-    const regex = /<div ?class="prod-only ?">(.*?)<\/div>/gis;
-    html = html.replace(regex, '$1');
-
-    return html_beautify(html, { indent_size: 4 });
-  }
   async exportThemeCSS()
   {
     let cssString = '';
@@ -354,7 +335,6 @@ export class ViewportBuilder
       '_typography',
       '_powerpages-fix',
       'theme',
-      'scss/menu',
       'scss/form',
     ];
     for (let i = 0; i < globalPaths.length; i++)
@@ -366,6 +346,7 @@ export class ViewportBuilder
 
     const modulePaths: { [key in ModuleType]: ModuleType } =
     {
+      'menu': 'menu',
       'header': 'header',
       'detalle-de-programa': 'detalle-de-programa',
       'columnas-de-texto': 'columnas-de-texto',

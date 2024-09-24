@@ -8,7 +8,7 @@ const { newModule: isVisible, configureModule } = useGlobalDialogs();
 
 const moduleItems = () =>
 {
-  const skipItems: ModuleType[] = ['footer'];
+  const skipItems: ModuleType[] = ['menu', 'footer'];
   const items: {
     typeName: string,
     title: string,
@@ -30,7 +30,7 @@ const selectModule = (selction: ModuleType) =>
   // If page is empty, add a menu & footer:
   if (page.modules.value.length == 0)
   {
-    // page.modules.value.push(moduleFactory['menu']());
+    page.modules.value.push(moduleFactory['menu']());
     page.modules.value.push(moduleFactory['footer']());
   }
   page.modules.value.splice(page.modules.value.length - 1, 0, newModule);

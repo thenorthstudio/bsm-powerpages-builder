@@ -143,9 +143,9 @@ const goBackFromSubmodule = () => {
         </div>
         <div class="field-grid | p-3">
             <DialogPropRenderer :options="p"
-                v-for="(p, i) in module.props" :key="i"
-                @set-dirty="module!.dirty = true"
-                @check-js="checkTriggerJS"
+            v-for="(p, i) in module.props" :key="i"
+            @set-dirty="module!.dirty = true"
+            @check-js="checkTriggerJS"
             />
         </div>
       </div>

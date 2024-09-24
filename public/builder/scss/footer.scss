@@ -3,12 +3,12 @@ footer.c-footer
   color: #E3E4E5;
   background-color: #383A43;
   padding: 4rem 0;
-  margin-top: 12rem !important;
+  margin-top: 12rem;
   @media (max-width: 1024px) {
-    margin-top: 10rem !important;
+    margin-top: 10rem;
   }
   @media (max-width: 760px) {
-    margin-top: 8rem !important;
+    margin-top: 8rem;
   }
   @media (max-width: 660px) {
     padding: 3.2rem 0;
@@ -81,7 +81,7 @@ footer.c-footer
         }
       }
     }
-    >.bottom
+    >nav.bottom
     {
       margin-top: 4rem;
       display: flex;
@@ -110,9 +110,10 @@ footer.c-footer
           display: none;
         }
       }
-      >.lang
+      >.c-lang-selector
       {
         flex: 0 0 auto;
+        color: #E3E4E5;
       }
     }
   }

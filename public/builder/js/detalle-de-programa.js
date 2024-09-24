@@ -6,7 +6,6 @@ window.addEventListener('load', () =>
     const swiperRoot = root.querySelector('.swiper');
     if (swiperRoot.swiper) swiperRoot.swiper.destroy();
 
-    // swapSwiperClass(root, true);
     new Swiper(swiperRoot, {
       slidesPerView: 'auto',
       spaceBetween: 0,

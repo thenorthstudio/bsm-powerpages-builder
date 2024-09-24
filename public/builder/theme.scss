@@ -65,7 +65,11 @@ html
   color: #181818;
   >.c-module
   {
-    &:not(header, .c-thank-you)
+    &:not(
+      nav, header, footer,
+      .c-detalle-de-programa,
+      .c-thank-you
+    )
     {
       margin-top: 4.8rem;
       &.is-normal-margin
@@ -98,6 +102,53 @@ html
           width: calc(100% - 10px);
         }
       }
+    }
+  }
+
+  .c-lang-selector
+  {
+    font-weight: 400;
+    font-size: 1.4rem;
+    line-height: 1;
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: .6rem;
+    cursor: pointer;
+    >svg
+    {
+      width: 1.6rem !important;
+      height: 1.6rem !important;
+      flex: 0 0 1.6rem !important;
+    }
+    >button { flex: 0 0 auto; }
+    &:not(.is-open)>.floater
+    {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+    >.floater
+    {
+      border-radius: 3px;
+      background-color: white;
+      box-shadow: 2px 2px 4px 1px rgba(0, 0, 0, 0.2);
+      padding: 0 1.2rem;
+      position: absolute;
+      transition: opacity .25s;
+      &.from-top { top: calc(100% + 1rem); }
+      &.from-bottom { bottom: calc(100% + 1rem); }
+      a
+      {
+        color: #181818;
+        font-weight: 400;
+        display: block;
+        padding: 1.2rem 0;
+        &+a { border-top: solid 1px #ededed; }
+      }
+    }
+    @at-root .in-builder#{&} a {
+      pointer-events: none;
     }
   }
   

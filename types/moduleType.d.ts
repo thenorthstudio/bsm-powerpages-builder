@@ -1,9 +1,20 @@
+type PageExport = {
+  language: Lang
+  modules: Module[]
+}
+
+
+type Lang = 'es' | 'ca' | 'en';
+type LangURLs = { [key in Lang]: string };
+
+
 type ModuleMarginType = (
   'normal-margin' |
   'small-margin'
 )
 
 type ModuleType = (
+  'menu' |
   'header' |
   'detalle-de-programa' |
   'columnas-de-texto' |

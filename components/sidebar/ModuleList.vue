@@ -82,7 +82,7 @@ const deleteModule = (index: number) =>
 }
 
 const isMenuOrFooter = (index: number) => {
-  return /* index == 0 ||  */index == page.modules.value.length - 1;
+  return index == 0 || index == page.modules.value.length - 1;
 }
 
 
@@ -155,7 +155,9 @@ onMounted(() =>
         <Column class="actions-row">
           <template #body="{ index }">
             <ButtonGroup>
-              <Button class="px-1 py-2" icon="pi pi-cog"
+              <Button v-if="index != page.modules.value.length - 1"
+              class="px-1 py-2 relative" icon="pi pi-cog"
+              :style="{ left: isMenuOrFooter(index) ? '40px' : undefined }"
               size="small" severity="secondary" text
               v-tooltip.bottom="'Opciones'" outlined
               @click="configureModule(index)"

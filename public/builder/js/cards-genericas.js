@@ -9,7 +9,11 @@ window.addEventListener('load', () =>
     // Video:
     if (root.querySelector('.video-opener'))
     {
-      const store = useState(root, {
+      const store = {
+        videoModal: root.querySelector('.video-modal'),
+        playBtn: root.querySelector('button.video-opener'),
+        modalBg: root.querySelector('.video-modal .background'),
+        iframeWrap: root.querySelector('.iframe-wrap'),
         onClickPlay: () =>
         {
           html.classList.add('no-scroll');
@@ -28,33 +32,26 @@ window.addEventListener('load', () =>
         {
           store.videoModal.classList.remove('is-visible');
           html.classList.remove('no-scroll');
-          store.player.stopVideo();
-          store.player.destroy();
-          store.player = null;
+          if (store.player && store.player.stopVideo)
+          {
+            store.player.stopVideo();
+            store.player.destroy();
+            store.player = null;
+          }
         }
-      });
-      store.videoModal = root.querySelector('.video-modal');
+      };
+
       store.videoModal.classList.remove('is-visible');
-    
-      const modalBg = root.querySelector('.video-modal .background');
-      modalBg.removeEventListener('click', store.onCloseModal);
-      modalBg.addEventListener('click', store.onCloseModal);
-    
-      store.playBtn = root.querySelector('button.video-opener');
-      store.playBtn.removeEventListener('click', store.onClickPlay);
+      store.modalBg.addEventListener('click', store.onCloseModal);
       store.playBtn.addEventListener('click', store.onClickPlay);
-            
-      store.iframeWrap = root.querySelector('.iframe-wrap');
     }
-        
-        
+
     // Swiper:
     if (root.classList.contains('has-swiper'))
     {
       const swiperRoot = root.querySelector('.swiper');
       if (swiperRoot.swiper) swiperRoot.swiper.destroy();
     
-      // swapSwiperClass(root, true);
       new Swiper(swiperRoot, {
         slidesPerView: 'auto',
         spaceBetween: 24,

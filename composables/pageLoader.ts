@@ -5,24 +5,24 @@ export const usePageLoader = () =>
 {
   const page = useCurrentPage();
   
-  const importFromObject = (obj: any) =>
+  const importFromObject = (obj: PageExport) =>
   {
-    const loadedModules = obj as Module[];
     const finalModules: Module[] = [];
-    
-    for (let i = 0; i < loadedModules.length; i++)
+    for (let i = 0; i < obj.modules.length; i++)
     {
-      const newModule = cloneModule(loadedModules[i], false);
+      const newModule = cloneModule(obj.modules[i], false);
       finalModules.push(newModule);
     }
     page.modules.value = finalModules;
+    page.lang.value = obj.language;
   }
   
-  const exportAsObject = () =>
+  const exportAsObject = (): PageExport =>
   {
-    // For now simply export module array,
-    // subtype factories must be created on-load
-    return page.modules.value;
+    return {
+      language: page.lang.value,
+      modules: page.modules.value
+    };
   }
   
   return { importFromObject, exportAsObject }

@@ -5,13 +5,9 @@ import type { FooterModule } from '#imports';
 const prop = defineProps<{
   m: FooterModule
 }>();
+const lang = useCurrentPage().lang;
 
-const lang = computed(() => prop.m.props.lang.getOption().value);
-
-type TTranslation = {
-  [key in ('es' | 'ca' | 'en')]:
-  Record<string, { label: string, url: string }>
-};
+type TTranslation = { [key in Lang]: Record<string, { label: string, url: string }> };
 const translations: TTranslation = {
   es: {
     'legal-notice': {
@@ -95,7 +91,7 @@ const t = (key: string) => translations[lang.value][key];
         </div>
       </div>
 
-      <div class="bottom">
+      <nav class="bottom">
         <div class="legal">
           ©2001 Fundació institut d’Educació Contínua
         </div>
@@ -106,10 +102,8 @@ const t = (key: string) => translations[lang.value][key];
           {{ t('cookies-policy').label }}
         </a>
         <div class="flex-space" />
-        <div class="lang">
-          <LangSelector :default="lang" />
-        </div>
-      </div>
+        <LangSelector floater-position="bottom" />
+      </nav>
 
     </div>
   </footer>

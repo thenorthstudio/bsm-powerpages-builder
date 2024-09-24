@@ -11,7 +11,7 @@ export class DetalleDeProgramaSubModule extends SubModule<DetalleDeProgramaSubPr
   {
     return {
       title: new ModulePropString('Título', 'Idioma', 'plain'),
-      text: new ModulePropString('Texto', 'Español', 'plain'),
+      text: new ModulePropString('Texto', 'Castellano', 'plain'),
     };
   }
   getDescriptor()

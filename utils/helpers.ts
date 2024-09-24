@@ -97,6 +97,14 @@ export const cleanHTML = (html: string) =>
   return html.replace(regex, '');
 }
 
+
+/* LITERALS */
+export const AllLocales: { label: string, value: Lang }[] = [
+  { label: 'Castellano', value: 'es' },
+  { label: 'Català', value: 'ca' },
+  { label: 'English', value: 'en' },
+]
+
 export const LONG_LOREM = `<p>Lorem ipsum dolor sit amet,
 <strong>consectetur</strong> adipiscing elit. Mauris condimentum
 nec elit vel egestas.<em>Integer sodales erat ac velit suscipit</em>,

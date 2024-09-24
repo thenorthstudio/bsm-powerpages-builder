@@ -3,7 +3,14 @@ import { type Module } from "@/utils/moduleTypes";
 
 export const useCurrentPage = () =>
 {
-  const name = useState('page-name', () => 'pagina nueva');
+  const name = useState('page-name', () => 'pagina-nueva');
+  const lang = useState<Lang>('page-lang', () => 'es');
+  const langUrls = useState<LangURLs>('page-lang-urls', () => ({
+    es: 'https://landinges.bsm.upf.edu/' + name.value,
+    ca: 'https://landingca.bsm.upf.edu/' + name.value,
+    en: 'https://landingen.bsm.upf.edu/' + name.value,
+  }));
+
   const dimensions = useState('page-size', () =>
   ({
     viewportWidth: '100%',
@@ -27,6 +34,9 @@ export const useCurrentPage = () =>
   
   return {
     name,
+    lang,
+    langUrls,
+
     dimensions,
     scrollY,
     

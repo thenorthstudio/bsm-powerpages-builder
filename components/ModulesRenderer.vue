@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import
 {
+  ModuleMenu,
   ModuleHeader,
   ModuleDetalleDePrograma,
   ModuleColumnasDeTexto,
@@ -19,6 +20,7 @@ from '#components';
 
 
 const moduleComponents: { [key in ModuleType]: any } = {
+  'menu': ModuleMenu,
   'header': ModuleHeader,
   'detalle-de-programa': ModuleDetalleDePrograma,
   'columnas-de-texto': ModuleColumnasDeTexto,

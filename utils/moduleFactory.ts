@@ -3,6 +3,7 @@ import { Module, SubModule } from "@/utils/moduleTypes";
 
 export const moduleFactory: { [key in ModuleType]: () => Module } =
 {
+  'menu': () => new MenuModule(),
   'header': () => new HeaderModule(),
   'detalle-de-programa': () => new DetalleDeProgramaModule(),
   'columnas-de-texto': () => new ColumnasDeTextoModule(),
@@ -21,6 +22,7 @@ export const moduleFactory: { [key in ModuleType]: () => Module } =
 
 export const submoduleFactory: { [key in ModuleType]: () => SubModule } =
 {
+  'menu': () => ({} as SubModule),
   'header': () => ({} as SubModule),
   'detalle-de-programa': () => new DetalleDeProgramaSubModule('detalle'),
   'columnas-de-texto': () => new ColumnasDeTextoSubModule('columna'),
@@ -40,6 +42,7 @@ export const submoduleFactory: { [key in ModuleType]: () => SubModule } =
 export type ExternalLib = ('swiper' | 'youtube');
 export const exLibRequirements: { [key in ModuleType]: ExternalLib[] } =
 {
+  'menu': [],
   'header': [],
   'detalle-de-programa': ['swiper'],
   'columnas-de-texto': [],
