@@ -17,7 +17,7 @@ window.addEventListener('load', () =>
         store.langSelectors.forEach(selector =>
         {
           const floater = selector.querySelector('.floater');
-          if (floater)
+          if (floater && floater.closest('nav.c-menu'))
           {
             floater.classList.toggle('from-top', !hasMenu);
             floater.classList.toggle('from-bottom', hasMenu);

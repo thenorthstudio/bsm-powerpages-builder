@@ -49,16 +49,12 @@ export abstract class Module<TPropDic extends ModulePropDic = ModulePropDic>
     // or already have a ortographically correct title
     if (!(['thank-you'] as ModuleType[]).includes(this.type))
     {
-      if (this.props.title)
-      {
-        if (this.props.title.value) return this.props.title.value as string;
-        else return this.props.title.defaultValue as string;
-      }
-      else
+      if (!this.props.title)
       {
         const title = this.type.replace(/-/g, ' ');
         return title.slice(0, 1).toUpperCase() + title.slice(1);
       }
+      else return this.props.title.defaultValue as string;
     }
     else return "'Thank you page'";
   }
