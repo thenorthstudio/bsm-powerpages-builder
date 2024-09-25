@@ -1,37 +1,49 @@
 import { Module, SubModule } from "@/utils/moduleTypes";
 
 
-type DetailItem = {
-  title: string,
-  text: string,
-};
 type CardsDeProgramaSubPropDic = {
   title: InstanceType<typeof ModulePropString>,
   description: InstanceType<typeof ModulePropString>,
-  details: InstanceType<typeof ModulePropList<DetailItem>>,
-  linkUrl: InstanceType<typeof ModulePropString>,
-  linkText: InstanceType<typeof ModulePropString>,
+  ctaText: InstanceType<typeof ModulePropString>,
+  ctaType: InstanceType<typeof ModulePropOptions>,
+  ctaUrl: InstanceType<typeof ModulePropString>,
+  ctaId: InstanceType<typeof ModulePropString>,
+  details: InstanceType<typeof ModulePropList<{
+    title: string,
+    text: string,
+  }>>,
 }
 export class CardsDeProgramaSubModule extends SubModule<CardsDeProgramaSubPropDic>
 {
   createProps()
   {
-    const defaultItem: DetailItem = {
-      title: 'Título',
-      text: 'Texto'
-    };
     const props = {
       title: new ModulePropString('Título', 'Programa', 'plain'),
       description: new ModulePropString('Descripción', MID_LOREM, 'rich'),
-      linkUrl: new ModulePropString('CTA Link', 'https://...', 'plain', 1),
-      linkText: new ModulePropString('CTA Texto', 'Me interesa', 'plain', 1),
-      details: new ModulePropList(defaultItem, 'Lista de detalles'),
+      ctaText: new ModulePropString('CTA Texto', 'Me interesa', 'plain', 1),
+      ctaType: new ModulePropOptions('CTA Tipo', [
+        { label: 'ID de Programa', value: 'programa' },
+        { label: 'Link', value: 'link' },
+      ], 0, 1),
+      ctaUrl: new ModulePropString('CTA Link', 'https://...', 'plain'),
+      ctaId: new ModulePropString('CTA ID', '12345', 'plain'),
+      details: new ModulePropList({
+        title: 'Título',
+        text: 'Texto'
+      }, 'Lista de detalles'),
     };
     props.details.additionalInfo = 'Icono de 25·25px';
+    props.ctaId.additionalInfo = `
+      Si existe un formulario en la página, al hacer click
+      llevará al usuario a este con el campo de Programa rellenado.
+    `.replace(/\n/g, '');
     return props;
   }
-  override onAnyChange() {
-    this.props.linkText.isHiiden = isEmpty(this.props.linkUrl.value);
+  override onAnyChange()
+  {
+    const ctaType = this.props.ctaType.getOption().value;
+    this.props.ctaUrl.isHiiden = ctaType == 'programa';
+    this.props.ctaId.isHiiden = ctaType == 'link';
   }
   getDescriptor()
   {

@@ -9,6 +9,7 @@
 *[data-gjs-type="EntityForm"]>div#viewRoot>*:last-child {
   display: none !important;
 }
+.row.sectionBlockLayout { display: none !important; }
 
 [data-gjs-type="Section"] { display: none !important; }
 

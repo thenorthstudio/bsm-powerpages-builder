@@ -67,8 +67,9 @@ section.c-cards-de-programa
       >.bottom
       {
         flex: 0 0 auto;
-        >a.cta
+        >a, >button
         {
+          width: 100%;
           color: #c8102e;
           font-weight: 600;
           line-height: 1;
@@ -80,9 +81,7 @@ section.c-cards-de-programa
           padding: 1.5rem 2rem;
           margin-top: 5rem;
           display: block;
-          transition: color .3s ease,
-          background-color .3s ease
-          ;
+          transition: color .3s ease, background-color .3s ease;
           &:hover
           {
             color: white;

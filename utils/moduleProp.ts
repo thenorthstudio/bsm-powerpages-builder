@@ -62,10 +62,6 @@ extends ModulePropBase<number>
   getOption() { return this.options[this.value] }
 }
 
-export class ModulePropNumber extends ModulePropBase<number> {
-  type = 'number' as ModulePropType;
-}
-
 export type StringObj = { [key: string]: string };
 export class ModulePropList<TItem extends StringObj = StringObj>
 extends ModulePropBase<TItem[]>
@@ -170,7 +166,6 @@ extends ModulePropBase<TSub[]>
 export type ModuleProp = (
   ModulePropString |
   ModulePropOptions |
-  ModulePropNumber |
   ModulePropList |
   ModulePropArray
 )

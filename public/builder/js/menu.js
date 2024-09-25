@@ -14,7 +14,7 @@ window.addEventListener('load', () =>
         // console.log('menu.js onResize');
         const hasMenu = store.links.scrollWidth > store.links.clientWidth;
         root.classList.toggle('has-menu', hasMenu);
-        if (hasMenu) store.langSelectors.forEach(selector =>
+        store.langSelectors.forEach(selector =>
         {
           const floater = selector.querySelector('.floater');
           if (floater)
@@ -23,7 +23,6 @@ window.addEventListener('load', () =>
             floater.classList.toggle('from-bottom', hasMenu);
           }
         });
-        console.log('menu.js onResize hasMenu:', hasMenu, root);
       },
       openMenu: () =>
       {

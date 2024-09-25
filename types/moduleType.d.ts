@@ -33,7 +33,6 @@ type ModuleType = (
 type ModulePropType = (
   'string' |
   'options' |
-  'number' |
   'list' |
   'array'
 )
