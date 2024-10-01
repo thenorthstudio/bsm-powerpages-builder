@@ -121,9 +121,9 @@ const printPage = () =>
     </div>
     
     <div id="viewport-slider" class="flex align-items-center gap-4">
-      <div class="pi pi-mobile"></div>
+      <div class="pi pi-mobile"/>
       <Slider class="w-14rem" v-model="pageWidthPercent" />
-      <div class="pi pi-desktop"></div>
+      <div class="pi pi-desktop"/>
       
       <div class="hint | text-sm text-400">
         {{ framePixelSize }}px

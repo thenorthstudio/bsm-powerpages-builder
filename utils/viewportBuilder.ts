@@ -1,6 +1,8 @@
 import type { Module } from "@/utils/moduleTypes";
 import { html_beautify } from 'js-beautify';
 import { compileString } from 'sass';
+import postcss from 'postcss';
+import autoprefixer from 'autoprefixer';
 
 
 export class ViewportBuilder
@@ -32,8 +34,7 @@ export class ViewportBuilder
     await this.appendStyle('typography-global', '/builder/_typography.scss');
     await this.appendStyle('theme-global', '/builder/theme.scss');
     await this.appendStyle('form-module', '/builder/scss/form.scss');
-
-    await this.appendScript('theme-global', '/builder/js/theme.js');
+    await this.appendScript('form-module', '/builder/js/form.js');
   }
 
 
@@ -176,7 +177,7 @@ export class ViewportBuilder
         const node = this.mirrorDoc!.createElement('script') as HTMLScriptElement;
         node.id = jsId;
         node.src = path;
-              
+
         this.bodyEl!.append(node);
         await skipFrame();
       }
@@ -320,10 +321,17 @@ export class ViewportBuilder
 
     // Remove <prod-only> tags, keeping content:
     const regex = /<div ?class="prod-only ?">(.*?)<\/div>/gis;
-    const html = kitchenEl.innerHTML.replace(regex, '$1');
+    let html = kitchenEl.innerHTML.replace(regex, '$1');
+    html = html_beautify(html, { indent_size: 2 });
 
-    await skipTime(10);
-    return html_beautify(html, { indent_size: 2 });
+    // Add needed fetchxml:
+    if (useCurrentPage().hasForm())
+    {
+      const paisFetch = await $fetch<string>('/builder/html/pais-fetch.html');
+      html = `${paisFetch}\n\n${html}`;
+    }
+
+    return html;
   }
   async exportThemeCSS()
   {
@@ -341,7 +349,7 @@ export class ViewportBuilder
     {
       const path = globalPaths[i];
       const scss = await $fetch<string>(`/builder/${path}.scss`);
-      cssString += compileString(scss, { style: 'compressed' }).css;
+      cssString += compileString(scss, { style: 'compressed', charset: false }).css;
     }
 
     const modulePaths: { [key in ModuleType]: ModuleType } =
@@ -367,8 +375,12 @@ export class ViewportBuilder
       cssString += compileString(scss, { style: 'compressed' }).css;
     }
 
-    // TODO: Prefix!
-    // cssString = (await postcss([autoprefixer]).process(cssString)).css;
+
+    // @ts-ignore
+    globalThis.concat = (values) => [...values];
+    cssString = await postcss([autoprefixer])
+      .process(cssString, { from: undefined })
+      .then(r => r.css);
     return cssString;
   }
 }

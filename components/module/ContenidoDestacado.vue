@@ -43,7 +43,7 @@ const classList = computed(() =>
                 </h2>
                 <div class="body | rich-text" v-if="hasText"
                     v-html="m.props.text.value"
-                ></div>
+                />
             </div>
             <div class="R">
                 <div class="swiper">
@@ -104,7 +104,7 @@ const classList = computed(() =>
                                     <div class="quote"
                                         v-html="`“${p.props.testimonialText.value}”`"
                                         v-if="!isEmpty(p.props.testimonialText.value)"
-                                    ></div>
+                                    />
                                 </template>
 
                             </div>

@@ -1,0 +1,52 @@
+{% fetchxml paises %}
+<fetch>
+	<entity name="new_pais">
+		<attribute name="new_paisid"></attribute>
+		<attribute name="new_nombre"></attribute>
+		<attribute name="new_nom"></attribute>
+		<attribute name="new_name"></attribute>
+    <order attribute="new_name" descending="false"></order>
+	</entity>
+</fetch>
+{% endfetchxml %}
+
+{% fetchxml provincias %}
+<fetch>
+	<entity name="new_provincia">
+		<attribute name="new_provinciaid"></attribute>
+		<attribute name="new_name"></attribute>
+		<attribute name="alg_pais"></attribute>
+    <order attribute="new_name" descending="false"></order>
+    <link-entity name="new_pais" from="new_paisid" to="alg_pais" alias="alg_pais" link-type="outer">
+			<attribute name="new_paisid"></attribute>
+		</link-entity>
+	</entity>
+</fetch>
+{% endfetchxml %}
+
+
+<script>
+  const paisesFetch = [
+    {% for pais in paises.results.entities %}
+    {
+      id: '{{ pais.new_paisid }}',
+      name: {
+        es: '{{ pais.new_name }}',
+        ca: '{{ pais.new_nom }}',
+        en: '{{ pais.new_nombre }}',
+      }
+    },
+    {% endfor %}
+  ];
+  const provinciasFetch = [
+    {% for provincia in provincias.results.entities %}
+    {
+      id: '{{ provincia.new_provinciaid }}',
+      name: {
+        en: '{{ provincia.new_name }}',
+      },
+      paisId: '{{ provincia['alg_pais.new_paisid'] }}',
+    },
+    {% endfor %}
+  ];
+</script>

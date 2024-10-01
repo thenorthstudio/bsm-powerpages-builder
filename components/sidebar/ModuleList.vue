@@ -108,7 +108,7 @@ onMounted(() =>
 
     <template #header>
       <div class="flex align-items-center gap-2">
-        <div :class="page.isUpdating.value? 'pi pi-spin pi-spinner' : 'pi pi-box'"></div>
+        <div :class="page.isUpdating.value? 'pi pi-spin pi-spinner' : 'pi pi-box'"/>
         <div>Módulos</div>
       </div>
     </template>

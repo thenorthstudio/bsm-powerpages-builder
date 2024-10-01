@@ -20,7 +20,7 @@ const videoId = computed(() => getYoutubeId(prop.m.props.url.value));
             </h2>
             <div class="body | rich-text" v-if="hasText"
                 v-html="m.props.text.value"
-            ></div>
+            />
 
             <button class="video-opener" :data-vid="videoId">
                 <BuilderImage />
@@ -40,9 +40,9 @@ const videoId = computed(() => getYoutubeId(prop.m.props.url.value));
         </div>
 
         <div class="video-modal">
-            <div class="background"></div>
+            <div class="background"/>
             <div class="inner">
-                <div class="iframe-wrap"></div>
+                <div class="iframe-wrap"/>
             </div>
         </div>
     </section>

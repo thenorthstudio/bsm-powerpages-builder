@@ -52,7 +52,7 @@ const selectModule = (selction: ModuleType) =>
   >
     <template #header>
       <div class="flex align-items-center gap-2">
-        <div class="pi pi-box"></div>
+        <div class="pi pi-box"/>
         <div>Nuevo módulo</div>
       </div>
     </template>

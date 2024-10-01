@@ -58,6 +58,7 @@ window.addEventListener('load', () =>
     {
       window.removeEventListener('click', store.closeAllLangSelectors);
       window.addEventListener('click', store.closeAllLangSelectors);
+
       selector.addEventListener('click',
         () => requestAnimationFrame(() => selector.classList.toggle('is-open'))
       );

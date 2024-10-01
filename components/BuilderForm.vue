@@ -3,7 +3,7 @@
 
 
 <template>
-  <div class="c-form | container">
+  <div class="c-form">
     <div class="prod-only">
       {% entityform name: '' %}
     </div>

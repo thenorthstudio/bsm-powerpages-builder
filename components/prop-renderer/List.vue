@@ -90,7 +90,7 @@ const deleteItem = (index: number) =>
                 <div class="pi pi-info-circle | mr-2"
                     v-tooltip.left="options.additionalInfo"
                     v-if="options.additionalInfo"
-                ></div>
+                />
                 {{ options.title }}
             </div>
             <Button icon="pi pi-plus"

@@ -17,7 +17,7 @@ const prop = defineProps<{
             <div class="body | rich-text"
                 v-if="!isEmpty(m.props.text.value)"
                 v-html="m.props.text.value"
-            ></div>
+            />
             <div class="card-grid">
                 <div class="card-block"
                     :class="`is-${c.props.width.getOption().value}-cols`"
@@ -32,7 +32,7 @@ const prop = defineProps<{
                     <div class="body | rich-text-simple"
                         v-if="!isEmpty(c.props.text.value)"
                         v-html="c.props.text.value"
-                    ></div>
+                    />
                 </div>
             </div>
         </div>

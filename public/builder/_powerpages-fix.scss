@@ -1,14 +1,20 @@
+div[data-gjs-type="Footer"],
+div[data-gjs-type="Header"] {
+  display: none !important;
+}
+
 *:not(
 [data-gjs-type="Header"],
 [data-gjs-type="EntityForm"],
-[data-gjs-type="ENTITY_FORM_FIELD"],
-[data-gjs-type="Footer"]
+[data-gjs-type="ENTITY_FORM_FIELD"]
 ) {
   >div#viewRoot { display: none !important; }
 }
 *[data-gjs-type="EntityForm"]>div#viewRoot>*:last-child {
   display: none !important;
 }
+
+div.columnBlockLayout,
 .row.sectionBlockLayout { display: none !important; }
 
 [data-gjs-type="Section"] { display: none !important; }
@@ -23,5 +29,11 @@
     width: 100% !important;
     height: 100% !important;
     display: block !important;
+  }
+}
+
+.main-content .c-form .crmEntityFormView .tab fieldset {
+  td.text[data-type="DateTimeType"], td.text[data-type="PicklistType"] {
+    .table-info { transform: translate(-0.2em, -0.7rem) scale(0.75); }
   }
 }

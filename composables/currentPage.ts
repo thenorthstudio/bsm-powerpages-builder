@@ -1,3 +1,4 @@
+import type { HeaderModule } from "#imports";
 import { type Module } from "@/utils/moduleTypes";
 
 
@@ -27,6 +28,17 @@ export const useCurrentPage = () =>
       m => m.id == moduleId
     );
   }
+  const hasForm = () =>
+  {
+    // const form = modules.value.find(m => m.type == 'form');
+    // if (form) return true;
+
+    const header = modules.value.find(m => m.type == 'header') as HeaderModule | undefined;
+    if (header && header.props.hasForm.getOption().value == 'true') return true;
+
+    return false;
+  }
+
   const reorder = useState('page-reordered', () => false);
   const isUpdating = useState('page-is-updating', () => false);
   const dirtyJS = useState('page-dirty-js', () => false);
@@ -43,6 +55,8 @@ export const useCurrentPage = () =>
     modules,
     hasModules,
     findModule,
+    hasForm,
+
     reorder,
     isUpdating,
     dirtyJS

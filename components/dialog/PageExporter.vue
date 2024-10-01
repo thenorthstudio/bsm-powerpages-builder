@@ -80,7 +80,7 @@ watch(page.hasModules, () =>
   >
     <template #header>
       <div class="flex align-items-center gap-2">
-        <div class="pi pi-file-export"></div>
+        <div class="pi pi-file-export"/>
         <div>Exportación de código</div>
       </div>
     </template>

@@ -18,7 +18,7 @@ const prop = defineProps<{
                 <div class="col | rich-text"
                     v-for="(c, i) in m.props.columns.value" :key="i"
                     v-html="c.props.text.value"
-                ></div>
+                />
             </div>
         </div>
     </section>

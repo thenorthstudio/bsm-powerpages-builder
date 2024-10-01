@@ -1,4 +1,156 @@
-.main-content .c-form
+.main-content .c-form .crmEntityFormView
 {
-  
+  * { float: none !important; }
+
+  .validation-summary { display: none; }
+
+  /* Fields */
+  .tab
+  {
+    margin-bottom: 0;
+    fieldset
+    {
+      margin-bottom: 0;
+      tr:nth-child(1), tr:nth-child(2) { display: none; }
+      td
+      {
+        vertical-align: bottom;
+        padding: 0 0 1.6rem;
+        position: relative;
+        &+td
+        {
+          padding-left: 1.6rem;
+          .table-info { left: 3.2rem; }
+        }
+        input { appearance: none; }
+        .table-info, input, select
+        {
+          font-family: "Lota Grotesque", sans-serif;
+          font-weight: 400;
+          font-size: 1.6rem;
+          line-height: 1;
+          border-radius: 0;
+          outline: none;
+          margin: 0;
+          &:focus
+          {
+            box-shadow: none;
+            outline: none;
+          }
+        }
+
+        /* Label */
+        .table-info
+        {
+          color: #6E6E6E;
+          white-space: nowrap;
+          position: absolute;
+          top: 1.6rem;
+          left: 1.6rem;
+          z-index: 2;
+          transform-origin: left top;
+          transition: color 0.25s, transform 0.25s;
+        }
+        &.is-error .table-info { color: #C8102E !important; }
+        &.text .table-info { transform: translateY(0.1em); }
+        &.text.is-open, &.picklist-cell, &.datetime {
+          .table-info { transform: translate(-0.2em, -0.7rem) scale(0.75); }
+        }
+        &.picklist-cell select option[selected] { display: none; }
+        &.checkbox-cell
+        {
+          padding: 0 0 1.6rem;
+          label, input { cursor: pointer; }
+          .table-info
+          {
+            color: #383A43;
+            line-height: 1.5;
+            white-space: normal;
+            padding-left: 4rem;
+            position: static;
+            float: left !important;
+          }
+          .control
+          {
+            position: absolute;
+            top: 0;
+            left: 0;
+            span { display: block; }
+            input
+            {
+              width: 2.4rem;
+              height: 2.4rem;
+              border: solid 2px #6E6E6E;
+              transition: all 0.15s;
+              &:checked
+              {
+                border-color: #C8102E;
+                background-color: #C8102E;
+                &::after
+                {
+                  content: '✓';
+                  color: white;
+                  font-size: 1.7rem;
+                  position: absolute;
+                  top: 5px;
+                  left: 5px;
+                  display: block;
+                }
+              }
+            }
+          }
+        }
+
+        /* Input */
+        .control
+        {
+          input[type="text"], input[type="email"], input[type="tel"], select
+          {
+            width: 100%;
+            height: 4.8rem;
+            border: solid 1px #E5E5E8;
+            background-color: white;
+            padding: 2.4rem 1.2rem 0.6rem;
+            display: block;
+            transition: border-color 0.2s;
+            &:focus { border-color: #181818; }
+          }
+          select
+          {
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            padding: 2.4rem 1.8rem .6rem 1.2rem;
+          }
+          .btn { display: none; }
+        }
+      }
+    }
+  }
+
+  /* Buttons */
+  .actions
+  {
+    border: none;
+    padding: 0;
+    margin: .8rem 0 0;
+    input[type="submit"], input[type="button"]
+    {
+      width: 100%;
+      color: white;
+      font-family: "Lota Grotesque", sans-serif;
+      font-weight: 600;
+      font-size: 1.4rem;
+      line-height: 1.5;
+      text-align: center;
+      text-transform: uppercase;
+      border-radius: 0;
+      border: none;
+      background-color: #C8102E;
+      padding: 1.6rem;
+      margin: 0;
+      display: block;
+      transition: background-color 0.2s;
+      &:hover { background-color: #9A0C23; }
+    }
+  }
 }

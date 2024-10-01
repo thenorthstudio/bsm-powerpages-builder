@@ -21,7 +21,7 @@ const page = useCurrentPage();
         <DialogConfigureModule />
         <DialogPageExporter />
         <!-- <ConfirmDialog /> -->
-         
+
         <Toast position="top-center" />
     </div>
 </template>

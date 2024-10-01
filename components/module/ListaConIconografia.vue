@@ -17,7 +17,7 @@ const prop = defineProps<{
             <div class="body | rich-text"
                 v-if="!isEmpty(m.props.text.value)"
                 v-html="m.props.text.value"
-            ></div>
+            />
             <div class="item-grid">
                 <div class="item-block" :key="i"
                     v-for="(c, i) in m.props.items.value" 
@@ -27,7 +27,7 @@ const prop = defineProps<{
                     </div>
                     <div class="R | rich-text-simple"
                         v-html="c.props.text.value"
-                    ></div>
+                    />
                 </div>
             </div>
         </div>
