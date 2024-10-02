@@ -20,7 +20,7 @@ export class MenuModule extends Module<MenuPropDic>
       esUrl: new ModulePropString('URL Castellano', 'https://landinges.bsm.upf.edu/pagina', 'plain'),
       caUrl: new ModulePropString('URL Catalán', 'https://landingca.bsm.upf.edu/pagina', 'plain'),
       enUrl: new ModulePropString('URL Inglés', 'https://landingen.bsm.upf.edu/pagina', 'plain'),
-      pageLinks: new ModulePropList(defaultItem, 'Subpáginas'),
+      pageLinks: new ModulePropList(defaultItem, 'Subpáginas', 0),
     };
     props.pageLinks.additionalInfo = 'Debe empezar por /';
     return props;

@@ -79,7 +79,7 @@ extends ModulePropBase<TItem[]>
   )
   {
     const items: TItem[] = [];
-    const length = minAmount || 1;
+    const length = minAmount === undefined ? 1 : minAmount;
     for (let i = 0; i < length; i++)
       {
       const item = { ...defaultItem };
