@@ -1,4 +1,4 @@
-.main-content .c-form .crmEntityFormView
+.c-form .crmEntityFormView
 {
   * { float: none !important; }
 
@@ -11,7 +11,9 @@
     fieldset
     {
       margin-bottom: 0;
-      tr:nth-child(1), tr:nth-child(2) { display: none; }
+      :not(*[data-gjs-type="tbody"]) {
+        >tr:nth-child(1), >tr:nth-child(2) { display: none; }
+      }
       td
       {
         vertical-align: bottom;
@@ -59,7 +61,7 @@
         &.picklist-cell select option[selected] { display: none; }
         &.checkbox-cell
         {
-          padding: 0 0 1.6rem;
+          padding: 0 0 1.6rem !important;
           label, input { cursor: pointer; }
           .table-info
           {
@@ -114,6 +116,7 @@
             display: block;
             transition: border-color 0.2s;
             &:focus { border-color: #181818; }
+            .c-formulario & { background-color: #F7F7F9; }
           }
           select
           {
@@ -151,6 +154,11 @@
       display: block;
       transition: background-color 0.2s;
       &:hover { background-color: #9A0C23; }
+      .c-formulario &
+      {
+        width: 20.9rem;
+        max-width: 100%;
+      }
     }
   }
 }

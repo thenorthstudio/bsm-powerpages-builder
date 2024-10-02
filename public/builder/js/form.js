@@ -54,31 +54,36 @@ window.addEventListener('load', () =>
         td.classList.toggle('is-error', !input.checked)
       );
     });
-    store.inputs.submit.addEventListener('click', () => setTimeout(() =>
+    store.inputs.submit.addEventListener('click', () =>
     {
-      // Summary:
-      store.errorList.querySelectorAll('li a').forEach(er =>
+      // Stop scroll to top:
+      requestAnimationFrame(() => window.scrollTo(0, window.scrollY));
+      setTimeout(() =>
       {
-        const ref = er.getAttribute('referencecontrolid');
-        if (ref && ref != '')
+        // Summary:
+        store.errorList.querySelectorAll('li a').forEach(er =>
         {
-          let label = root.querySelector('label[id="'+ref+'_label_fake"]');
-          if (!label) label = root.querySelector('label[id="'+ref+'_label"]');
-          if (label)
+          const ref = er.getAttribute('referencecontrolid');
+          if (ref && ref != '')
           {
-            const td = label.closest('td');
-            if (td) td.classList.add('is-error');
+            let label = root.querySelector('label[id="' + ref + '_label_fake"]');
+            if (!label) label = root.querySelector('label[id="' + ref + '_label"]');
+            if (label)
+            {
+              const td = label.closest('td');
+              if (td) td.classList.add('is-error');
+            }
           }
-        }
-      });
-      
-      // If form some reason checkboxes are not included in the summary:
-      store.inputs.checkbox.forEach(td =>
-      {
-        const input = td.querySelector('input[aria-required="true"]');
-        if (input) td.classList.toggle('is-error', !input.checked);
-      });
-    }, 100));
+        });
+          
+        // If form some reason checkboxes are not included in the summary:
+        store.inputs.checkbox.forEach(td =>
+        {
+          const input = td.querySelector('input[aria-required="true"]');
+          if (input) td.classList.toggle('is-error', !input.checked);
+        });
+      }, 100)
+    });
 
 
     // Datetime picker:

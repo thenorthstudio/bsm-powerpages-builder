@@ -330,6 +330,8 @@ export class ViewportBuilder
       const formFetch = await $fetch<string>('/builder/html/form-fetch.html');
       html = `${formFetch}\n\n${html}`;
     }
+    const analytics = await $fetch<string>('/builder/html/analytics.html');
+    html = `${analytics}\n\n${html}`;
 
     return html;
   }
@@ -366,6 +368,7 @@ export class ViewportBuilder
       'acordeon': 'acordeon',
       'grid-de-imagenes': 'grid-de-imagenes',
       'video': 'video',
+      'formulario': 'formulario',
       'thank-you': 'thank-you',
       'footer': 'footer',
     }

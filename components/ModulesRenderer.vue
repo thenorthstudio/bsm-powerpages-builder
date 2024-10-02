@@ -13,6 +13,7 @@ import
   ModuleAcordeon,
   ModuleGridDeImagenes,
   ModuleVideo,
+  ModuleFormulario,
   ModuleThankYou,
   ModuleFooter,
 }
@@ -33,6 +34,7 @@ const moduleComponents: { [key in ModuleType]: any } = {
   'grid-de-imagenes': ModuleGridDeImagenes,
   'video': ModuleVideo,
   'thank-you': ModuleThankYou,
+  'formulario': ModuleFormulario,
   'footer': ModuleFooter,
 }
 const page = useCurrentPage();

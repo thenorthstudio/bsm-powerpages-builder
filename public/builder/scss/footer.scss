@@ -13,6 +13,7 @@ footer.c-footer
   @media (max-width: 660px) {
     padding: 3.2rem 0;
   }
+  section.c-formulario + & { margin-top: 0; }
   >.inner
   {
     >.top

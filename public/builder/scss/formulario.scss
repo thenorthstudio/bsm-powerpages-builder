@@ -1,0 +1,69 @@
+section.c-formulario
+{
+  padding: 8rem 0;
+  background-color: #F7F7F9;
+  position: relative;
+  overflow: hidden;
+  &:last-child
+  {
+    margin-bottom: -12rem;
+    @media (max-width: 1024px) {
+      margin-bottom: -10rem;
+    }
+    @media (max-width: 760px) {
+      margin-bottom: -8rem;
+    }
+  }
+  >.icon
+  {
+    width: 379px;
+    height: 340px;
+    position: absolute;
+    top: -4px;
+    left: -36px;
+    @media (max-width: 959px) {
+      opacity: 0;
+    }
+  }
+  >.boxed
+  {
+    display: flex;
+    justify-content: flex-end;
+    >.inner
+    {
+      flex: 0 1 80.8rem;
+      background-color: white;
+      padding: 8rem 8rem 4rem;
+      position: relative;
+      overflow: hidden;
+      @media (max-width: 959px) {
+        padding-top: 15.4rem;
+      }
+      @media (max-width: 860px) {
+        padding: 14rem 1.6rem 4rem;
+      }
+      >.icon
+      {
+        width: 116px;
+        height: 106px;
+        position: absolute;
+        top: 24px;
+        left: -8px;
+        @media (min-width: 960px) {
+          opacity: 0;
+        }
+      }
+      >h2 { color: #181818; }
+      >.body
+      {
+        color: #6F7173;
+        margin: 2.4rem 0;
+      }
+    }
+  }
+  .icon>svg
+  {
+    width: 100%;
+    height: 100%;
+  }
+}

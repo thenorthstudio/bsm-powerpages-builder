@@ -30,8 +30,8 @@ export const useCurrentPage = () =>
   }
   const hasForm = () =>
   {
-    // const form = modules.value.find(m => m.type == 'form');
-    // if (form) return true;
+    const formulario = modules.value.find(m => m.type == 'formulario');
+    if (formulario) return true;
 
     const header = modules.value.find(m => m.type == 'header') as HeaderModule | undefined;
     if (header && header.props.hasForm.getOption().value == 'true') return true;

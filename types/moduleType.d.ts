@@ -26,6 +26,7 @@ type ModuleType = (
   'acordeon' |
   'grid-de-imagenes' |
   'video' |
+  'formulario' |
   'thank-you' |
   'footer'
 )
