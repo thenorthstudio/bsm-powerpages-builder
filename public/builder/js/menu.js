@@ -11,7 +11,7 @@ window.addEventListener('load', () =>
       close: root.querySelector('.menu-close'),
       onResize: () =>
       {
-        // console.log('menu.js onResize');
+        if (!store.links) return;
         const hasMenu = store.links.scrollWidth > store.links.clientWidth;
         root.classList.toggle('has-menu', hasMenu);
         store.langSelectors.forEach(selector =>

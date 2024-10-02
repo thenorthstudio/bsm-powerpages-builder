@@ -327,8 +327,8 @@ export class ViewportBuilder
     // Add needed fetchxml:
     if (useCurrentPage().hasForm())
     {
-      const paisFetch = await $fetch<string>('/builder/html/pais-fetch.html');
-      html = `${paisFetch}\n\n${html}`;
+      const formFetch = await $fetch<string>('/builder/html/form-fetch.html');
+      html = `${formFetch}\n\n${html}`;
     }
 
     return html;

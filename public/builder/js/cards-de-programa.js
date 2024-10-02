@@ -3,8 +3,33 @@ window.addEventListener('load', () =>
   const moduleName = '.c-cards-de-programa';
   document.querySelectorAll(moduleName).forEach((root, i) =>
   {
+    /* Cards to form */
+    const forms = document.querySelectorAll('.c-form');
+    if (forms.length)
+    {
+      const targetForm = forms[forms.length - 1];
+      const field = targetForm.querySelector('select[id="alg_programadeinteres"]');
+      if (field) root.querySelectorAll('button[data-programa-id]').forEach(b =>
+      {
+        const anchor = targetForm.closest('header, section');
+        const programaId = b.dataset.programaId;
+        b.addEventListener('click', () =>
+        {
+          field.value = programaId;
+          field.setAttribute('value', programaId);
+          field.dispatchEvent(new Event('change', { target: field }));
+          if (anchor) window.scrollTo({
+            top: anchor.offsetTop,
+            left: 0,
+            behavior: 'smooth',
+          });
+        });
+      });
+    }
+
+    /* Swiper */
     if (!root.classList.contains('has-swiper')) return;
-        
+
     const swiperRoot = root.querySelector('.swiper');
     if (swiperRoot.swiper) swiperRoot.swiper.destroy();
 

@@ -62,14 +62,21 @@ window.addEventListener('load', () =>
         const ref = er.getAttribute('referencecontrolid');
         if (ref && ref != '')
         {
-          let label = root.querySelector(`label[id="${ref}_label_fake"]`);
-          if (!label) label = root.querySelector(`label[id="${ref}_label"]`);
+          let label = root.querySelector('label[id="'+ref+'_label_fake"]');
+          if (!label) label = root.querySelector('label[id="'+ref+'_label"]');
           if (label)
           {
             const td = label.closest('td');
             if (td) td.classList.add('is-error');
           }
         }
+      });
+      
+      // If form some reason checkboxes are not included in the summary:
+      store.inputs.checkbox.forEach(td =>
+      {
+        const input = td.querySelector('input[aria-required="true"]');
+        if (input) td.classList.toggle('is-error', !input.checked);
       });
     }, 100));
 
@@ -84,8 +91,8 @@ window.addEventListener('load', () =>
         const dayRegex = (/^(\d\d)(\d)$/).exec(date);
         const monthRegex = (/^(\d\d)\/?(\d\d)(\d)$/).exec(date);
         
-        if (monthRegex) input.value = `${monthRegex[1]}/${monthRegex[2]}/${monthRegex[3]}`;
-        else if (dayRegex) input.value = `${dayRegex[1]}/${dayRegex[2]}`;
+        if (monthRegex) input.value = monthRegex[1]+'/'+monthRegex[2]+'/'+monthRegex[3];
+        else if (dayRegex) input.value = dayRegex[1]+'/'+dayRegex[2];
       });
       const btn = td.querySelector('.datetimepicker>span.btn');
       if (btn) btn.parentElement.removeChild(btn);
@@ -99,7 +106,7 @@ const paisProvinciaSetup = (root) =>
   const lang = document.querySelector('html').getAttribute('lang').slice(0, 2);
   const store = ['alg_pais', 'alg_provincia'].map(id =>
   {
-    const input = root.querySelector(`.lookup input[id="${id}"]`);
+    const input = root.querySelector('.lookup input[id="'+id+'"]');
     if (input)
     {
       const tr = input.closest('tr');
@@ -111,29 +118,6 @@ const paisProvinciaSetup = (root) =>
 
   const createFakeSelect = (storeField, values) =>
   {
-    /* 
-    <tr>
-      <td colspan="2" rowspan="1" class="clearfix cell picklist-cell">
-        <div class="table-info required">
-          <label for="alg_programadeinteres" id="alg_programadeinteres_label" class="field-label">
-            Programa de interés
-          </label>
-        </div>
-        <div class="control">
-          <select id="alg_programadeinteres" class="form-control form-select picklist">
-            <option selected="selected" value="">
-              Seleccionar
-            </option>
-            <option value="15201">
-              Máster Universitario en Finanzas y Banca
-            </option>
-            ...
-          </select>
-        </div>
-      </td>
-      <td class="cell zero-cell"></td>
-    </tr>
-    */
     const tr = document.createElement('tr');
     const td = document.createElement('td');
     td.colSpan = 2;
@@ -146,8 +130,8 @@ const paisProvinciaSetup = (root) =>
     tableInfo.classList.add('table-info', 'required');
 
     const label = document.createElement('label');
-    label.setAttribute('for', `${storeField.id}_fake`);
-    label.setAttribute('id', `${storeField.id}_label_fake`);
+    label.setAttribute('for', storeField.id+'_fake');
+    label.setAttribute('id', storeField.id+'_label_fake');
     label.classList.add('field-label');
     label.innerHTML = storeField.label.innerHTML;
     tableInfo.appendChild(label);
@@ -158,7 +142,7 @@ const paisProvinciaSetup = (root) =>
     td.appendChild(control);
 
     const select = document.createElement('select');
-    select.setAttribute('id', `${storeField.id}_fake`);
+    select.setAttribute('id', storeField.id+'_fake');
     select.classList.add('form-control', 'form-select', 'picklist');
     select.addEventListener('change', e =>
     {

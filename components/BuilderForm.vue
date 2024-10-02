@@ -1,7 +1,3 @@
-<script lang="ts" setup>
-</script>
-
-
 <template>
   <div class="c-form">
     <div class="prod-only">
