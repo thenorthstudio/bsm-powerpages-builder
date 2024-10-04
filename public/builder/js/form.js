@@ -183,7 +183,7 @@ const paisProvinciaSetup = (root) =>
   }
 
   // País:
-  if (store[0]) createFakeSelect(store[0], paisesFetch);
+  if (store[0]) createFakeSelect(store[0], window.paisesFetch);
 
   // Provincia:
   if (store[1])
@@ -207,7 +207,7 @@ const paisProvinciaSetup = (root) =>
             en: 'Select',
           }[lang];
           store[1].fake.select.appendChild(defaultOption);
-          provinciasFetch.filter(p => p.paisId == value).forEach(p =>
+          window.provinciasFetch.filter(p => p.paisId == value).forEach(p =>
           {
             const option = document.createElement('option');
             option.value = p.id;

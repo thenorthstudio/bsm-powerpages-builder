@@ -26,24 +26,24 @@
 
 
 <script>
-  const paisesFetch = [
+  window.paisesFetch = [
     {% for pais in paises.results.entities %}
     {
-      id: '{{ pais.new_paisid }}',
+      id: "{{ pais.new_paisid }}",
       name: {
-        es: '{{ pais.new_name }}',
-        ca: '{{ pais.new_nom }}',
-        en: '{{ pais.new_nombre }}',
+        es: "{{ pais.new_name }}",
+        ca: "{{ pais.new_nom }}",
+        en: "{{ pais.new_nombre }}",
       }
     },
     {% endfor %}
   ];
-  const provinciasFetch = [
+  window.provinciasFetch = [
     {% for provincia in provincias.results.entities %}
     {
       id: '{{ provincia.new_provinciaid }}',
       name: {
-        en: '{{ provincia.new_name }}',
+        en: "{{ provincia.new_name }}",
       },
       paisId: '{{ provincia['alg_pais.new_paisid'] }}',
     },
