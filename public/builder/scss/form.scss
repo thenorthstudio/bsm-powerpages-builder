@@ -58,7 +58,9 @@
         &.text.is-open, &.picklist-cell, &.datetime {
           .table-info { transform: translate(-0.2em, -0.7rem) scale(0.75); }
         }
-        &.picklist-cell select option[selected] { display: none; }
+        &.picklist-cell select {
+          option[value=""] { display: none; }
+        }
         &.checkbox-cell
         {
           padding: 0 0 1.6rem !important;
