@@ -154,7 +154,18 @@ const paisProvinciaSetup = (root) =>
       const value = e.target.value;
       storeField.input.value = value;
       storeField.input.setAttribute('value', value);
-      storeField.input.dispatchEvent(new Event('change', { target: storeField.input }));
+
+      const nameInput = root.querySelector(`#${storeField.id}_name`);
+      if (nameInput)
+      {
+        console.log('locating label for ', value);
+        const option = values.find(v => v.id == value);
+        console.log('option', option);
+
+        const name = option?.name[lang] || option?.name.es || option?.name.en || option?.name.ca;
+        nameInput.value = name;
+        nameInput.setAttribute('value', name);
+      }
     });
     control.appendChild(select);
 
@@ -172,7 +183,7 @@ const paisProvinciaSetup = (root) =>
     {
       const option = document.createElement('option');
       option.value = value.id;
-      option.innerHTML = value.name[lang] || value.name.en;
+      option.innerHTML = value.name[lang] || value.name.es || value.name.en || value.name.ca;
       select.appendChild(option);
     });
     
@@ -228,12 +239,11 @@ const paisProvinciaSetup = (root) =>
           {
             const option = document.createElement('option');
             option.value = p.id;
-            option.innerHTML = p.name[lang] || p.name.en;
+            option.innerHTML = p.name[lang] || p.name.es || p.name.en || p.name.ca;
             store[1].fake.select.appendChild(option);
           });
           store[1].fake.select.value = '';
 
-          store[1].fake.select.dispatchEvent(new Event('change', { target: store[1].fake.select }));
           if (store[1].fake.select.children.length) store[1].fake.tr.style.display = '';
           else store[1].fake.tr.style.display = 'none';
         })
