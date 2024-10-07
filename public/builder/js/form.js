@@ -183,12 +183,29 @@ const paisProvinciaSetup = (root) =>
   }
 
   // País:
-  if (store[0]) createFakeSelect(store[0], window.paisesFetch);
+  if (store[0])
+  {
+    createFakeSelect(store[0], window.paisesFetch);
+    const entityInput = root.querySelector('#alg_pais_entityname');
+    if (entityInput)
+    {
+      const value = 'new_pais';
+      entityInput.setAttribute('value', value);
+      entityInput.value = value;
+    }
+  }
 
   // Provincia:
   if (store[1])
   {
     createFakeSelect(store[1], []);
+    const entityInput = root.querySelector('#alg_provincia_entityname');
+    if (entityInput)
+    {
+      const value = 'new_provincia';
+      entityInput.setAttribute('value', value);
+      entityInput.value = value;
+    }
     store[0].fake.select.addEventListener('change', e =>
     {
       const value = e.target.value;
