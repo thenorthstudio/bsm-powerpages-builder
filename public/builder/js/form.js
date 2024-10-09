@@ -155,7 +155,7 @@ const paisProvinciaSetup = (root) =>
       storeField.input.value = value;
       storeField.input.setAttribute('value', value);
 
-      const nameInput = root.querySelector(`#${storeField.id}_name`);
+      const nameInput = root.querySelector(storeField.id+'_name');
       if (nameInput)
       {
         console.log('locating label for ', value);
