@@ -215,18 +215,22 @@ section.c-cards-genericas
   }
   &.has-1-item, &.has-2-items
   {
+    >.inner .swiper>.cards-grid
+    {
+      justify-content: flex-start;
+    }
     >.inner>.R
     {
       @media (max-width: 760px) {
         >.swiper>.cards-grid {
-          justify-content: center;
+          justify-content: flex-start;
         }
       }
     }
   }
   &.has-2-items>.inner .swiper>.cards-grid
   {
-    justify-content: space-around;
+    justify-content: flex-start;
     flex-wrap: wrap;
     gap: 2.4rem;
     @media (max-width: 420px) {
@@ -237,7 +241,7 @@ section.c-cards-genericas
   {
     @media (min-width: 768px)
     {
-      justify-content: space-between;
+      justify-content: flex-start;
       >.card-block
       {
         flex: 0 0 28%;

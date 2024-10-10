@@ -34,7 +34,7 @@ const videoId = computed(() => getYoutubeId(prop.m.props.url.value));
                     </svg>
                 </div>
             </button>
-            <div class="foot-text | t-sm" v-if="!isEmpty(m.props.foot.value)">
+            <div class="foot-text | t-xs" v-if="!isEmpty(m.props.foot.value)">
                 {{ m.props.foot.value }}
             </div>
         </div>

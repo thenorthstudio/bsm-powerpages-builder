@@ -27,7 +27,7 @@ onMounted(updateLangURLs);
       <a class="logo-block" :href="page.langUrls.value[page.lang.value]" >
         <IconLogo />
       </a>
-      <div class="flex-space" />
+      
       <div class="menu-wrap">
         <div class="submenu">
           <div class="links" v-if="m.props.pageLinks.value.length">

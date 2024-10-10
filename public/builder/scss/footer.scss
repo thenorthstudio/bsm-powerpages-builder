@@ -55,12 +55,14 @@ footer.c-footer
           margin-bottom: 2.4rem;
           display: flex;
           gap: 2rem;
+          justify-content: flex-end;
           @media (max-width: 660px) {
             border: solid 1px #6F7173;
             border-left: 0;
             border-right: 0;
             padding: 2.4rem 0;
             margin: 2.4rem 0;
+            justify-content: flex-start;
           }
           >a
           {
@@ -71,7 +73,7 @@ footer.c-footer
         }
         >.info
         {
-          max-width: 17.5rem;
+          max-width: 27.5rem;
           text-align: right;
           margin-left: auto;
           @media (max-width: 660px) {

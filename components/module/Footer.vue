@@ -84,8 +84,8 @@ const t = (key: string) => translations[lang.value][key];
             </a>
           </div>
           <div class="info">
-            Carrer de Balmes, 132 
-            08008, Barcelona
+            Carrer de Balmes, 132<br /> 
+            08008, Barcelona<br />
             (+34) 935 421 800
           </div>
         </div>

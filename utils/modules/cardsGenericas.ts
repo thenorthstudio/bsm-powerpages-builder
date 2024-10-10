@@ -30,7 +30,7 @@ export class CardsGenericasSubModule extends SubModule<CardsGenericasSubPropDic>
             ),
             title: new ModulePropString('Titular', 'Lorem ipsum', 'plain'),
             subtitle: new ModulePropString('Subtitular', SHORT_LOREM, 'plain-lines'),
-            text: new ModulePropString('Texto', SHORT_LOREM, 'plain-lines'),
+            text: new ModulePropString('Texto', LONG_LOREM, 'rich'),
             bottomText: new ModulePropString('Pie de card', 'PIE', 'plain', 1),
             url: new ModulePropString('Enlace de la card', 'https://...', 'plain', 1),
         };

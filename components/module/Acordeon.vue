@@ -78,8 +78,10 @@ const hasTabs = computed(() => viewGroups.value.length > 1);
               </h3>
               <div class="handle">
                 <div class="inner">
-                  <div class="line V" />
-                  <div class="line H" />
+                  <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M8 2V14" stroke="currentColor" stroke-width="1.5" class="line V" />
+                    <path d="M2 8H14" stroke="currentColor" stroke-width="1.5" class="line H" />
+                  </svg>
                 </div>
               </div>
             </button>

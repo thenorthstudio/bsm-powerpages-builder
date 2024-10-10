@@ -98,12 +98,17 @@ header.c-header
     {
       font-size: 6rem;
       line-height: 7rem;
-      &+.body { margin-top: 4.8rem; }
+      &+.body { 
+        margin-top: 4.8rem; 
+      }
     }
     .body
     {
       font-size: 3.4rem;
       line-height: 4rem;
+      p+p{
+        margin-top:0;
+      }
     }
   }
   @media (max-width: 1024px)
