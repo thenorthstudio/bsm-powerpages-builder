@@ -143,6 +143,9 @@ html
     >.swiper-wrapper
     {
       height: auto;
+      &[data-gjs-type="default"]{
+        overflow: auto;
+      }
       >.swiper-slide
       {
         height: auto;
