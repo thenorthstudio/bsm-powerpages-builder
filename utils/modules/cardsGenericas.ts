@@ -51,6 +51,7 @@ type TOption = {
     label: string,
     value: ('people' | 'other')
 }
+
 type CardsGenericasPropDic = {
     title: InstanceType<typeof ModulePropString>;
     text: InstanceType<typeof ModulePropString>;
