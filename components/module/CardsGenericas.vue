@@ -148,7 +148,7 @@ const sectionClass = computed(() =>
                       v-html="c.subtitle.value"
                       />
                       <div v-if="!isEmpty(c.text.value)"
-                      :class="`text | ${c.text.class}`"
+                      :class="`text | rich-text-simple ${c.text.class}`"
                       v-html="c.text.value"
                       />
                   </component>
