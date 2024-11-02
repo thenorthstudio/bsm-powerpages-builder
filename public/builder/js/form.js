@@ -1,97 +1,3 @@
-function getUTMData() {
-  var referrer = document.referrer;
-  var urlParams = new URLSearchParams(window.location.search);
-  var source = '';
-  var medium = '';
-  var campaign = '';
-  var term = '';
-  var content = '';
-
-   // Verificar si es tráfico de campaña
-  if (urlParams.has('utm_source')) {
-    source = urlParams.get('utm_source');
-    medium = urlParams.get('utm_medium') || 'No definido';
-    campaign = urlParams.get('utm_campaign') || 'No definido';
-    term = urlParams.get('utm_term') || 'No definido';
-    content = urlParams.get('utm_content') || 'No definido';
-
-    return {
-      source: source,
-      medium: medium,
-      campaign: campaign,
-      term: term,
-      content: content
-    };
-  }
-
-  // Verificar si es tráfico directo
-  if (!referrer) {
-    return {
-      source: '(direct)',
-      medium: '(none)',
-      campaign: '(none)',
-      term: '(none)',
-      content: '(none)'
-    };
-  }
-
-  // Verificar si el referrer proviene de un motor de búsqueda
-  var searchEngines = [
-    { name: 'Google', url: 'google.com' },
-    { name: 'Bing', url: 'bing.com' },
-    { name: 'Yahoo', url: 'yahoo.com' },
-    { name: 'DuckDuckGo', url: 'duckduckgo.com' },
-    { name: 'Baidu', url: 'baidu.com' },
-    { name: 'Yandex', url: 'yandex.com' }
-  ];
-
-  for (var i = 0; i < searchEngines.length; i++) {
-    if (referrer.includes(searchEngines[i].url)) {
-      return {
-        source: searchEngines[i].name,
-        medium: 'organic_search',
-        campaign: '(none)',
-        term: '(none)',
-        content: '(none)'
-      };
-    }
-  }
-
-  // Verificar si es tráfico de referencia
-  var referrerDomain = new URL(referrer).hostname;
-  if (referrerDomain) {
-    // Verificar si es tráfico de redes sociales
-    var socialNetworks = ['facebook.com', 'twitter.com', 'instagram.com', 'linkedin.com', 'pinterest.com'];
-    for (var j = 0; j < socialNetworks.length; j++) {
-      if (referrer.includes(socialNetworks[j])) {
-        return {
-          source: socialNetworks[j],
-          medium: 'organic_social',
-          campaign: '(none)',
-          term: '(none)',
-          content: '(none)'
-        };
-      }
-    }
-    return {
-      source: referrerDomain,
-      medium: 'referral',
-      campaign: '(none)',
-      term: '(none)',
-      content: '(none)'
-    };
-  }
-
-  // Si no se identifica la fuente, retornar 'Otro'
-  return {
-    source: 'Otro',
-    medium: '(none)',
-    campaign: '(none)',
-    term: '(none)',
-    content: '(none)'
-  };
-}
-
 window.addEventListener('load', () =>
 {
   if (document.querySelector('main.in-builder'))
@@ -110,7 +16,6 @@ window.addEventListener('load', () =>
         datetime: root.querySelectorAll('td.datetime'),
         checkbox: root.querySelectorAll('td.checkbox-cell'),
         submit: root.querySelector('.actions input[type="button"]'),
-
       }
     };
 
@@ -126,13 +31,17 @@ window.addEventListener('load', () =>
         // Fill utm fields
         if (control.id === 'alg_utm_campaign') {
           control.value = utmData.campaign;
-        } else if (control.id === 'alg_utm_source') {
+        }
+        else if (control.id === 'alg_utm_source') {
           control.value = utmData.source;
-        } else if (control.id === 'alg_utm_medium') {
+        }
+        else if (control.id === 'alg_utm_medium') {
           control.value = utmData.medium;
-        } else if (control.id === 'alg_utm_content') {
+        }
+        else if (control.id === 'alg_utm_content') {
           control.value = utmData.content;
-        } else if (control.id === 'alg_utm_term') {
+        }
+        else if (control.id === 'alg_utm_term') {
           control.value = utmData.term;
         }
         if (
@@ -140,9 +49,10 @@ window.addEventListener('load', () =>
           control.id === 'alg_utm_source' || 
           control.id === 'alg_utm_medium' || 
           control.id === 'alg_utm_content' ||
-          control.id === 'alg_utm_term') {
-            td.classList.add('is-open');
-            td.style.display = 'none';
+          control.id === 'alg_utm_term'
+        ) {
+          td.classList.add('is-open');
+          td.style.display = 'none';
         }
 
         control.addEventListener('focus', () =>
@@ -370,4 +280,98 @@ const paisProvinciaSetup = (root) =>
       }
     });
   }
+}
+
+function getUTMData() {
+  var referrer = document.referrer;
+  var urlParams = new URLSearchParams(window.location.search);
+  var source = '';
+  var medium = '';
+  var campaign = '';
+  var term = '';
+  var content = '';
+
+   // Verificar si es tráfico de campaña
+  if (urlParams.has('utm_source')) {
+    source = urlParams.get('utm_source');
+    medium = urlParams.get('utm_medium') || 'No definido';
+    campaign = urlParams.get('utm_campaign') || 'No definido';
+    term = urlParams.get('utm_term') || 'No definido';
+    content = urlParams.get('utm_content') || 'No definido';
+
+    return {
+      source: source,
+      medium: medium,
+      campaign: campaign,
+      term: term,
+      content: content
+    };
+  }
+
+  // Verificar si es tráfico directo
+  if (!referrer) {
+    return {
+      source: '(direct)',
+      medium: '(none)',
+      campaign: '(none)',
+      term: '(none)',
+      content: '(none)'
+    };
+  }
+
+  // Verificar si el referrer proviene de un motor de búsqueda
+  var searchEngines = [
+    { name: 'Google', url: 'google.com' },
+    { name: 'Bing', url: 'bing.com' },
+    { name: 'Yahoo', url: 'yahoo.com' },
+    { name: 'DuckDuckGo', url: 'duckduckgo.com' },
+    { name: 'Baidu', url: 'baidu.com' },
+    { name: 'Yandex', url: 'yandex.com' }
+  ];
+
+  for (var i = 0; i < searchEngines.length; i++) {
+    if (referrer.includes(searchEngines[i].url)) {
+      return {
+        source: searchEngines[i].name,
+        medium: 'organic_search',
+        campaign: '(none)',
+        term: '(none)',
+        content: '(none)'
+      };
+    }
+  }
+
+  // Verificar si es tráfico de referencia
+  var referrerDomain = new URL(referrer).hostname;
+  if (referrerDomain) {
+    // Verificar si es tráfico de redes sociales
+    var socialNetworks = ['facebook.com', 'twitter.com', 'instagram.com', 'linkedin.com', 'pinterest.com'];
+    for (var j = 0; j < socialNetworks.length; j++) {
+      if (referrer.includes(socialNetworks[j])) {
+        return {
+          source: socialNetworks[j],
+          medium: 'organic_social',
+          campaign: '(none)',
+          term: '(none)',
+          content: '(none)'
+        };
+      }
+    }
+    return {
+      source: referrerDomain,
+      medium: 'referral',
+      campaign: '(none)',
+      term: '(none)',
+      content: '(none)'
+    };
+  }
+
+  // Si no se identifica la fuente, retornar 'Otro'
+  return {
+    source: 'Otro',
+    medium: '(none)',
+    campaign: '(none)',
+    term: '(none)',
+    content: '(none)'
+  };
 }
