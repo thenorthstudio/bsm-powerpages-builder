@@ -16,7 +16,7 @@ export class FormularioModule extends Module<FormularioModulePropDic>
   {
     const props = {
       title: new ModulePropString('Título', 'Formulario'),
-      text: new ModulePropString('Texto', SHORT_LOREM, 'plain-lines'),
+      text: new ModulePropString('Texto', SHORT_LOREM, 'rich'),
     }
     return props;
   }

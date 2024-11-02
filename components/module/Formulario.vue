@@ -21,9 +21,7 @@ const prop = defineProps<{
         <h2 class="t-title" v-if="!isEmpty(m.props.title.value)">
           {{ m.props.title.value }}
         </h2>
-        <div class="body">
-          {{ m.props.text.value }}
-        </div>
+        <div class="body | rich-text-simple" v-html="m.props.text.value" />
         <BuilderForm />
       </div>
     </div>
