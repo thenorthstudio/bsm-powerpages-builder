@@ -7,6 +7,17 @@ const prop = defineProps<{
 }>();
 const page = useCurrentPage();
 
+const hasFormulario = computed(() => page.modules.value.some(m => m.type == 'formulario'));
+const buttonText = computed(() =>
+{
+  const text = {
+    es: 'SOLICITAR INFORMACIÓN   →',
+    ca: 'SOL·LICITAR INFORMACIÓ   →',
+    en: 'REQUEST INFORMATION   →'
+  }
+  return text[page.lang.value];
+});
+
 
 const updateLangURLs = () =>
 {
@@ -27,8 +38,8 @@ onMounted(updateLangURLs);
       <a class="logo-block" :href="page.langUrls.value[page.lang.value]" >
         <IconLogo />
       </a>
-      
-      <div class="menu-wrap">
+
+      <div class="menu-wrap" :class="{ 'permanent': i == 2 }" v-for="i in 2" :key="i">
         <div class="submenu">
           <div class="links" v-if="m.props.pageLinks.value.length">
             <a v-for="link in m.props.pageLinks.value" :href="link.url">
@@ -43,9 +54,19 @@ onMounted(updateLangURLs);
           </button>
         </div>
       </div>
+
+      <div class="form-button-div" v-if="hasFormulario">
+        <div class="inner">
+          <button class="form-button">
+            {{ buttonText }}
+          </button>
+        </div>
+      </div>
+
       <button class="menu-button">
         <IconBurger />
       </button>
+
     </div>
   </nav>
 </template>
