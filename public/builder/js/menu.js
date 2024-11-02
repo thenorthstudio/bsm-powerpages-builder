@@ -29,7 +29,7 @@ window.addEventListener('load', () =>
         {
           let hasMenu = root.classList.contains('has-menu');
           const measureClass = hasMenu ? '.permanent' : ':not(.permanent)';
-          const measure = root.querySelector(`.menu-wrap${measureClass}`);
+          const measure = root.querySelector('.menu-wrap' + measureClass);
           hasMenu = measure.scrollWidth > measure.clientWidth;
           root.classList.toggle('has-menu', hasMenu);
           store.langSelectors.forEach(selector =>
