@@ -5,6 +5,7 @@
     <attribute name="new_nombre"></attribute>
     <attribute name="new_nom"></attribute>
     <attribute name="new_name"></attribute>
+    <attribute name="prefijo"></attribute>
     <order attribute="new_name" descending="false"></order>
   </entity>
 </fetch>
@@ -34,7 +35,8 @@
         es: "{{ pais.new_name }}",
         ca: "{{ pais.new_nom }}",
         en: "{{ pais.new_nombre }}",
-      }
+      },
+      prefijo: "{{ pais.prefijo }}"
     },
     {% endfor %}
   ];
