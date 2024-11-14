@@ -29,23 +29,25 @@ export class CardsDeProgramaSubModule extends SubModule<CardsDeProgramaSubPropDi
         { label: 'Link', value: 'link' },
       ], 0, 1),
       ctaUrl: new ModulePropString('CTA Link', 'https://...', 'plain'),
-      programaId: new ModulePropString('ID de programa', '12345', 'plain'),
+      programaId: new ModulePropString('ID de programa (en CRM)', '12345', 'plain'),
       details: new ModulePropList({
         title: 'Título',
         text: 'Texto'
       }, 'Lista de detalles'),
     };
     props.details.additionalInfo = 'Icono de 25·25px';
-    props.programaId.additionalInfo = `
-      Si existe un formulario en la página, hacer click en el CTA
-      llevará al usuario a este con el campo de Programa rellenado.
-    `.replace(/\n/g, '');
     return props;
   }
   override onAnyChange()
   {
     const ctaType = this.props.ctaType.getOption().value;
-    this.props.ctaUrl.isHiiden = ctaType == 'programa';
+    const isPrograma = ctaType == 'programa';
+    this.props.ctaUrl.isHiiden = isPrograma;
+    if (isPrograma) this.props.ctaType.additionalInfo = `
+      Si existe un formulario en la página, llevará al
+      usuario a este con el campo de Programa rellenado.
+    `.replace(/\n/g, '');
+    else this.props.ctaType.additionalInfo = '';
   }
   getDescriptor()
   {
