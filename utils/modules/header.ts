@@ -32,7 +32,7 @@ export class HeaderModule extends Module<HeaderModulePropDic>
         'plain', 1
       ),
     }
-    const hint = 'Este se debe añadir y configurar en Dynamics';
+    const hint = 'Este se debe añadir y configurar en Dynamics. 1 formulario máx. por página';
     props.hasForm.additionalInfo = hint;
     return props;
   }
