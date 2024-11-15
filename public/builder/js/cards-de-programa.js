@@ -49,4 +49,28 @@ window.addEventListener('load', () =>
       }
     })
   })
+
+  // Filter form program options:
+  const ids = [];
+  document.querySelectorAll(moduleName).forEach((root, i) =>
+  {
+    root.querySelectorAll('button[data-programa-id]').forEach(b =>
+    {
+      if (!ids.includes(b.dataset.programaId))
+        ids.push(b.dataset.programaId);
+    });
+  });
+  const forms = document.querySelectorAll('.c-form');
+  if (forms.length)
+  {
+    const targetForm = forms[forms.length - 1];
+    const options = targetForm.querySelectorAll(
+      'select[id="alg_programadeinteres"] option:not([selected])'
+    );
+    options.forEach(o =>
+    {
+      if (!ids.includes(o.value))
+        o.style.display = 'none';
+    });
+  }
 })
