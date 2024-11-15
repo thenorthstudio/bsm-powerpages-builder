@@ -25,7 +25,8 @@ window.addEventListener('load', () =>
       },
       onResize: () =>
       {
-        setTimeout(() =>
+        root.classList.toggle('has-menu', false);
+        requestAnimationFrame(() =>
         {
           const measure = root.querySelector('.flex-space');
           const hasMenu = measure.scrollWidth < 20;
@@ -39,7 +40,7 @@ window.addEventListener('load', () =>
               floater.classList.toggle('from-bottom', hasMenu);
             }
           });
-        }, 2);
+        })
       },
       openMenu: () =>
       {
