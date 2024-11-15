@@ -19,16 +19,15 @@ PHS2VK "height="0" width="0" style="display:none;visibility:hidden">
 <script>
 window.addEventListener('load', () =>
 {
-  const isTYP = document.querySelector('section.c-thank-you');
   const pageView = {
     event: 'virtual_pageview',
     page_info: {
       page_location: window.location.href,
       page_language: document.querySelector('html').getAttribute('lang').substring(0, 2),
       page_status: 'ok200',
-      // page_referrer: 'https://www.bsm.upf.edu/es/executive-mba-emba',
+      page_referrer: document.referrer,
       // page_destination: '/es/',
-      page_template: isTYP ? 'pagina confirmacion' : 'product',
+      page_template: 'landing',
       // page_template_referrer: 'home',
     },
     // program_info: {
@@ -43,6 +42,7 @@ window.addEventListener('load', () =>
   console.log(pageView);
   dataLayer.push(pageView);
 
+  const isTYP = document.querySelector('section.c-thank-you');
   if (isTYP)
   {
     const formConfirmation = {
