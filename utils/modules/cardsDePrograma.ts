@@ -9,7 +9,7 @@ type CardsDeProgramaSubPropDic = {
   ctaUrl: InstanceType<typeof ModulePropString>,
   programaId: InstanceType<typeof ModulePropString>,
   // programaType: InstanceType<typeof ModulePropString>,
-  // programaArea: InstanceType<typeof ModulePropString>,
+  programaArea: InstanceType<typeof ModulePropString>,
   // programaModality: InstanceType<typeof ModulePropString>,
   details: InstanceType<typeof ModulePropList<{
     title: string,
@@ -30,6 +30,7 @@ export class CardsDeProgramaSubModule extends SubModule<CardsDeProgramaSubPropDi
       ], 0, 1),
       ctaUrl: new ModulePropString('CTA Link', 'https://...', 'plain'),
       programaId: new ModulePropString('ID de programa (en CRM)', '12345', 'plain'),
+      programaArea: new ModulePropString('Área de programa (en CRM)', '30', 'plain'),
       details: new ModulePropList({
         title: 'Título',
         text: 'Texto'
@@ -48,6 +49,8 @@ export class CardsDeProgramaSubModule extends SubModule<CardsDeProgramaSubPropDi
       usuario a este con el campo de Programa rellenado.
     `.replace(/\n/g, '');
     else this.props.ctaType.additionalInfo = '';
+    this.props.programaId.additionalInfo = 'Para Analytics y para vincular a formulario';
+    this.props.programaArea.additionalInfo = 'Para Analytics';
   }
   getDescriptor()
   {

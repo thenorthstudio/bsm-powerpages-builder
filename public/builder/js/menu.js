@@ -13,6 +13,24 @@ window.addEventListener('load', () =>
       {
         const form = document.querySelector('.c-module.c-formulario');
         if (form) form.scrollIntoView(true);
+        const event = {
+          event: 'contact_form',
+          contact_form_info: {
+            contact_form_name: 'solicita información',
+            // contact_form_id: '1234',
+            contact_form_location: 'cta sticky',
+            contact_form_step: 'pagina formulario',
+            value: 1,
+            ecommerce_timestamp_in_utc: new Date().toISOString(),
+          },
+          // program_info: {
+          //   program_id: '30',
+          //   program_name: '015000',
+          //   program_area: 'executive MBA',
+          // },
+        };
+        console.log(event);
+        dataLayer.push(event);
       },
       onScroll: () =>
       {

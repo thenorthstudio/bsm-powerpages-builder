@@ -23,6 +23,25 @@ window.addEventListener('load', () =>
             left: 0,
             behavior: 'smooth',
           });
+
+          const event = {
+            event: 'contact_form',
+            contact_form_info: {
+              contact_form_name: 'solicita información',
+              // contact_form_id: '1234',
+              contact_form_location: 'cta card programa',
+              contact_form_step: 'pagina formulario',
+              value: 1,
+              ecommerce_timestamp_in_utc: new Date().toISOString(),
+            },
+            program_info: {
+              program_id: programaId,
+              program_name: b.dataset.programaTitle,
+              program_area: b.dataset.programaArea,
+            },
+          };
+          console.log(event);
+          dataLayer.push(event);
         });
       });
     }

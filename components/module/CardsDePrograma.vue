@@ -79,8 +79,10 @@ const classList = computed(() =>
                   >
                     {{ p.props.ctaText.value }}
                   </a>
-                  <button :data-programa-id="p.props.programaId.value"
-                  v-if="p.props.ctaType.getOption().value == 'programa'"
+                  <button v-if="p.props.ctaType.getOption().value == 'programa'"
+                  :data-programa-title="p.props.title.value"
+                  :data-programa-id="p.props.programaId.value"
+                  :data-programa-area="p.props.programaArea.value"
                   >
                     {{ p.props.ctaText.value }}
                   </button>
