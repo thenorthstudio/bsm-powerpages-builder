@@ -10,7 +10,7 @@ export class FormularioModule extends Module<FormularioModulePropDic>
   constructor()
   {
     super('formulario');
-    this.additionalInfo = 'Este se debe añadir y configurar en Dynamics. 1 formulario máx. por página';
+    this.additionalInfo = 'Configurar en Dynamics (Máximo de 1 formulario por página)';
   }
   createProps()
   {
