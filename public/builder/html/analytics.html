@@ -17,51 +17,62 @@ PHS2VK "height="0" width="0" style="display:none;visibility:hidden">
 
 <!-- Analytics implementation -->
 <script>
-const isTYP = !!document.querySelector('section.c-thank-you');
-const pageView = {
-  event: 'virtual_pageview',
-  page_info: {
-    page_location: window.location.href,
-    page_language: document.querySelector('html').getAttribute('lang').substring(0, 2),
-    page_status: 'ok200',
-    // page_referrer: 'https://www.bsm.upf.edu/es/executive-mba-emba',
-    // page_destination: '/es/',
-    page_template: isTYP ? 'pagina confirmacion' : 'product',
-    // page_template_referrer: 'home',
-  },
-  // program_info: {
-  //   program_id: 015050,
-  //   program_name: 'Executive MBA',
-  //   program_type: 'mba',
-  //   program_area: '30',
-  //   program_modality: 'Presencial',
-  //   program_language: 'Castellano',
-  // },
-};
-console.log(pageView);
-dataLayer.push(pageView);
-
-if (isTYP)
+window.addEventListener('load', () =>
 {
-  const formConfirmation = {
-    event: 'contact_form_confirmation',
-    contact_form_info: {
-      contact_form_name: 'solicita informacion',
-      // contact_form_id: '1234',
-      contact_form_location: 'cta sticky',
-      contact_form_step: 'pagina confirmacion',
-      value: 1,
-      // conversion_id: 'OPP-205922',
-      ecommerce_timestamp_in_utc: new Date().toISOString(),
-      // contact_form_interest_point: 'Executive MBA',
+  const isTYP = document.querySelector('section.c-thank-you');
+  const pageView = {
+    event: 'virtual_pageview',
+    page_info: {
+      page_location: window.location.href,
+      page_language: document.querySelector('html').getAttribute('lang').substring(0, 2),
+      page_status: 'ok200',
+      // page_referrer: 'https://www.bsm.upf.edu/es/executive-mba-emba',
+      // page_destination: '/es/',
+      page_template: isTYP ? 'pagina confirmacion' : 'product',
+      // page_template_referrer: 'home',
     },
     // program_info: {
-    //   program_id: '015000',
+    //   program_id: 015050,
     //   program_name: 'Executive MBA',
+    //   program_type: 'mba',
     //   program_area: '30',
+    //   program_modality: 'Presencial',
+    //   program_language: 'Castellano',
     // },
   };
-  console.log(formConfirmation);
-  dataLayer.push(formConfirmation);
-}
+  console.log(pageView);
+  dataLayer.push(pageView);
+
+  if (isTYP)
+  {
+    const formConfirmation = {
+      event: 'contact_form_confirmation',
+      contact_form_info: {
+        contact_form_name: 'solicita informacion',
+        // contact_form_id: '1234',
+        contact_form_location: 'cta sticky',
+        contact_form_step: 'pagina confirmacion',
+        value: 1,
+        // conversion_id: 'OPP-205922',
+        ecommerce_timestamp_in_utc: new Date().toISOString(),
+        // contact_form_interest_point: 'Executive MBA',
+      },
+      // program_info: {
+      //   program_id: '015000',
+      //   program_name: 'Executive MBA',
+      //   program_area: '30',
+      // },
+    };
+    const programInfo = sessionStorage.getItem('program_info');
+    if (programInfo)
+    {
+      const info = JSON.parse(programInfo);
+      formConfirmation.program_info = info;
+      formConfirmation.contact_form_info.contact_form_interest_point = info.program_name;
+    }
+    console.log(formConfirmation);
+    dataLayer.push(formConfirmation);
+    sessionStorage.removeItem('program_info');
+  }
+})
 </script>

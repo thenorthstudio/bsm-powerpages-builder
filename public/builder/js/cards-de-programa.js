@@ -42,6 +42,21 @@ window.addEventListener('load', () =>
           };
           console.log(event);
           dataLayer.push(event);
+          sessionStorage.setItem('program_info', JSON.stringify(event.program_info));
+        });
+
+        // Also save program info in session storage when field changes:
+        field.addEventListener('change', (e) =>
+        {
+          const value = e.target.value;
+          const selected = document.querySelector(
+            'button[data-programa-id="' + value + '"]'
+          );
+          if (selected) sessionStorage.setItem('program_info', JSON.stringify({
+            program_id: value,
+            program_name: selected.dataset.programaTitle,
+            program_area: selected.dataset.programaArea,
+          }));
         });
       });
     }
