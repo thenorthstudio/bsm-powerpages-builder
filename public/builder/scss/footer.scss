@@ -16,8 +16,12 @@ footer.c-footer
   section.c-formulario + & { margin-top: 0; }
   >.inner
   {
-    font-size: 1.4rem;
-    line-height: 1.71;
+    font-size: 1.6rem;
+    line-height: 1.5;
+    @media (max-width: 768px) {
+      font-size: 1.4rem;
+      line-height: 1.4;
+    }
     >.top
     {
       display: flex;
