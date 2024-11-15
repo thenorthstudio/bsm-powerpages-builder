@@ -39,7 +39,9 @@ onMounted(updateLangURLs);
         <IconLogo />
       </a>
 
-      <div class="menu-wrap" :class="{ 'permanent': i == 2 }" v-for="i in 2" :key="i">
+      <div class="flex-space" />
+
+      <div class="menu-wrap">
         <div class="submenu">
           <div class="links" v-if="m.props.pageLinks.value.length">
             <a v-for="link in m.props.pageLinks.value" :href="link.url">

@@ -25,12 +25,10 @@ window.addEventListener('load', () =>
       },
       onResize: () =>
       {
-        requestAnimationFrame(() =>
+        setTimeout(() =>
         {
-          let hasMenu = root.classList.contains('has-menu');
-          const measureClass = hasMenu ? '.permanent' : ':not(.permanent)';
-          const measure = root.querySelector('.menu-wrap' + measureClass);
-          hasMenu = measure.scrollWidth > measure.clientWidth;
+          const measure = root.querySelector('.flex-space');
+          const hasMenu = measure.scrollWidth < 20;
           root.classList.toggle('has-menu', hasMenu);
           store.langSelectors.forEach(selector =>
           {
@@ -41,7 +39,7 @@ window.addEventListener('load', () =>
               floater.classList.toggle('from-bottom', hasMenu);
             }
           });
-        })
+        }, 2);
       },
       openMenu: () =>
       {
