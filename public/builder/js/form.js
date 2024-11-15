@@ -115,7 +115,6 @@ window.addEventListener('load', () =>
       }, 100)
     });
 
-
     // Datetime picker:
     store.inputs.datetime.forEach(td =>
     {
@@ -234,6 +233,21 @@ const paisProvinciaSetup = (root) =>
       entityInput.setAttribute('value', value);
       entityInput.value = value;
     }
+
+    // Prefijo:
+    store[0].fake.select.addEventListener('change', e =>
+    {
+      const value = e.target.value;
+      if (value && value != '')
+      {
+        const field = document.querySelector('#alg_prefijo');
+        if (field)
+        {
+          const pais = window.paisesFetch.find(p => p.id == value);
+          if (pais) field.value = pais.prefijo;
+        }
+      }
+    });
   }
 
   // Provincia:
