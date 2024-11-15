@@ -99,6 +99,7 @@ nav.c-menu
       height: 2.4rem;
       flex: 0 0 2.4rem;
       display: none;
+      &.no-links { display: none !important; }
     }
     svg
     {
@@ -107,7 +108,6 @@ nav.c-menu
       display: block;
     }
   }
-  // main.in-builder & a { pointer-events: none !important; }
   
   &.has-menu>.inner
   {

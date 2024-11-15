@@ -63,7 +63,7 @@ onMounted(updateLangURLs);
         </div>
       </div>
 
-      <button class="menu-button">
+      <button class="menu-button" :class="{ 'no-links': !m.props.pageLinks.value.length }">
         <IconBurger />
       </button>
 
