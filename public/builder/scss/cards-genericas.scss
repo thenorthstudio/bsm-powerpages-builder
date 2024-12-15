@@ -32,7 +32,6 @@ section.c-cards-genericas
             @media (max-width: 768px) {
               height: 164px;
             }
-            img { object-fit: contain; }
           }
           >.info-wrap
           {
@@ -237,18 +236,18 @@ section.c-cards-genericas
       gap: 1.2rem;
     }
   }
-  &.has-3-items .swiper>.cards-grid
-  {
-    @media (min-width: 768px)
-    {
-      justify-content: flex-start;
-      >.card-block
-      {
-        flex: 0 0 28%;
-        max-width: none;
-      }
-    }
-  }
+  // &.has-3-items .swiper>.cards-grid
+  // {
+  //   @media (min-width: 768px)
+  //   {
+  //     justify-content: flex-start;
+  //     >.card-block
+  //     {
+  //       flex: 0 0 28%;
+  //       max-width: none;
+  //     }
+  //   }
+  // }
   
   >.video-modal
   {
