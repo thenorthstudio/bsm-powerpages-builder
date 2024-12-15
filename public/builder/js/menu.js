@@ -97,9 +97,11 @@ window.addEventListener('load', () =>
     store.button.addEventListener('click', store.openMenu);
     store.close.addEventListener('click', store.closeMenu);
 
-
+    // Hide lang selectors on TYP:
+    const isTYP = document.querySelector('section.c-thank-you');
+    if (isTYP) store.langSelectors.forEach(selector => selector.style.display = 'none');
     // Lang selector open/close:
-    store.langSelectors.forEach(selector =>
+    else store.langSelectors.forEach(selector =>
     {
       window.removeEventListener('click', store.closeAllLangSelectors);
       window.addEventListener('click', store.closeAllLangSelectors);
