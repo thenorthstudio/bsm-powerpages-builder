@@ -6,9 +6,10 @@ window.addEventListener('load', () =>
     const store = {
       langSelectors: document.querySelectorAll('.c-lang-selector'),
       button: root.querySelector('.menu-button'),
-      wrap: root.querySelector('.menu-wrap:not(.permanent)'),
+      wrap: root.querySelector('.menu-wrap'),
       formButton: root.querySelector('.form-button-div'),
       close: root.querySelector('.menu-close'),
+      calculatingFreeSpace: false,
       onClickFormButton: () =>
       {
         const form = document.querySelector('.c-module.c-formulario');
@@ -43,11 +44,17 @@ window.addEventListener('load', () =>
       },
       onResize: () =>
       {
-        root.classList.toggle('has-menu', false);
-        requestAnimationFrame(() =>
+        if (store.calculatingFreeSpace) return;
+        else store.calculatingFreeSpace = true;
+
+        root.classList.remove('has-menu');
+        root.classList.remove('has-floating-button');
+        const calculateBurgerButton = () =>
         {
-          const measure = root.querySelector('.flex-space');
-          const hasMenu = measure.scrollWidth < 20;
+          const spacer = root.querySelector('.flex-space');
+          let freeSpace = spacer.scrollWidth;
+          console.log(freeSpace);
+          const hasMenu = freeSpace < 20;
           root.classList.toggle('has-menu', hasMenu);
           store.langSelectors.forEach(selector =>
           {
@@ -58,6 +65,20 @@ window.addEventListener('load', () =>
               floater.classList.toggle('from-bottom', hasMenu);
             }
           });
+          store.calculatingFreeSpace = false;
+        }
+        requestAnimationFrame(() =>
+        {
+          const spacer = root.querySelector('.flex-space');
+          let freeSpace = spacer.scrollWidth;
+          if (store.formButton && freeSpace < 20)
+          {
+            // Take button into account to determine if it should be floating:
+            root.classList.add('has-floating-button');
+            requestAnimationFrame(() => calculateBurgerButton());
+            return;
+          }
+          calculateBurgerButton();
         })
       },
       openMenu: () =>
