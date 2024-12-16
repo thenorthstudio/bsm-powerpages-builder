@@ -43,6 +43,7 @@ export class ViewportBuilder
     const page = useCurrentPage();
     page.isUpdating.value = true;
     page.scrollY.value = this.mirrorWindow!.scrollY;
+    let triggerMenuRender = false;
     let triggerJS = false;
 
     await skipTime(10);
@@ -60,6 +61,9 @@ export class ViewportBuilder
 
         await this.cleanCssJs(m, page.modules.value);
         await this.cleanExLib(m, page.modules.value);
+
+        // Force re-render of menu if a formulario is removed:
+        if (m.type == 'formulario') triggerMenuRender = true;
       }
       else if (m.dirty)
       {
@@ -87,9 +91,11 @@ export class ViewportBuilder
     }
     await skipTime(10);
     if (triggerJS) this.triggerJS();
-
     page.isUpdating.value = false;
     this.pinScroll();
+
+    // Force re-render of menu if needed:
+    if (triggerMenuRender) page.modules.value[0].dirty = true;
   }
   reRender()
   {

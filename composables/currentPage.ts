@@ -28,11 +28,12 @@ export const useCurrentPage = () =>
       m => m.id == moduleId
     );
   }
-  const hasForm = () =>
+  const hasForm = (excludeHeader?: boolean) =>
   {
     const formulario = modules.value.find(m => m.type == 'formulario');
     if (formulario) return true;
 
+    if (excludeHeader) return false;
     const header = modules.value.find(m => m.type == 'header') as HeaderModule | undefined;
     if (header && header.props.hasForm.getOption().value == 'true') return true;
 
