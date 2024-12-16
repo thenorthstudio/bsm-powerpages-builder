@@ -198,7 +198,7 @@ onMounted(() =>
     .reorder-row { width: 32px; }
     .type-row
     {
-      width: 100%;
+      width: 170px;
       .text-sm
       {
         width: 170px;
