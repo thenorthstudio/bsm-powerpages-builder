@@ -20,4 +20,13 @@ export default defineNuxtConfig({
     'primeicons/primeicons.css',
     'primevue/resources/themes/aura-dark-noir/theme.css',
   ],
+  vite: {
+    css: {
+      preprocessorOptions: {
+        scss: {
+          api: 'modern-compiler',
+        }
+      }
+    },
+  },
 });
