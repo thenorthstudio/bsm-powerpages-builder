@@ -12,6 +12,7 @@ window.addEventListener('load', () =>
       calculatingFreeSpace: false,
       onClickFormButton: () =>
       {
+        if (document.querySelector('main.in-builder')) return;
         const form = document.querySelector('.c-module.c-formulario');
         if (form) form.scrollIntoView(true);
         const event = {
