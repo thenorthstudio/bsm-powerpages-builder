@@ -187,10 +187,7 @@ const paisProvinciaSetup = (root) =>
       const nameInput = root.querySelector(storeField.id+'_name');
       if (nameInput)
       {
-        console.log('locating label for ', value);
         const option = values.find(v => v.id == value);
-        console.log('option', option);
-
         const name = option?.name[lang] || option?.name.es || option?.name.en || option?.name.ca;
         nameInput.value = name;
         nameInput.setAttribute('value', name);

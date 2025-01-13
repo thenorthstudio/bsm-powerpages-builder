@@ -53,7 +53,6 @@ window.addEventListener('load', () =>
         {
           const spacer = root.querySelector('.flex-space');
           let freeSpace = spacer.scrollWidth;
-          console.log(freeSpace);
           const hasMenu = freeSpace < 20;
           root.classList.toggle('has-menu', hasMenu);
           store.langSelectors.forEach(selector =>
