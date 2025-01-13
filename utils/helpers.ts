@@ -40,7 +40,12 @@ export const cloneModule = <TModule extends Module>(
           const subProp = submodule.props[subPropName];
           const newSubProp = newSubmodule.props[subPropName];
           if (!generateNewId) newSubProp.id = subProp.id;
-          newSubProp.value = subProp.value;
+          if (typeof subProp.value == 'object')
+          {
+            const subPropValue = subProp.value as StringObj[];
+            newSubProp.value = subPropValue.map(item => ({ ...item }));
+          }
+          else newSubProp.value = subProp.value;
         }
       }
     }
