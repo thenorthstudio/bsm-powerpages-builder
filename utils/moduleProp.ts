@@ -25,7 +25,7 @@ abstract class ModulePropBase<T>
 
 /* All possible types */
 type ModulePropStringEditor = ('plain' | 'plain-lines' | 'rich' | 'rich-h3');
-export class ModulePropString extends ModulePropBase<string>
+  export class ModulePropString extends ModulePropBase<string>
 {
   type = 'string' as ModulePropType;
   editor: ModulePropStringEditor;
@@ -44,7 +44,7 @@ export class ModulePropString extends ModulePropBase<string>
 
 export type ModulePropOption = { label: string, value: string }
 export class ModulePropOptions<TOption extends ModulePropOption = ModulePropOption>
-extends ModulePropBase<number>
+  extends ModulePropBase<number>
 {
   type = 'options' as ModulePropType;
   options: TOption[];
@@ -64,7 +64,7 @@ extends ModulePropBase<number>
 
 export type StringObj = { [key: string]: string };
 export class ModulePropList<TItem extends StringObj = StringObj>
-extends ModulePropBase<TItem[]>
+  extends ModulePropBase<TItem[]>
 {
   type = 'list' as ModulePropType;
   factory: () => TItem;
@@ -81,7 +81,7 @@ extends ModulePropBase<TItem[]>
     const items: TItem[] = [];
     const length = minAmount === undefined ? 1 : minAmount;
     for (let i = 0; i < length; i++)
-      {
+    {
       const item = { ...defaultItem };
       items.push(item);
     }
@@ -94,7 +94,7 @@ extends ModulePropBase<TItem[]>
   addNew()
   {
     if (!this.maxAmount || this.value.length < this.maxAmount)
-      {
+    {
       const item = this.factory();
       this.value.push(item);
       return true;
@@ -104,7 +104,7 @@ extends ModulePropBase<TItem[]>
   remove(index: number)
   {
     if (!this.minAmount || this.value.length > this.minAmount)
-      {
+    {
       this.value.splice(index, 1);
       return true;
     }
@@ -112,7 +112,7 @@ extends ModulePropBase<TItem[]>
   }
 }
 export class ModulePropArray<TSub extends SubModule = SubModule>
-extends ModulePropBase<TSub[]>
+  extends ModulePropBase<TSub[]>
 {
   type = 'array' as ModulePropType;
   createSubtype: () => TSub;
@@ -130,7 +130,7 @@ extends ModulePropBase<TSub[]>
     const items: TSub[] = [];
     const length = minAmount || 1;
     for (let i = 0; i < length; i++)
-      {
+    {
       const item = new subtype(submoduleType);
       items.push(item);
     }
@@ -143,7 +143,7 @@ extends ModulePropBase<TSub[]>
   addNew()
   {
     if (!this.maxAmount || this.value.length < this.maxAmount)
-      {
+    {
       const submodule = this.createSubtype();
       this.value.push(submodule);
       return true;
@@ -153,7 +153,7 @@ extends ModulePropBase<TSub[]>
   remove(index: number)
   {
     if (!this.minAmount || this.value.length > this.minAmount)
-      {
+    {
       this.value.splice(index, 1);
       return true;
     }
