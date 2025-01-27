@@ -6,12 +6,13 @@ const prop = defineProps<{
   m: HeaderModule
 }>();
 
-const hasForm = computed(() => prop.m.props.hasForm.getOption().value == 'true');
+// const hasForm = computed(() => prop.m.props.hasForm.getOption().value == 'true');
 </script>
 
 
 <template>
-  <header class="c-header" :class="{ 'has-form': hasForm }">
+  <header class="c-header" :class="{ 'has-form': false }">
+    
     <div class="background">
       <BuilderImage />
       <div class="overlay" />
@@ -25,7 +26,8 @@ const hasForm = computed(() => prop.m.props.hasForm.getOption().value == 'true')
       v-html="m.props.text.value"
       />
     </div>
-    <div class="form-wrap" v-if="hasForm">
+
+    <div class="form-wrap" v-if="false">
       <div class="head">
         <div class="icon">
           <svg width="27" height="19" viewBox="0 0 27 19" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -41,6 +43,7 @@ const hasForm = computed(() => prop.m.props.hasForm.getOption().value == 'true')
         <BuilderForm />
       </div>
     </div>
+
   </header>
 </template>
 

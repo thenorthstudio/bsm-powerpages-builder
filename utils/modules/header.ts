@@ -7,7 +7,7 @@ type TOption = {
 type HeaderModulePropDic = {
   title: InstanceType<typeof ModulePropString>;
   text: InstanceType<typeof ModulePropString>;
-  hasForm: InstanceType<typeof ModulePropOptions<TOption>>;
+  // hasForm: InstanceType<typeof ModulePropOptions<TOption>>;
   formClaim: InstanceType<typeof ModulePropString>;
 }
 export class HeaderModule extends Module<HeaderModulePropDic>
@@ -22,25 +22,25 @@ export class HeaderModule extends Module<HeaderModulePropDic>
     const props = {
       title: new ModulePropString('Título', 'Header'),
       text: new ModulePropString('Texto', MID_LOREM, 'rich'),
-      hasForm: new ModulePropOptions<TOption>('Incluir formulario', [
-        { label: 'No', value: 'false' },
-        { label: 'Sí', value: 'true' },
-      ], 0, 1),
+      // hasForm: new ModulePropOptions<TOption>('Incluir formulario', [
+      //   { label: 'No', value: 'false' },
+      //   { label: 'Sí', value: 'true' },
+      // ], 0, 1),
       formClaim: new ModulePropString(
         'Encabezado del formulario',
         'QUIERO SABER MÁS',
         'plain', 1
       ),
     }
-    const hint = 'Configurar en Dynamics (Máximo de 1 formulario por página)';
-    props.hasForm.additionalInfo = hint;
+    /* const hint = 'Configurar en Dynamics (Máximo de 1 formulario por página)';
+    props.hasForm.additionalInfo = hint; */
     return props;
   }
-  override onAnyChange()
+/*   override onAnyChange()
   {
     const hasForm = this.props.hasForm.getOption().value == 'true';
     this.props.formClaim.isHiiden = !hasForm;
-  }
+  } */
   getDescriptor()
   {
     const title = this.props.title.value;
