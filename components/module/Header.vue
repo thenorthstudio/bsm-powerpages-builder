@@ -36,7 +36,7 @@ const prop = defineProps<{
           </svg>
         </div>
         <div class="text | t-xxs">
-          {{ m.props.formClaim.value }}
+          <!-- {{ m.props.formClaim.value }} -->
         </div>
       </div>
       <div class="body">

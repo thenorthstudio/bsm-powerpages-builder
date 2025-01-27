@@ -8,7 +8,7 @@ type HeaderModulePropDic = {
   title: InstanceType<typeof ModulePropString>;
   text: InstanceType<typeof ModulePropString>;
   // hasForm: InstanceType<typeof ModulePropOptions<TOption>>;
-  formClaim: InstanceType<typeof ModulePropString>;
+  // formClaim: InstanceType<typeof ModulePropString>;
 }
 export class HeaderModule extends Module<HeaderModulePropDic>
 {
@@ -26,11 +26,11 @@ export class HeaderModule extends Module<HeaderModulePropDic>
       //   { label: 'No', value: 'false' },
       //   { label: 'Sí', value: 'true' },
       // ], 0, 1),
-      formClaim: new ModulePropString(
-        'Encabezado del formulario',
-        'QUIERO SABER MÁS',
-        'plain', 1
-      ),
+      // formClaim: new ModulePropString(
+      //   'Encabezado del formulario',
+      //   'QUIERO SABER MÁS',
+      //   'plain', 1
+      // ),
     }
     /* const hint = 'Configurar en Dynamics (Máximo de 1 formulario por página)';
     props.hasForm.additionalInfo = hint; */
