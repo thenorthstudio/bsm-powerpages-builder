@@ -19,7 +19,7 @@ window.addEventListener('load', () =>
       }
     };
 
-    /* Focus / blur */
+    /* Text inputs */
     store.inputs.text.forEach((td) =>
     {
       const control = td.querySelector('input.form-control');
@@ -55,6 +55,7 @@ window.addEventListener('load', () =>
           td.style.display = 'none';
         }
 
+        /* Focus / blur */
         control.addEventListener('focus', () =>
         {
           td.classList.remove('is-error');
@@ -130,6 +131,17 @@ window.addEventListener('load', () =>
       });
       const btn = td.querySelector('.datetimepicker>span.btn');
       if (btn) btn.parentElement.removeChild(btn);
+    });
+
+    // Filter form program options:
+    const ids = window.programasFilter;
+    const options = root.querySelectorAll(
+      'select[id="alg_programadeinteres"] option:not([selected])'
+    );
+    options.forEach(o =>
+    {
+      if (!ids.includes(o.value))
+        o.style.display = 'none';
     });
   })
 });

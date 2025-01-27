@@ -4,6 +4,9 @@ import { Module } from "@/utils/moduleTypes";
 type FormularioModulePropDic = {
   title: InstanceType<typeof ModulePropString>;
   text: InstanceType<typeof ModulePropString>;
+  filterProgramas: InstanceType<typeof ModulePropList<{
+    programaId: string,
+  }>>,
 }
 export class FormularioModule extends Module<FormularioModulePropDic>
 {
@@ -17,6 +20,9 @@ export class FormularioModule extends Module<FormularioModulePropDic>
     const props = {
       title: new ModulePropString('Título', 'Formulario'),
       text: new ModulePropString('Texto', SHORT_LOREM, 'rich'),
+      filterProgramas: new ModulePropList({
+        programaId: 'ID de programa',
+      }, 'Lista de programas'),
     }
     return props;
   }

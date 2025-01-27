@@ -25,6 +25,15 @@ const prop = defineProps<{
         <BuilderForm />
       </div>
     </div>
+
+    <component is="script" type="text/javascript"
+    v-if="m.props.filterProgramas.value.length"
+    >
+      const filter = window.programasFilter ||
+        ["{{ m.props.filterProgramas.value.map(p => p.programaId).join('","') }}"];
+      window.programasFilter = filter;
+    </component>
+
   </section>
 </template>
 
