@@ -141,7 +141,7 @@ window.addEventListener('load', () =>
     options.forEach(o =>
     {
       if (!ids.includes(o.value))
-        o.style.display = 'none';
+        o.remove();
     });
   })
 });
