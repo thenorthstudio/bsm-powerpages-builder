@@ -41,6 +41,11 @@ export class CardsDeProgramaSubModule extends SubModule<CardsDeProgramaSubPropDi
   }
   override onAnyChange()
   {
+    // Remove spaces from ID and area:
+    this.props.programaId.value = this.props.programaId.value.replace(/ /g, '');
+    this.props.programaArea.value = this.props.programaArea.value.replace(/ /g, '');
+
+    // CTA type:
     const ctaType = this.props.ctaType.getOption().value;
     const isPrograma = ctaType == 'programa';
     this.props.ctaUrl.isHiiden = isPrograma;

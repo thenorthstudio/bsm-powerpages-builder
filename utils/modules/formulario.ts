@@ -26,6 +26,13 @@ export class FormularioModule extends Module<FormularioModulePropDic>
     }
     return props;
   }
+  override onAnyChange()
+  {
+    // Remove spaces from ID:
+    this.props.filterProgramas.value.forEach(p =>
+      p.programaId = p.programaId.replace(/ /g, '')
+    );
+  }
   getDescriptor()
   {
     const title = this.props.title.value;
