@@ -143,6 +143,14 @@ window.addEventListener('load', () =>
       if (!ids.includes(o.value))
         o.remove();
     });
+
+    // Create link tags:
+    root.querySelectorAll('td.checkbox-cell label').forEach(label =>
+      label.innerHTML = label.innerHTML.replace(
+        /&lt; *a *href=" *(.*) *" *&gt; *(.*) *&lt; *\/a *&gt;/gi,
+        '<a href="$1" target="_blank">$2</a>'
+      )
+    );
   })
 });
 
