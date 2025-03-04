@@ -145,9 +145,13 @@ window.addEventListener('load', () =>
     });
 
     // Create link tags:
+    const et = s => '&' + s + ';';	
     root.querySelectorAll('td.checkbox-cell label').forEach(label =>
       label.innerHTML = label.innerHTML.replace(
-        /&lt; *a *href=" *(.*) *" *&gt; *(.*) *&lt; *\/a *&gt;/gi,
+        new RegExp(
+          et('lt')+' *a *href=" *(.*) *" *'+et('gt')+' *(.*) *'+et('lt')+' *\/a *'+et('gt'),
+          'gi'
+        ),
         '<a href="$1" target="_blank">$2</a>'
       )
     );
