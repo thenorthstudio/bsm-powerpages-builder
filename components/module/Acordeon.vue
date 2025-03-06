@@ -54,8 +54,9 @@ const hasTabs = computed(() => viewGroups.value.length > 1);
       
       <div class="tab-wrap | swiper | t-xxs" v-if="hasTabs">
         <div class="swiper-wrapper">
-          <div class="tab | swiper-slide" :class="{ 'is-current': i == 0 }" :data-index="i"
-          v-for="(g, i) in viewGroups" :key="i"
+          <div v-for="(g, i) in viewGroups" :key="i"
+          class="tab | swiper-slide" :data-index="i"
+          :class="{ 'is-current': i == 0 }"
           >
             <button>{{ g.name }}</button>
           </div>
@@ -66,11 +67,13 @@ const hasTabs = computed(() => viewGroups.value.length > 1);
         </div>
       </div>
       <div class="viewport-wrap">
-        <div class="viewport" :class="{ 'is-current': i == 0 }" :data-index="i"
-        v-for="(g, i) in viewGroups" :key="i"
+        <div v-for="(g, i) in viewGroups" :key="i"
+        :class="{ 'is-current': i == 0 }"
+        class="viewport" :data-index="i"
         >
-          <div class="foldable" :class="{ 'is-open': j == 0 }"
-          v-for="(f, j) in g.foldables" :key="j"
+          <div v-for="(f, j) in g.foldables" :key="j"
+          :class="{ 'is-open': j == 0 && false }"
+          class="foldable"
           >
             <button class="head">
               <h3 class="t-md">

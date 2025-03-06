@@ -84,10 +84,10 @@ window.addEventListener('load', () =>
       store.tabs.forEach(tab => tab.addEventListener('click', store.onClickTab));
     }
 
-    // Open first foldable (only in prod)
+/*     // Open first foldable (only in prod)
     if (document.querySelector('main.in-builder'))
       store.toggleFoldable(store.foldables[0], false);
     else
-      store.toggleFoldable(store.foldables[0], true);
+      store.toggleFoldable(store.foldables[0], true); */
   })
 })
